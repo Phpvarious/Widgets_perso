@@ -69,12 +69,12 @@ le widget est nativement compatible avec ces plugins :
 
 - Virtuel (virtual)
   - à condition d'utiliser les noms de commmandes [ci-dessus](#nomcommande).
-  - ou, si l'import a été effectué avec les plugins ci-dessous.
+  - ou, si l'import a été effectué à partir des plugins ci-dessous.
 - ZigbeeLinker (zigbee2mqtt)
 - Zigbee (zigbee)
 - Philips Hue (philipsHue)
 - Xiaomi home (xiaomihome)
-  - 
+  - un temps de réponse important a été constaté sur ce plugin, n'hesitez pas a augmenter la tempo (delaiTempo) à 3000 si vous constatez un comportement anormal lors d'une action sur le widget.
 
 ## Debug
 
