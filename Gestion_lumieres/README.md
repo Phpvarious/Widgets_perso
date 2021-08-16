@@ -14,7 +14,7 @@
 
 ![](doc/images/installation_virtuel.png)
 
-## 3) Associer le widget à la commande info.
+## 3) Associer le widget à la commande info. (créée précédemment)
 
 ![](doc/images/installation_virtuel2.png)
 ![](doc/images/installation_virtuel3.png)
@@ -48,6 +48,18 @@ Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos éq
 ![](doc/images/installation_virtuel5.png)
 
 <div id='nomcommande'/>
+ 
+## Compatibilité.
+le widget est nativement compatible avec ces plugins :
+
+- Virtuel (virtual)
+  - à condition d'utiliser les noms de commmandes [ci-dessus](#nomcommande).
+  - ou, si l'import a été effectué à partir des plugins ci-dessous.
+- ZigbeeLinker (zigbee2mqtt)
+- Zigbee (zigbee)
+- Philips Hue (philipsHue)
+- Xiaomi home (xiaomihome)
+  - un temps de réponse important a été constaté sur ce plugin, n'hesitez pas a augmenter la tempo (delaiTempo) à 3000 si vous constatez un comportement anormal lors d'une action sur le widget.
 
 ## Nom des commandes.
 
@@ -67,18 +79,6 @@ Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos éq
   - Exemple 1 : Etat_duree -> [OK]
   - Exemple 2 : Couleur_état ->  [OK]
   
-## Compatibilité.
-le widget est nativement compatible avec ces plugins :
-
-- Virtuel (virtual)
-  - à condition d'utiliser les noms de commmandes [ci-dessus](#nomcommande).
-  - ou, si l'import a été effectué à partir des plugins ci-dessous.
-- ZigbeeLinker (zigbee2mqtt)
-- Zigbee (zigbee)
-- Philips Hue (philipsHue)
-- Xiaomi home (xiaomihome)
-  - un temps de réponse important a été constaté sur ce plugin, n'hesitez pas a augmenter la tempo (delaiTempo) à 3000 si vous constatez un comportement anormal lors d'une action sur le widget.
-
 ## Debug
 
      Le Widget dispose d'un mode debug (debug = 1), celui-ci a pour effet d'ajouter du contenu en dessous de votre widget
