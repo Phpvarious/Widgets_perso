@@ -69,6 +69,7 @@ le widget est nativement compatible avec ces plugins :
 - ZigbeeLinker (zigbee2mqtt)
 - Zigbee (zigbee)
 - Philips Hue (philipsHue)
+- Xiaomi home (xiaomihome)
 
 ## Debug
 
