@@ -1,6 +1,6 @@
 # Widget Gestion lumières.
 
-![](doc/images/capture1.png)![](doc/images/capture8.png)
+![](doc/images/capture1.png) ![](doc/images/capture8.png)
 
 ## 1) Téléchargement du fichier.
 - Fichier source à récupérer sous :
