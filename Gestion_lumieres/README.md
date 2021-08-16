@@ -24,7 +24,7 @@
      palierLum : [Numérique] - 	Palier pour l'augmentation/diminution de la luminosité. [Défaut : 17]
      palierTemp : [Numérique] - 	Palier pour l'augmentation/diminution de la température. [Défaut : 50]
      palierDelai : [Numérique] - 	Palier pour l'augmentation/diminution du délai de transition. [Défaut : 50]
-	 plugin :			Liste des plugin pour l'import des équipements sans espace, séparés par une virgule (,) Exemple : virtual,zigbee2mqtt
+	 plugin :			Liste des plugins pour l'import des équipements sans espace, séparés par une virgule (,) Exemple : virtual,zigbee2mqtt
      displayCat : [Binaire] -   	Permet d'afficher une séparation entre les plugins dans la liste déroulante.[Défaut : 0]
      slider : [Binaire] -       	Affiche un slider à la place des boutons.[Défaut : 0 donc mode  bouton]
      couleurSlider :            	Couleur de la barre des sliders. Exemple : White, #ffffff ..... [Défaut : white]
@@ -34,7 +34,7 @@
      delaiTempo : [Numérique] - 	Temporisation pour le refresh des valeurs du widget après avoir exécuté une commande sur celui-ci.
 	 Attention valeur en ms soit 5000 pour 5s.[Défaut : 700]
      debug : [Binaire] - 		Passe le Widget en mode Debug. [Défaut : 0]
-	 Ne pas oublier d'allonger le widget en hauteur pour afficher le mode debug
+	 Ne pas oublier d'allonger le widget vers le bas pour afficher le mode debug
 	 updateAuto : [Binaire] - 	ATTENTION pour que ce mode fonctionne correctement, votre Widget ne doit pas être affiché sur la même page que votre équipement, sinon les commandes états de votre équipement ne seront pas refresh.
 	 Ce mode désactive la tempo 'delaiTempo' et le widget se met à jour automatiquement lorsqu'un événement est remonté sur l'équipement. [Défaut : 0]
 
@@ -63,7 +63,7 @@ Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos éq
   - Température couleur : temperature couleur, temperature de blanc, couleur temp, temperature.
   - Température couleur état : etat temperature couleur, etat couleur temp, temperature de blanc info, temperature couleur (valeur).
 
-- Les noms de commandes sont insensibles aux majuscules, traits du bas (_), et caractère (é).
+- Les noms de commandes sont insensibles aux majuscules, l'underscore (_), et caractère (é).
   - Exemple 1 : Etat_duree -> [OK]
   - Exemple 2 : Couleur_état ->  [OK]
   
