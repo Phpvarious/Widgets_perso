@@ -44,6 +44,8 @@ Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos éq
 
 ![](doc/images/installation_virtuel5.png)
 
+<div id='nomcommande'/>
+
 ## Nom des commandes.
 
 - Pour que le widget fonctionne correctement il y un standard dans les noms des commandes de votre équipement à respecter !
@@ -66,9 +68,12 @@ Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos éq
 le widget est nativement compatible avec ces plugins :
 
 - Virtuel (virtual)
+  - à condition d'utiliser les noms de commmandes [ci-dessus](#nomcommande).
+  - ou, si l'import a été effectué avec les plugins ci-dessous.
 - ZigbeeLinker (zigbee2mqtt)
 - Zigbee (zigbee)
 - Philips Hue (philipsHue)
+- Xiaomi home (xiaomihome)
 
 ## Debug
 
@@ -77,8 +82,8 @@ le widget est nativement compatible avec ces plugins :
 	 
 ![](doc/images/installation_virtuel7.png)
 
-     Dans l'exemple ci-dessus, on peut constater que la ligne "Luminosité" (1) n'est pas entièrement verte.
-	 Le widget n'a pas réussi à trouver la commande Info (état) de la luminosité et donc ne peut activer le slider (2).
-	 - 2 raisons possibles :
-	  - Votre équipement ne gère tout simplement pas cette commande.
-	  - Le nom de la commande ne correspond pas au standard compatible avec le widget.
+Dans l'exemple ci-dessus, on peut constater que la ligne "Luminosité" (1) n'est pas entièrement verte.  
+Le widget n'a pas réussi à trouver la commande Info (état) de la luminosité et donc ne peut activer le slider (2).
+- 2 raisons possibles :
+  - Votre équipement ne gère tout simplement pas cette commande.
+  - Le nom de la commande ne correspond pas au [standard compatible](#nomcommande) avec le widget.
