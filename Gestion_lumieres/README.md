@@ -39,6 +39,9 @@
 	 Ce mode désactive la tempo 'delaiTempo' et le widget se met à jour automatiquement lorsqu'un événement est remonté sur l'équipement. [Défaut : 0]
 
 ## 5) Paramétrage des équipements.
+Votre équipement doit être 'Activer' et categorisé 'Lumière'.
+
+![](doc/images/installation_virtuel9.png)
 
 Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos équipements.
 
