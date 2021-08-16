@@ -37,6 +37,10 @@
 	 Ne pas oublier d'allonger le widget vers le bas pour afficher le mode debug
 	 updateAuto : [Binaire] - 	ATTENTION pour que ce mode fonctionne correctement, votre Widget ne doit pas être affiché sur la même page que votre équipement, sinon les commandes états de votre équipement ne seront pas refresh.
 	 Ce mode désactive la tempo 'delaiTempo' et le widget se met à jour automatiquement lorsqu'un événement est remonté sur l'équipement. [Défaut : 0]
+	 
+- Exemple de paramètres optionnels :
+
+![](doc/images/installation_virtuel10.png)
 
 ## 5) Paramétrage des équipements.
 Votre équipement doit être 'Activer' et categorisé 'Lumière'.
