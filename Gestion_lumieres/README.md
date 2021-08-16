@@ -44,6 +44,8 @@ Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos éq
 
 ![](doc/images/installation_virtuel5.png)
 
+<div id='nomcommande'/>
+
 ## Nom des commandes.
 
 - Pour que le widget fonctionne correctement il y un standard dans les noms des commandes de votre équipement à respecter !
@@ -66,6 +68,8 @@ Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos éq
 le widget est nativement compatible avec ces plugins :
 
 - Virtuel (virtual)
+  - à condition d'utiliser les noms de commmandes [ci-dessus](#nomcommande).
+  - ou si l'import a été effectué a des plugins ci-dessous.
 - ZigbeeLinker (zigbee2mqtt)
 - Zigbee (zigbee)
 - Philips Hue (philipsHue)
