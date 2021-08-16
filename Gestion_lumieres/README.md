@@ -56,7 +56,7 @@ Veuillez à bien paramétrer les Min et Max de vos commandes Action dans vos éq
   - Couleur état : etat couleur, couleur etat, couleur rgb, couleur (valeur).
   - Couleur cde : couleur, definir couleur rgb.
   - Durée/transition cde : duree, transition.
-  - Durée/transition état : etat duree, duree etat, transition statut,statut transition.
+  - Durée/transition état : etat duree, duree etat, transition statut,statut transition, transition status, status transition.
   - Température couleur : temperature couleur, temperature de blanc, couleur temp, temperature.
   - Température couleur état : etat temperature couleur, etat couleur temp, temperature de blanc info, temperature couleur (valeur).
 
@@ -74,6 +74,7 @@ le widget est nativement compatible avec ces plugins :
 - Zigbee (zigbee)
 - Philips Hue (philipsHue)
 - Xiaomi home (xiaomihome)
+  - 
 
 ## Debug
 
