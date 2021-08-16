@@ -86,4 +86,4 @@ le widget est nativement compatible avec ces plugins :
 	 Le widget n'a pas réussi à trouver la commande Info (état) de la luminosité et donc ne peut activer le slider (2).
 	 - 2 raisons possibles :
 	  - Votre équipement ne gère tout simplement pas cette commande.
-	  - Le nom de la commande ne correspond pas au standard compatible avec le widget.
+	  - Le nom de la commande ne correspond pas au [standard compatible](#nomcommande) avec le widget.
