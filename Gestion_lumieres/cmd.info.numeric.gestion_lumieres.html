@@ -46,7 +46,7 @@ Durée/transition état : etat duree, duree etat, transition statut,statut trans
 Température couleur : temperature couleur, temperature de blanc, couleur temp, temperature
 Température couleur état : etat temperature couleur, etat couleur temp, temperature de blanc info, temperature couleur (valeur)
 
-Les noms de commandes sont insensibles au majuscule, et trait du bas (_).
+Les noms de commandes sont insensibles aux majuscules, et trait du bas (_).
 Exemple : Etat_duree -> [OK]
 
 
@@ -56,7 +56,7 @@ Exemple : Etat_duree -> [OK]
   
   <div style="width: 390px;border-radius: 5px !important;display: none;" id="div_alert#id#" class="jqAlert alert-danger">
     <span href="#" class="btn_closeAlert pull-right cursor" style="position : relative; left : 30px;color : grey">×</span>
-    <span class="displayError">Veuillez selectionner un équipement !</span>
+    <span class="displayError">Veuillez sélectionner un équipement !</span>
   </div>
   <style>
    :root {
@@ -628,7 +628,7 @@ Exemple : Etat_duree -> [OK]
           }
         }
       }
-      else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      else $('.att_delai#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       $(".span_delai#id#").hide();
     });
     ///////////////////////////////////////////////////////////////////////
@@ -765,9 +765,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         } 
-        else $('.att_power#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_power#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement!', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////// Luminosité +/-  /////////////////////////
@@ -802,9 +802,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         }
-        else $('.att_lum#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_lum#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       } 
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'});
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'});
     });
     $('.cmd[data-cmd_uid=#uid#]:last .lum_moins#id#').off('click').on('click', function () {
       var id_luminosite_cde#id# = document.getElementById('luminosite_cde#id#').value;
@@ -835,9 +835,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         }
-        else $('.att_lum#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_lum#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'});
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'});
     });
 
     ///////////////////////////////////////////////////////////////////////
@@ -873,9 +873,9 @@ Exemple : Etat_duree -> [OK]
             }                    
           }
         }
-        else $('.att_temp#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_temp#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
     $('.cmd[data-cmd_uid=#uid#]:last .temp_moins#id#').off('click').on('click', function () {
       var id_temperature_cde#id# = document.getElementById('temperature_cde#id#').value;
@@ -907,9 +907,9 @@ Exemple : Etat_duree -> [OK]
             }    
           }
         }
-        else $('.att_temp#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_temp#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     }); 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////// Delais +/-  /////////////////////////
@@ -944,9 +944,9 @@ Exemple : Etat_duree -> [OK]
             }                         
           }
         }
-        else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_delai#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
     $('.cmd[data-cmd_uid=#uid#]:last .delai_moins#id#').off('click').on('click', function () {
       var id_delai_cde#id# = document.getElementById('delai_cde#id#').value;
@@ -978,9 +978,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         }
-        else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_delai#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////// Couleur  ////////////////////////////
@@ -1016,9 +1016,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         }
-        else $('.att_couleur#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_couleur#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
   </script>
   <div class="container#id#">
