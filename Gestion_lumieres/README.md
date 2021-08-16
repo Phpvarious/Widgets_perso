@@ -82,8 +82,8 @@ le widget est nativement compatible avec ces plugins :
 	 
 ![](doc/images/installation_virtuel7.png)
 
-     Dans l'exemple ci-dessus, on peut constater que la ligne "Luminosité" (1) n'est pas entièrement verte.
-	 Le widget n'a pas réussi à trouver la commande Info (état) de la luminosité et donc ne peut activer le slider (2).
-	 - 2 raisons possibles :
-	  - Votre équipement ne gère tout simplement pas cette commande.
-	  - Le nom de la commande ne correspond pas au [standard compatible](#nomcommande) avec le widget.
+Dans l'exemple ci-dessus, on peut constater que la ligne "Luminosité" (1) n'est pas entièrement verte.
+Le widget n'a pas réussi à trouver la commande Info (état) de la luminosité et donc ne peut activer le slider (2).
+- 2 raisons possibles :
+  - Votre équipement ne gère tout simplement pas cette commande.
+  - Le nom de la commande ne correspond pas au [standard compatible](#nomcommande) avec le widget.
