@@ -69,7 +69,7 @@ le widget est nativement compatible avec ces plugins :
 
 - Virtuel (virtual)
   - à condition d'utiliser les noms de commmandes [ci-dessus](#nomcommande).
-  - ou si l'import a été effectué a des plugins ci-dessous.
+  - ou, si l'import a été effectué avec les plugins ci-dessous.
 - ZigbeeLinker (zigbee2mqtt)
 - Zigbee (zigbee)
 - Philips Hue (philipsHue)
