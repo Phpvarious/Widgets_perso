@@ -1,0 +1,1200 @@
+<div class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#" style="width: 100%;">
+  
+<!-- ################ Gestion Multi lumières ################ 
+  Widget name : cmd.info.numeric.gestion_lumieres
+  Author : Phpvarious
+  Inspiration / Idée : @Tarlak_ ;-)
+  Last Uptade : 2021/08/15 - Phpvarious -> Création.
+
+
+				************************************************		
+				********** Paramètres Optionnels ***************
+				************************************************
+  
+  palierLum : [Numérique] - 	Palier pour l'augmentation/diminution de la luminosité. [Défaut : 17]
+  palierTemp : [Numérique] - 	Palier pour l'augmentation/diminution de la température. [Défaut : 50]
+  palierDelai : [Numérique] - 	Palier pour l'augmentation/diminution du délai de transition. [Défaut : 50]
+  plugin : 						Liste des plugin pour l'import des équipements sans espace, séparés par une
+                                virgule (,) Exemple : virtual,zigbee2mqtt
+  displayCat : [Binaire] -   	Permet d'afficher une séparation entre les plugins dans la liste déroulante.[Défaut : 0]
+  slider : [Binaire] -       	Affiche un slider à la place des boutons.[Défaut : 0 donc mode  bouton]
+  couleurSlider :            	Couleur de la barre des sliders. Exemple : White, #ffffff ..... [Défaut : white]
+  couleurSliderRond :        	Couleur du rond des sliders. Exemple : White, #ffffff ..... [Défaut : white]
+  couleurBoutonPlus :        	Couleur du bouton + . Exemple : White, #ffffff ..... [Défaut : aliceblue]
+  couleurBoutonMoins :       	Couleur du bouton - . Exemple : White, #ffffff ..... [Défaut : aliceblue]
+  delaiTempo : [Numérique] - 	Temporisation pour le refresh des valeurs du widget après avoir exécuté une
+				commande sur celui-ci. Attention valeur en ms soit 5000 pour 5s.[Défaut : 700]
+  debug : [Binaire] - 		Passe le Widget en mode Debugg. [Défaut : 0]
+ 				(ne pas oublier d'allonger le widget en hauteur pour afficher le mode debug
+
+  updateAuto : [Binaire] - 	ATTENTION pour que ce mode fonctionne correctement, votre Widget ne doit pas être
+				affiché sur la même page que votre équipement, sinon les commandes états
+				de votre équipement ne seront pas refresh.
+				Ce mode désactive la tempo delaiTempo et le widget se met à jour automatiquement
+                                lorsqu'un événement est remonté sur l'équipement.[Défaut : 0]
+                                
+/////////////////////////////////////////////////
+Compatibilité des Noms de commandes : 
+
+Power on : on, on1, allumer
+Power off : off, off1, eteindre
+Power état : state, etat, statut
+Couleur état : etat couleur, couleur etat, couleur rgb, couleur (valeur)
+Couleur cde : couleur, definir couleur rgb
+Durée/transition cde : duree, transition
+Durée/transition état : etat duree, duree etat, transition statut,statut transition
+Température couleur : temperature couleur, temperature de blanc, couleur temp, temperature
+Température couleur état : etat temperature couleur, etat couleur temp, temperature de blanc info, temperature couleur (valeur)
+
+Les noms de commandes sont insensibles au majuscule, et trait du bas (_).
+Exemple : Etat_duree -> [OK]
+
+
+/////////////////////////////////////////////////
+
+-->
+  
+  <div style="width: 390px;border-radius: 5px !important;display: none;" id="div_alert#id#" class="jqAlert alert-danger">
+    <span href="#" class="btn_closeAlert pull-right cursor" style="position : relative; left : 30px;color : grey">×</span>
+    <span class="displayError">Veuillez selectionner un équipement !</span>
+  </div>
+  <style>
+   :root {
+      --slider-color#id# : white;
+      --slider-colorRond#id# : white;
+      --boutonpplus-color#id# : aliceblue;
+      --boutonpmoins-color#id# : aliceblue;
+    }
+    .cmd[data-cmd_id="#id#"] .ui-slider.ui-slider-horizontal .ui-slider-range {
+      background-color: transparent !important;
+    }
+    .cmd[data-cmd_id="#id#"] .ui-slider-handle.ui-corner-all.ui-state-default {
+      background-color: var(--slider-colorRond#id#) !important;
+    }
+    .cmd[data-cmd_id="#id#"] .slider.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content {
+      background-color: var(--slider-color#id#) !important;
+    }
+    .cmd[data-cmd_id="#id#"] .btn.btn-sm.lum_plus#id#,.cmd[data-cmd_id="#id#"] .btn.btn-sm.temp_plus#id#,.cmd[data-cmd_id="#id#"] .btn.btn-sm.delai_plus#id#{
+      background-color: var(--boutonpplus-color#id#) !important;
+    }
+    .cmd[data-cmd_id="#id#"] .btn.btn-sm.lum_moins#id#,.cmd[data-cmd_id="#id#"] .btn.btn-sm.temp_moins#id#, .cmd[data-cmd_id="#id#"] .btn.btn-sm.delai_moins#id# {
+      background-color: var(--boutonpmoins-color#id#) !important;
+    }
+    .container#id# {
+      width: 390px;
+      border: 2px solid white;
+      border-radius: 22px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: rgba(var(--eq-bg-color), var(--opacity)) !important;
+    }
+    input[class=Toggle#uid#]{
+      height: 0;
+	  width: 0;
+	  visibility: hidden;
+      position: absolute;
+    }
+    .cmdName#id# {
+	  cursor: pointer;
+	  text-indent: -9999px;
+	  width: 70px;
+	  height: 30px;
+	  background: grey;
+      border-radius: 50px;
+	  position: relative;
+      margin-bottom: 0px;
+    }
+    label.ch#id#::after {
+	  content: '';
+	  position: absolute;
+	  top: 5px;
+	  left: 5px;
+	  width: 20px;
+	  height: 20px;
+	  background: #fff;
+	  border-radius: 40px;
+	  transition: 0.3s;
+    }
+    input:checked + label.ch#id# {
+	  background: #bada55;
+    }  
+    input:checked + label.ch#id#:after {
+	  left: calc(100% - 5px);
+	  transform: translateX(-100%);
+    }
+    label.ch#id#:active:after {
+      width: 30px;
+    }
+    .data#id# {
+      width:350px;
+    }
+    .label#id# {
+      width: 130px;
+      text-indent: 5px;
+    }
+    .label_debug#id# {
+      /* width: 150px; */
+      text-indent: 3px;
+      /* height: 20px;*/
+    }
+    .valeur#id# {
+      width: 100px;
+    }
+    .moins#id# {
+      width:40px; 
+    }
+    .plus#id# {
+      width:40px; 
+    }
+    .input_cache#id# {
+      width:60px;
+      border-radius: 10px !important;
+      height: 25px
+    }
+    .input#id# {
+      width: 80px; 
+    }
+    .lights#id# {
+      color: #888888;
+      font-size: 12px;
+      height: 30px !important;
+    }
+    .lum_moins#id#, .lum_plus#id#, .temp_moins#id#, .temp_plus#id#, .delai_moins#id# , .delai_plus#id# {
+      border-radius: 10px !important;
+    }
+    .attention#id# {
+      width: 40px;
+      text-align: center;
+    }
+    .refresh#id#, .reset#id# {
+      margin-right: 20px;
+      width: 70px;
+      border-radius: 5px !important;
+      opacity: 0.6;
+    }
+    .byphpvarious#id# {
+      width: 350px;
+    font-style: italic;
+    padding-top: 5px;
+    font-size: 10px;
+      text-align: right
+    }
+    .td_debug#id# {
+      text-align: center;
+    }
+    #debug#id# {
+      display: none;
+    }
+  </style>
+  <script language="javascript">
+    var valuePalierlum#id# = is_numeric('#palierLum#') ? parseFloat('#palierLum#'):17;
+    var valuePaliertemp#id# = is_numeric('#palierTemp#') ? parseFloat('#palierTemp#'):50;
+    var valuePalierdelai#id# = is_numeric('#palierDelai#') ? parseFloat('#palierDelai#'):50;
+    var displayCat#id# = is_numeric('#displayCat#') ? parseFloat('#displayCat#'):0;
+    var plugin#id# = ('#plugin#' != '#' + 'plugin#') ? '#plugin#' : 'virtuel';
+    plugin#id# = plugin#id#.replace(/\s+/g, '');
+    var slider#id# = is_numeric('#slider#') ? parseFloat('#slider#'):0;
+    var debug#id# = is_numeric('#debug#') ? parseFloat('#debug#'):0;
+    var update_auto#id# = is_numeric('#updateAuto#') ? parseFloat('#updateAuto#'):0;
+    var coul_slider#id# = ('#couleurSlider#' != '#' + 'couleurSlider#') ? '#couleurSlider#' : 'white';
+    var coul_sliderRond#id# = ('#couleurSliderRond#' != '#' + 'couleurSliderRond#') ? '#couleurSliderRond#' : 'white';
+    var coul_boutonplus#id# = ('#couleurBoutonPlus#' != '#' + 'couleurBoutonPlus#') ? '#couleurBoutonPlus#' : 'aliceblue';
+    var coul_boutonmoins#id# = ('#couleurBoutonMoins#' != '#' + 'couleurBoutonMoins#') ? '#couleurBoutonMoins#' : 'aliceblue';
+    var tempo#id# = false;
+    var delaiTempo#id# = is_numeric('#delaiTempo#') ? parseFloat('#delaiTempo#'):700;
+    var plugins_array#id# = plugin#id#.split(",");
+    if (debug#id# == 1) $('#debug#id#').show();
+    if (slider#id# == 1) {
+        $('.slider#id#').show();
+        $('.plusmoins#id#').hide();
+    }
+    else
+    {
+      $('.slider#id#').hide();
+      $('.plusmoins#id#').show();
+    }
+    document.documentElement.style.setProperty('--slider-color#id#', coul_slider#id#);
+    document.documentElement.style.setProperty('--slider-colorRond#id#', coul_sliderRond#id#);
+    document.documentElement.style.setProperty('--boutonpplus-color#id#', coul_boutonplus#id#);
+    document.documentElement.style.setProperty('--boutonpmoins-color#id#', coul_boutonmoins#id#);
+    $(document).ready(function () {
+      ///////////////////////////////////////////////////////////////////////
+      /////////////////////////// Liste déroulante //////////////////////////
+      ///////////////////////////////////////////////////////////////////////
+      if (debug#id# == 1) console.log(plugins_array#id#.length +' Plugin(s) enregsitré(s) dans les parametres optionnels');
+      var select#id# = $("<select></select>").attr("id", "lights#id#").attr("name", "lights#id#").attr("class", "selectCmd lights#id#");
+      select#id#.append($("<option></option>").attr("disabled", 'disabled').attr("selected", 'selected').text("Choisissez un équipement"));
+      for (let i = 0; i < plugins_array#id#.length; i++) {
+        if (plugins_array#id#[i] != '') 
+        {
+          jeedom.eqLogic.byType({
+            type: plugins_array#id#[i],
+            error: function(error) {
+            $('#div_alert#id#').showAlert({message: error.message, level: 'danger'})
+            },
+            success: function(_eqs#id#) {
+              if (displayCat#id# == 1) select#id#.append($("<option></option>").attr("disabled", 'disabled').text("------------- "+plugins_array#id#[i]+" -------------"));
+              for (i in _eqs#id#) {
+                if (_eqs#id#[i].isEnable == 1 && _eqs#id#[i].category.light==1) {
+                  select#id#.append($("<option></option>").attr("value", _eqs#id#[i].id).text(_eqs#id#[i].name));
+                }
+              }
+            }
+          });
+          if (debug#id# == 1) console.log('['+i+'] : '+plugins_array#id#[i]);
+         }
+         else 
+         {
+           $('#div_alert#id#').showAlert({message: 'Widget Gestion Lumière : Parametre Optionnel "plugin" mal renseigné !', level: 'danger'});
+           if (debug#id# == 1) console.log('['+i+'] : VIDE !!!!!');
+         }
+      }
+      $("#selection#id#").html(select#id#);
+      ///////////////////////////////////////////////////////////////////////
+      ///////////////////// Validation d'un équipement //////////////////////
+      ///////////////////////////////////////////////////////////////////////
+      $('.cmd[data-cmd_uid=#uid#]:last .lights#id#').on('change', function () {
+        reset#id#();
+        var id_cde#id# = this.value;
+        var text_cde#id# = document.getElementById('lights#id#').options[document.getElementById('lights#id#').selectedIndex].text;
+        if (id_cde#id# != 'NC')
+        {
+          if (debug#id# == 1) console.log("selection de " + text_cde#id#+' (ID='+id_cde#id#+')');
+          jeedom.eqLogic.byId({
+            id:id_cde#id#,
+            error: function(error) { $('#div_alert#id#').showAlert({message: error.message, level: 'danger'}) },
+            success: function(_eqs#id#) {
+              $('#id_lumiere#id#').value(id_cde#id#);
+              get_info#id#(id_cde#id#);
+            }
+          });
+        }
+      });   
+    });
+    ///////////////////////////////////////////////////////////////////////
+    /////////////////////////////  Résultats  /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////  
+    function get_info#id#(id){
+    
+    var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+    if (typeof id == 'undefined') var id=id_lum#id#; 
+    tempo#id# = false;
+    if (debug#id# == 1) console.log('Demande de get_info'); 
+      $('.att_lum#id#').hide();
+      $('.att_temp#id#').hide();
+      $('.att_delai#id#').hide();
+      $('.att_power#id#').hide();
+      jeedom.eqLogic.getCmd({
+        id: id,
+        async: false,
+        success: function (cmds#id#) {
+          document.getElementById('id_lumiere#id#').style.setProperty('background-color', 'green', 'important');
+          for (j in cmds#id#) {
+            cmds#id#[j].name = cmds#id#[j].name.toLowerCase();
+            cmds#id#[j].name = cmds#id#[j].name.replace('é', 'e');
+            cmds#id#[j].name = cmds#id#[j].name.replace('_', ' ');
+            if (debug#id# == 1) console.log(cmds#id#[j].type+" - "+cmds#id#[j].name+" - Min:"+cmds#id#[j].configuration.minValue+" - Max:"+cmds#id#[j].configuration.maxValue);
+            var id_eql#id# = cmds#id#[j].id;
+            ///////////////////////////////////////////////////////////////////////
+            //////////////////////  Résultat Luminosité Etat //////////////////////
+            ///////////////////////////////////////////////////////////////////////                
+            if (cmds#id#[j].name == 'etat luminosite' || cmds#id#[j].name == 'luminosite info' || cmds#id#[j].name == 'luminosite (valeur)' || cmds#id#[j].name == 'luminosite etat' ) {
+              $('#luminosite_id#id#').value(id_eql#id#);
+              document.getElementById('luminosite_id#id#').style.setProperty('background-color', 'green', 'important');
+              if (update_auto#id# == 1){
+                var update_lum = jeedom.cmd.update[id_eql#id#] = function (){ get_info#id#(); }    
+                if (debug#id# == 1) console.log('------------Cde Info Lum en mode autoUpdate'); 
+              }
+              jeedom.cmd.execute({
+		        id: id_eql#id#,
+		        success:  function(valeur_luminosite#id#) {
+                  if (valeur_luminosite#id#==null || valeur_luminosite#id#=='') valeur_luminosite#id# = 0;
+                  $('#luminosite#id#').value(valeur_luminosite#id#);
+                  $(".span_lum#id#").html(valeur_luminosite#id#)
+                  $(".cmd[data-cmd_id=#id#] .slider_lum#id#").slider({
+                    min: parseInt(min_lum#id#),
+                    max: parseInt(max_lum#id#),
+                    value: parseInt(valeur_luminosite#id#),
+                    range: "min",
+                    animate: false,
+                    slide: function (event, ui) {
+                      $(".span_lum#id#").show().html(ui.value)
+                    }
+                  });
+                }
+              })
+            }
+            ///////////////////////////////////////////////////////////////////////
+            //////////////////////  Résultat Luminosité Cde ///////////////////////
+            /////////////////////////////////////////////////////////////////////// 
+            else if (cmds#id#[j].name == 'luminosite') {
+              $('#luminosite_cde#id#').value(id_eql#id#);
+              document.getElementById('luminosite_cde#id#').style.setProperty('background-color', 'green', 'important');
+              var min_lum#id# = cmds#id#[j].configuration.minValue;
+              var max_lum#id# = cmds#id#[j].configuration.maxValue;
+              if (min_lum#id# == "" || !is_numeric(min_lum#id#)) {
+                min_lum#id# = 0;
+                $('#luminosite_min#id#').value(0);
+                document.getElementById('luminosite_min#id#').style.setProperty('background-color', '#ff5900', 'important');
+              }
+              else {
+                $('#luminosite_min#id#').value(min_lum#id#);
+                document.getElementById('luminosite_min#id#').style.setProperty('background-color', 'green', 'important');
+              }
+              if (max_lum#id# == "" || !is_numeric(max_lum#id#)) {
+                max_lum#id# = 9999;  
+                $('#luminosite_max#id#').value(9999);
+                document.getElementById('luminosite_max#id#').style.setProperty('background-color', '#ff5900', 'important');
+              }
+              else {
+                $('#luminosite_max#id#').value(max_lum#id#);
+                document.getElementById('luminosite_max#id#').style.setProperty('background-color', 'green', 'important');
+              }
+            }
+            ///////////////////////////////////////////////////////////////////////
+            /////////////////////  Résultat Température Etat //////////////////////
+            ///////////////////////////////////////////////////////////////////////
+            else if (cmds#id#[j].name == 'etat temperature couleur' || cmds#id#[j].name == 'etat couleur temp' || cmds#id#[j].name == 'temperature de blanc info' || cmds#id#[j].name == 'temperature couleur (valeur)') {
+              $('#temperature_id#id#').value(id_eql#id#);
+              document.getElementById('temperature_id#id#').style.setProperty('background-color', 'green', 'important');
+              if (update_auto#id# == 1){    
+                var update_temp = jeedom.cmd.update[id_eql#id#] = function (){ get_info#id#(); };
+                if (debug#id# == 1) console.log('------------Cde Info Temp en mode autoUpdate'); 
+              }
+              jeedom.cmd.execute({  
+		        id: id_eql#id#,
+		        success:  function(valeur_temperature#id#) {
+                  if (valeur_temperature#id#==null || valeur_temperature#id#=='') valeur_temperature#id# = 0;
+                  $('#temperature#id#').value(valeur_temperature#id#);
+                  $(".span_temp#id#").html(valeur_temperature#id#)
+                  $(".cmd[data-cmd_id=#id#] .slider_temp#id#").slider({
+                    min: parseInt(min_temp#id#),
+                    max: parseInt(max_temp#id#),
+                    value: parseInt(valeur_temperature#id#),
+                    range: "min",
+                    animate: false,
+                    slide: function (event, ui) {
+                      $(".span_temp#id#").show().html(ui.value)
+                    }
+                  })  
+
+                }
+              })
+            }
+            ///////////////////////////////////////////////////////////////////////
+            /////////////////////  Résultat Température Cde ///////////////////////
+            ///////////////////////////////////////////////////////////////////////  
+            else if (cmds#id#[j].name == 'temperature couleur' || cmds#id#[j].name == 'temperature de blanc' || cmds#id#[j].name == 'couleur temp' || cmds#id#[j].name == 'temperature') {
+              document.getElementById('temperature_cde#id#').style.setProperty('background-color', 'green', 'important');
+              $('#temperature_cde#id#').value(id_eql#id#);
+              var max_temp#id# = cmds#id#[j].configuration.maxValue;
+              var min_temp#id# = cmds#id#[j].configuration.minValue;
+              if (min_temp#id# == "" || !is_numeric(min_temp#id#)) 
+              {
+                min_temp#id# = 0;
+                $('#temperature_min#id#').value(0);
+                document.getElementById('temperature_min#id#').style.setProperty('background-color', '#ff5900', 'important');
+              }
+              else {
+                $('#temperature_min#id#').value(min_temp#id#);
+                document.getElementById('temperature_min#id#').style.setProperty('background-color', 'green', 'important');
+              }
+              if (max_temp#id# == "" || !is_numeric(max_temp#id#)) {
+                max_temp#id# = 9999;
+                $('#temperature_max#id#').value(9999);
+                document.getElementById('temperature_max#id#').style.setProperty('background-color', '#ff5900', 'important');
+              }
+              else {
+                $('#temperature_max#id#').value(max_temp#id#);
+                document.getElementById('temperature_max#id#').style.setProperty('background-color', 'green', 'important');
+              }                                           
+            }
+            ///////////////////////////////////////////////////////////////////////
+            /////////////////////////  Résultat Délai Etat ////////////////////////
+            ///////////////////////////////////////////////////////////////////////    
+            else if (cmds#id#[j].name == 'etat duree' || cmds#id#[j].name == 'duree etat' || cmds#id#[j].name == 'transition statut' || cmds#id#[j].name == 'statut transition') {
+              $('#delai_id#id#').value(id_eql#id#);
+              document.getElementById('delai_id#id#').style.setProperty('background-color', 'green', 'important');
+              if (update_auto#id# == 1){    
+                var update_delai = jeedom.cmd.update[id_eql#id#] = function (){ get_info#id#(); }    
+                if (debug#id# == 1) console.log('------------Cde Info Delai en mode autoUpdate'); 
+              }              
+              jeedom.cmd.execute({  
+		        id: id_eql#id#,
+		        success:  function(valeur_transition#id#) {
+                  if (valeur_transition#id#==null || valeur_transition#id#=='') valeur_transition#id# = 0;
+                  $(".span_delai#id#").html(valeur_transition#id#)
+                  $('#delai#id#').value(valeur_transition#id#);
+                  $(".cmd[data-cmd_id=#id#] .slider_delai#id#").slider({
+                    id: "test",
+                    min: parseInt(min_delai#id#),
+                    max: parseInt(max_delai#id#),
+                    value: parseInt(valeur_transition#id#),
+                    range: "min",
+                    animate: false,
+                    slide: function (event, ui) {
+                      $(".span_delai#id#").show().html(ui.value)
+                    }
+                  })
+                }
+              })
+            }
+            ///////////////////////////////////////////////////////////////////////
+            /////////////////////////  Résultat Délai Cde  ////////////////////////
+            ///////////////////////////////////////////////////////////////////////
+            else if (cmds#id#[j].name == 'duree' || cmds#id#[j].name == 'transition') {
+              document.getElementById('delai_cde#id#').style.setProperty('background-color', 'green', 'important');
+              $('#delai_cde#id#').value(id_eql#id#);
+              var min_delai#id# = cmds#id#[j].configuration.minValue;
+              var max_delai#id# = cmds#id#[j].configuration.maxValue;
+              if (min_delai#id# == "" || !is_numeric(min_delai#id#)) {
+                min_delai#id# = 0;
+                $('#delai_min#id#').value(0);
+                document.getElementById('delai_min#id#').style.setProperty('background-color', '#ff5900', 'important');
+              }
+              else {
+                $('#delai_min#id#').value(min_delai#id#);
+                document.getElementById('delai_min#id#').style.setProperty('background-color', 'green', 'important');
+              }
+              if (max_delai#id# == "" || !is_numeric(max_delai#id#)) {
+                max_delai#id# = 9999;
+                $('#delai_max#id#').value(9999);
+                document.getElementById('delai_max#id#').style.setProperty('background-color', '#ff5900', 'important');
+              }
+              else {
+                $('#delai_max#id#').value(max_delai#id#);
+                document.getElementById('delai_max#id#').style.setProperty('background-color', 'green', 'important');
+              }
+            }
+            ///////////////////////////////////////////////////////////////////////
+            //////////////////////  Résultat Couleur Etat  ////////////////////////
+            ///////////////////////////////////////////////////////////////////////     
+            else if (cmds#id#[j].name == 'etat couleur' || cmds#id#[j].name == 'couleur etat' || cmds#id#[j].name == 'couleur rgb' || cmds#id#[j].name == 'couleur (valeur)') {
+              $('#couleur_id#id#').value(id_eql#id#);
+              document.getElementById('couleur_id#id#').style.setProperty('background-color', 'green', 'important');
+              if (update_auto#id# == 1){    
+                var update_couleur = jeedom.cmd.update[id_eql#id#] = function (){ get_info#id#(); }    
+                if (debug#id# == 1) console.log('------------Cde Info Couleur en mode autoUpdate'); 
+              }     
+              jeedom.cmd.execute({  
+		        id: id_eql#id#,
+		        success:  function(valeur_couleur#id#) {
+                  if (valeur_couleur#id#==null || valeur_couleur#id#=='') valeur_couleur#id# = '#000000';
+                  $('#couleur#id#').value(valeur_couleur#id#);
+                  document.getElementById('couleur#id#').style.setProperty('background-color', valeur_couleur#id#, 'important');
+                }
+              })              
+            }
+            ///////////////////////////////////////////////////////////////////////
+            ///////////////////////  Résultat Couleur Cde  ////////////////////////
+            /////////////////////////////////////////////////////////////////////// 
+            else if (cmds#id#[j].name == 'couleur' || cmds#id#[j].name == 'definir couleur rgb') {
+              document.getElementById('couleur_cde#id#').style.setProperty('background-color', 'green', 'important');
+              $('#couleur_cde#id#').value(id_eql#id#);
+            }
+            ///////////////////////////////////////////////////////////////////////
+            //////////////////////////////  Power Etat  ///////////////////////////
+            ///////////////////////////////////////////////////////////////////////  
+            else if (cmds#id#[j].name == 'state' || cmds#id#[j].name == 'etat' || cmds#id#[j].name == 'statut') {
+              $('#power_id#id#').value(id_eql#id#);
+              document.getElementById('power_id#id#').style.setProperty('background-color', 'green', 'important');
+              if (update_auto#id# == 1){    
+                var update_etat = jeedom.cmd.update[id_eql#id#] = function (){ get_info#id#(); }    
+                if (debug#id# == 1) console.log('------------Cde Info Etat en mode autoUpdate'); 
+              }
+              jeedom.cmd.execute({ 
+		        id: id_eql#id#,
+                success:  function(valeur_etat#id#) {
+                  let power#id# = (valeur_etat#id#==null || valeur_etat#id#==0 || valeur_etat#id#=='')?'Off':'On';
+                  $('#power#id#').value(power#id#);
+                  if (power#id# == 'On') $('.Toggle#uid#').prop('checked', true);
+                  else $('.Toggle#uid#').prop('checked', false);
+                }
+              })
+            }
+            ///////////////////////////////////////////////////////////////////////
+            //////////////////////////////  Power On  /////////////////////////////
+            ///////////////////////////////////////////////////////////////////////
+            else if (cmds#id#[j].name == 'on' || cmds#id#[j].name == 'on1' || cmds#id#[j].name == 'allumer' ) {
+              document.getElementById('power_cde_on#id#').style.setProperty('background-color', 'green', 'important');
+              $('#power_cde_on#id#').value(id_eql#id#);
+            }
+            ///////////////////////////////////////////////////////////////////////
+            ////////////////////////////  Power Off  //////////////////////////////
+            ///////////////////////////////////////////////////////////////////////
+            else if (cmds#id#[j].name == 'off' || cmds#id#[j].name == 'off1' || cmds#id#[j].name == 'eteindre') {
+              document.getElementById('power_cde_off#id#').style.setProperty('background-color', 'green', 'important');
+              $('#power_cde_off#id#').value(id_eql#id#);
+            }
+          }
+        }    
+      })
+    } 
+    ///////////////////////////////////////////////////////////////////////
+    //////////////////////////////// Div Alerte ///////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    $('[data-cmd_id="#id#"]').find('.btn_closeAlert').on('click', function() {
+      console.log("appuie sur le bouton");
+      $(this).closest('.jqAlert').hide();
+    });                                           
+    ///////////////////////////////////////////////////////////////////////
+    /////////////////////////// Slider Luminosité /////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    $(".cmd[data-cmd_uid=#uid#] .slider_lum#id#").on('slidestop', function (event,ui) {
+      var id_lum_cde#id# = document.getElementById('luminosite_cde#id#').value;
+      var id_lum_valeur#id# = document.getElementById('luminosite#id#').value;
+      var id_luminosite_id#id# = document.getElementById('luminosite_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      if (id_lum_cde#id# != "(none)" && id_luminosite_id#id# != "(none)")
+      {
+        if (ui.value != id_lum_valeur#id#) 
+        {
+          jeedom.cmd.execute({id: id_lum_cde#id#, value: {slider: ui.value}});
+          $('#luminosite#id#').value(ui.value);
+          if (debug#id# == 1) console.log("Valeur demandée pour la Cde Luminosité : "+ui.value);
+          if (update_auto#id# == 0)
+          {
+            if (tempo#id# == false){
+              if (debug#id# == 1) console.log('event tempo lum+ false');
+            }
+            else 
+            {
+              if (debug#id# == 1) console.log('event tempo lum+ true');
+              clearTimeout(tempo#id#);
+            }
+            tempo#id# = setTimeout(get_info#id#, delaiTempo#id#); 
+          }
+        }
+      }
+      else $('.att_lum#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      $(".span_lum#id#").hide();
+    });
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////// Slider Températures /////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    $(".cmd[data-cmd_uid=#uid#] .slider_temp#id#").on('slidestop', function (event,ui) {
+      var id_temp_cde#id# = document.getElementById('temperature_cde#id#').value;
+      var id_temp_valeur#id# = document.getElementById('temperature#id#').value;
+      var id_temp_id#id# = document.getElementById('temperature_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      if (id_temp_cde#id# != "(none)" && id_temp_id#id# != "(none)")
+      {
+        if (ui.value != id_temp_valeur#id#) {
+          jeedom.cmd.execute({id: id_temp_cde#id#, value: {slider: ui.value}});
+          $('#temperature#id#').value(ui.value);
+          if (debug#id# == 1) console.log("Valeur demandée pour la Cde Température : "+ui.value);
+          if (update_auto#id# == 0)
+          {
+            if (tempo#id# == false){
+              if (debug#id# == 1) console.log('event tempo lum+ false');
+            }
+            else 
+            {
+              if (debug#id# == 1) console.log('event tempo lum+ true');
+              clearTimeout(tempo#id#);
+            }
+            tempo#id# = setTimeout(get_info#id#, delaiTempo#id#); 
+          }
+        }
+      }
+      else $('.att_temp#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      $(".span_temp#id#").hide();
+    });
+    ///////////////////////////////////////////////////////////////////////
+    ////////////////////////////// Slider Délai ///////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    $(".cmd[data-cmd_uid=#uid#] .slider_delai#id#").on('slidestop', function (event,ui) {
+      var id_delai_cde#id# = document.getElementById('delai_cde#id#').value;
+      var id_delai_valeur#id# = document.getElementById('delai#id#').value;
+      var id_delai_id#id# = document.getElementById('delai_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      if (id_delai_cde#id# != "(none)" && id_delai_id#id# != "(none)")
+      {
+        if (ui.value != id_delai_valeur#id#) {
+          jeedom.cmd.execute({id: id_delai_cde#id#, value: {slider: ui.value}});
+          $('#delai#id#').value(ui.value);
+          if (debug#id# == 1) console.log("Valeur demandée pour la Cde Delai : "+ui.value);
+          if (update_auto#id# == 0)
+          {
+            if (tempo#id# == false){
+              if (debug#id# == 1) console.log('event tempo lum+ false');
+            }
+            else 
+            {
+              if (debug#id# == 1) console.log('event tempo lum+ true');
+              clearTimeout(tempo#id#);
+            }
+            tempo#id# = setTimeout(get_info#id#, delaiTempo#id#); 
+          }
+        }
+      }
+      else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      $(".span_delai#id#").hide();
+    });
+    ///////////////////////////////////////////////////////////////////////
+    ////////////////////////////////// Reset  /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////  
+    function reset#id#(){ 
+      if (update_auto#id# == 1) delete jeedom.cmd.update[document.getElementById('luminosite_id#id#').value];
+      if (update_auto#id# == 1)delete jeedom.cmd.update[document.getElementById('temperature_id#id#').value];
+      if (update_auto#id# == 1)delete jeedom.cmd.update[document.getElementById('delai_id#id#').value];
+      if (update_auto#id# == 1)delete jeedom.cmd.update[document.getElementById('couleur_id#id#').value];
+      if (update_auto#id# == 1)delete jeedom.cmd.update[document.getElementById('power_id#id#').value];
+      $('#luminosite_id#id#').value('(none)');
+      $('#luminosite#id#').value('(none)');
+      $('#luminosite_cde#id#').value('(none)');
+      $('#luminosite_max#id#').value('(none)');
+      $('#luminosite_min#id#').value('(none)');
+      $('#temperature_id#id#').value('(none)');
+      $('#temperature#id#').value('(none)');
+      $('#temperature_cde#id#').value('(none)');
+      $('#temperature_max#id#').value('(none)');
+      $('#temperature_min#id#').value('(none)');
+      $('#delai_id#id#').value('(none)');
+      $('#delai#id#').value('(none)');
+      $('#delai_cde#id#').value('(none)');
+      $('#delai_max#id#').value('(none)');
+      $('#delai_min#id#').value('(none)');
+      $('#couleur_id#id#').value('(none)');
+      $('#couleur#id#').value('(none)');
+      $('#couleur_cde#id#').value('(none)');
+      $('#power_id#id#').value('(none)');
+      $('#power#id#').value('(none)');
+      $('#power_cde_on#id#').value('(none)');
+      $('#power_cde_off#id#').value('(none)');
+      $('#id_lumiere#id#').value('(none)');
+      $('#object_lumiere#id#').value('(none)');
+      $('.Toggle#uid#').prop('checked', false);
+      document.getElementById('id_lumiere#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('luminosite_id#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('luminosite_cde#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('luminosite_max#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('luminosite_min#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('temperature_id#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('temperature_cde#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('temperature_max#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('temperature_min#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('delai_cde#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('delai_id#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('delai_max#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('delai_min#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('couleur_cde#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('couleur_id#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('power_id#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('power_cde_on#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('power_cde_off#id#').style.setProperty('background-color', 'red', 'important');
+      document.getElementById('couleur#id#').style.setProperty('background-color', 'unset', 'important');
+      document.getElementById('power#id#').style.setProperty('background-color', 'transparent', 'important');
+      $('.att_lum#id#').hide();
+      $('.att_temp#id#').hide();
+      $('.att_delai#id#').hide();
+      $('.att_couleur#id#').hide();
+      $('.att_power#id#').hide();
+      $('.cmd[data-cmd_uid=#uid#] .slider#id# .ui-slider-range ').remove();
+      $('.cmd[data-cmd_uid=#uid#] .slider#id# .ui-slider-handle ').remove();
+      $('[data-cmd_id="#id#"]').find('.btn_closeAlert').closest('.jqAlert').hide();
+    }
+    ///////////////////////////////////////////////////////////////////////
+    //////////////////////////////// Refresh  /////////////////////////////
+    /////////////////////////////////////////////////////////////////////// 
+    $('.cmd[data-cmd_uid=#uid#]:last .refresh#id#').off('click').on('click', function () {
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      if (id_lum#id# != "(none)") {
+        get_info#id#(id_lum#id#);
+      }
+    });
+    ///////////////////////////////////////////////////////////////////////
+    ////////////////////////////////// Reset  /////////////////////////////
+    /////////////////////////////////////////////////////////////////////// 
+    $('.cmd[data-cmd_uid=#uid#]:last .reset#id#').off('click').on('click', function () {
+      document.getElementById('lights#id#').options[0].selected=true;
+      reset#id#();
+    });
+    ///////////////////////////////////////////////////////////////////////
+    ////////////////////////////////// On/Off /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////   
+    $('.Toggle#uid#').on('click', function() {
+      var id_on#id# = document.getElementById('power_cde_on#id#').value;
+      var id_off#id# = document.getElementById('power_cde_off#id#').value;
+      var id_power_valeur#id# = document.getElementById('power#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      if (id_lum#id# != "(none)")
+      {
+        
+        //if (id_on#id# != "(none)" && id_off#id# != "(none)" && id_power_valeur#id# != "(none)") {        
+        if (id_on#id# != "(none)" && id_off#id# != "(none)") { 
+          if (id_power_valeur#id# == "(none)")
+          {
+            document.getElementById('power#id#').style.setProperty('background-color', '#ff5900', 'important');
+          }
+          if ( $('.Toggle#uid#').is( ":checked" ) ){
+            jeedom.cmd.execute({id: id_on#id#});
+            $('#power#id#').value('On');
+            if (debug#id# == 1) console.log('Demande de ON');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }
+          } 
+          else 
+          {
+            jeedom.cmd.execute({id: id_off#id#});
+            $('#power#id#').value('Off');
+            if (debug#id# == 1) console.log('Demande de OFF');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }
+          }
+        } 
+        else $('.att_power#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      }
+      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement!', level: 'danger'})
+    });
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////// Luminosité +/-  /////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    $('.cmd[data-cmd_uid=#uid#]:last .lum_plus#id#').off('click').on('click', function () {
+      var id_luminosite_cde#id# = document.getElementById('luminosite_cde#id#').value;
+      var id_luminosite_valeur#id# = document.getElementById('luminosite#id#').value;
+      var id_luminosite_id#id# = document.getElementById('luminosite_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      var max_lum#id# = document.getElementById('luminosite_max#id#').value;
+      
+      if (id_lum#id# != "(none)"){
+        if (id_luminosite_cde#id# != "(none)" && id_luminosite_valeur#id# != "(none)" && id_luminosite_id#id# != "(none)") { 
+          var new_valeur#id# = parseFloat(id_luminosite_valeur#id#) + valuePalierlum#id#;
+          if (new_valeur#id# > max_lum#id#) new_valeur#id# = max_lum#id#;
+          if (new_valeur#id# != id_luminosite_valeur#id#) {
+            jeedom.cmd.execute({id: id_luminosite_cde#id#, value: {slider: new_valeur#id#}});
+            $('#luminosite#id#').value(new_valeur#id#);
+            if (debug#id# == 1) console.log('Demande lum+');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }
+          }
+        }
+        else $('.att_lum#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      } 
+      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'});
+    });
+    $('.cmd[data-cmd_uid=#uid#]:last .lum_moins#id#').off('click').on('click', function () {
+      var id_luminosite_cde#id# = document.getElementById('luminosite_cde#id#').value;
+      var id_luminosite_valeur#id# = document.getElementById('luminosite#id#').value;
+      var id_luminosite_id#id# = document.getElementById('luminosite_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      var min_lum#id# = document.getElementById('luminosite_min#id#').value;
+      if (id_lum#id# != "(none)") { 
+        if (id_luminosite_cde#id# != "(none)" && id_luminosite_valeur#id# != "(none)" && id_luminosite_id#id# != "(none)") {
+          var new_valeur#id# = parseFloat(id_luminosite_valeur#id#) - valuePalierlum#id#; 
+          if (new_valeur#id# < min_lum#id#) new_valeur#id# = min_lum#id#;
+          if (new_valeur#id# != id_luminosite_valeur#id#) {
+            jeedom.cmd.execute({id: id_luminosite_cde#id#, value: {slider: new_valeur#id#}});
+            $('#luminosite#id#').value(new_valeur#id#);
+            if (debug#id# == 1) console.log('Demande lum-');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }
+          }
+        }
+        else $('.att_lum#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      }
+      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'});
+    });
+
+    ///////////////////////////////////////////////////////////////////////
+    //////////////////////////// Température +/-  /////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    $('.cmd[data-cmd_uid=#uid#]:last .temp_plus#id#').off('click').on('click', function () {
+      var id_temperature_cde#id# = document.getElementById('temperature_cde#id#').value;
+      var id_temperature_valeur#id# = document.getElementById('temperature#id#').value;
+      var id_temperature_id#id# = document.getElementById('temperature_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      var max_temperature#id# = document.getElementById('temperature_max#id#').value;
+      if (id_lum#id# != "(none)")
+      {
+        if (id_temperature_cde#id# != "(none)" && id_temperature_valeur#id# != "(none)" && id_temperature_id#id# != "(none)") { 
+          var new_valeur#id# = parseFloat(id_temperature_valeur#id#) + valuePaliertemp#id#;
+          if (new_valeur#id# > max_temperature#id#) new_valeur#id# = max_temperature#id#;
+          if (new_valeur#id# != id_temperature_valeur#id#) {
+            jeedom.cmd.execute({id: id_temperature_cde#id#, value: {slider: new_valeur#id#}});
+            $('#temperature#id#').value(new_valeur#id#);
+            if (debug#id# == 1) console.log('Demande temp+');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }                    
+          }
+        }
+        else $('.att_temp#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      }
+      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+    });
+    $('.cmd[data-cmd_uid=#uid#]:last .temp_moins#id#').off('click').on('click', function () {
+      var id_temperature_cde#id# = document.getElementById('temperature_cde#id#').value;
+      var id_temperature_valeur#id# = document.getElementById('temperature#id#').value;
+      var id_temperature_id#id# = document.getElementById('temperature_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      var min_temperature#id# = document.getElementById('temperature_min#id#').value;
+      if (id_lum#id# != "(none)")
+      {
+        if (id_temperature_cde#id# != "(none)" && id_temperature_valeur#id# != "(none)" && id_temperature_id#id# != "(none)") { 
+          var new_valeur#id# = parseFloat(id_temperature_valeur#id#) - valuePaliertemp#id#;
+          if (new_valeur#id# < min_temperature#id#) new_valeur#id# = min_temperature#id#;
+          if (new_valeur#id# != id_temperature_valeur#id#) {
+            jeedom.cmd.execute({id: id_temperature_cde#id#, value: {slider: new_valeur#id#}});
+            $('#temperature#id#').value(new_valeur#id#);
+            if (debug#id# == 1) console.log('Demande temp-');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }    
+          }
+        }
+        else $('.att_temp#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      }
+      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+    }); 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////// Delais +/-  /////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    $('.cmd[data-cmd_uid=#uid#]:last .delai_plus#id#').off('click').on('click', function () {
+      var id_delai_cde#id# = document.getElementById('delai_cde#id#').value;
+      var id_delai_valeur#id# = document.getElementById('delai#id#').value;
+      var id_delai_id#id# = document.getElementById('delai_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      var max_delai#id# = document.getElementById('delai_max#id#').value;
+      if (id_lum#id# != "(none)")
+      {
+        if (id_delai_cde#id# != "(none)" && id_delai_valeur#id# != "(none)" && id_delai_id#id# != "(none)") { 
+          var new_valeur#id# = parseFloat(id_delai_valeur#id#) + valuePalierdelai#id#;
+          if (new_valeur#id# > max_delai#id#) new_valeur#id# = max_delai#id#;
+          if (new_valeur#id# != id_delai_valeur#id#) {
+            jeedom.cmd.execute({id: id_delai_cde#id#, value: {slider: new_valeur#id#}});
+            $('#delai#id#').value(new_valeur#id#);
+            if (debug#id# == 1) console.log('Demande delai+');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }                         
+          }
+        }
+        else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      }
+      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+    });
+    $('.cmd[data-cmd_uid=#uid#]:last .delai_moins#id#').off('click').on('click', function () {
+      var id_delai_cde#id# = document.getElementById('delai_cde#id#').value;
+      var id_delai_valeur#id# = document.getElementById('delai#id#').value;
+      var id_delai_id#id# = document.getElementById('delai_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      var min_delai#id# = document.getElementById('delai_min#id#').value;
+      if (id_lum#id# != "(none)")
+      {
+        if (id_delai_cde#id# != "(none)" && id_delai_valeur#id# != "(none)" && id_delai_id#id# != "(none)") { 
+          var new_valeur#id# = parseFloat(id_delai_valeur#id#) - valuePalierdelai#id#;
+          if (new_valeur#id# < min_delai#id#) new_valeur#id# = min_delai#id#;
+          if (new_valeur#id# != id_delai_valeur#id#) {
+            jeedom.cmd.execute({id: id_delai_cde#id#, value: {slider: new_valeur#id#}});
+            $('#delai#id#').value(new_valeur#id#);
+            if (debug#id# == 1) console.log('Demande delai-');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }
+          }
+        }
+        else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      }
+      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+    });
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////// Couleur  ////////////////////////////
+    ///////////////////////////////////////////////////////////////////////    
+    $('.cmd[data-cmd_uid=#uid#]:last .colorpicker#id#').on('change', function() {
+      var id_couleur_cde#id# = document.getElementById('couleur_cde#id#').value;
+      var id_couleur_valeur#id# = document.getElementById('couleur#id#').value;
+      var id_couleur_id#id# = document.getElementById('couleur_id#id#').value;
+      var id_lum#id# = document.getElementById('id_lumiere#id#').value;
+      var couleur_choix#id# = this.value;
+      if (id_lum#id# != "(none)")
+      {
+        if (id_couleur_cde#id# != "(none)" && id_couleur_valeur#id# != "(none)" && id_couleur_id#id# != "(none)") {
+          if (couleur_choix#id# != id_couleur_valeur#id#)
+          {
+            $('#couleur#id#').value(couleur_choix#id#);
+            document.getElementById('couleur#id#').style.setProperty('background-color', couleur_choix#id#, 'important');
+            //document.getElementById('couleur#id#').style.setProperty('opacity', 1, 'important');
+            jeedom.cmd.execute({id: id_couleur_cde#id#, value: {color: couleur_choix#id#}});
+            if (debug#id# == 1) console.log('Demande couleur');
+            if (update_auto#id# == 0)
+            {
+              if (debug#id# == 1) console.log('debut tempo on');
+              if (tempo#id# == false){
+                if (debug#id# == 1) console.log('event tempo on false');
+              }
+              else 
+              {
+                if (debug#id# == 1) console.log('event tempo on true');
+                clearTimeout(tempo#id#);
+              }
+              tempo#id# = setTimeout(get_info#id#, delaiTempo#id#);
+            }
+          }
+        }
+        else $('.att_couleur#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      }
+      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+    });
+  </script>
+  <div class="container#id#">
+    <h2 style="margin-top: 0px; margin-bottom: 10px; font-style: italic;">Gestion Lumières</h2>
+    <table class="data#id#">
+      <tr>
+        <td colspan=5 ><div id="selection#id#"></div></td>
+      </tr>
+      <tr>
+        <td class="label#id#">Luminosité</td>
+        <td class="valeur#id#"><input type="text" id="luminosite#id#" class="input#id#" value="(none)" disabled="" style="background-color: transparent !important;cursor: default !important;"></td>
+        <td class="moins#id#">
+          <div class="plusmoins#id#">
+            <a class="btn btn-sm lum_moins#id#" style="color: black !important;">-</a>
+            <a class="btn btn-sm lum_plus#id#" style="color: black !important;">+</a>
+          </div>
+          <div class="slider#id#" id="slider_lum#id#" style="">
+            <div class="slider_lum#id# slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" value="0" style="border-radius: 2px !important;height: 4px !important;">
+            <span class="span_lum#id# sliderValue" style="display: none;">0</span>
+           </div>
+           
+          </div>
+        </td>
+        <td class="attention#id#"><i class="fas fa-exclamation-triangle icon_red att_lum#id#" style="display: none;"></i></td>
+      </tr>
+      <tr>
+        <td class="label#id#">Température</td>
+        <td class="valeur#id#"><input type="text" id="temperature#id#" class="input#id#" value="(none)" disabled="" style="background-color: transparent !important;cursor: default !important;"></td>
+        <td class="moins#id#">
+          <div class="plusmoins#id#">
+            <a class="btn btn-sm temp_moins#id#" style="color: black !important;">-</a>
+          <a class="btn btn-sm temp_plus#id#" style="color: black !important;">+</a>
+          </div>
+          <div class="slider#id#">
+            <div class="slider_temp#id# slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" value="0" style="border-radius: 2px !important;height: 4px !important;">
+              <span class="span_temp#id# sliderValue" style="display: none;">0</span>
+            </div>
+          </div>
+        </td>
+        <td class="attention#id#"><i class="fas fa-exclamation-triangle icon_red att_temp#id#" style="display: none;"></i></td>
+      </tr>
+      <tr>
+        <td class="label#id#">Délai de transition</td>
+        <td class="valeur#id#"><input type="text" id="delai#id#" class="input#id#" value="(none)" disabled="" style="background-color: transparent !important;cursor: default !important;"></td>
+        <td class="moins#id#">
+          <div class="plusmoins#id#">
+            <a class="btn btn-sm delai_moins#id#" style="color: black !important;">-</a>
+            <a class="btn btn-sm delai_plus#id#" style="color: black !important;">+</a>
+          </div>
+          <div class="slider#id#">
+            <div class="slider_delai#id# slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" value="74" style="border-radius: 2px !important;height: 4px !important;">
+              <span class="span_delai#id# sliderValue" style="display: none;">0</span>
+            </div>
+          </div>
+        </td>
+        <td class="attention#id#"><i class="fas fa-exclamation-triangle icon_red att_delai#id#" style="display: none;"></i></td>
+      </tr>
+      <tr>
+        <td class="label#id#">Couleur</td>
+        <td class="valeur#id#" sty><input type="text" id="couleur#id#" class="input#id#" value="(none)" disabled="" style="background-color: transparent !important;cursor: default !important;opacity: 1 !important;"></td>
+        <td class="moins#id#">
+          <input class="input-sm btn action action_colorpicker_change form-control cursor colorpicker#id#" type="color" style="height: 30px !important; margin-top: 0px;">
+        </td>
+        <td class="attention#id#"><i class="fas fa-exclamation-triangle icon_red att_couleur#id#" style="display: none;"></i></td>
+      </tr>
+      <tr>
+        <td class="label#id#">Power</td>
+        <td class="valeur#id#"><input type="text" id="power#id#" class="input#id#" value="(none)" disabled="" style="background-color: transparent !important;cursor: default !important;"></td>
+        <td class="moins#id#">
+          <input class="Toggle#uid#" type="checkbox" id="switch#id#"/>
+          <label for="switch#id#" class="cmdName#id# ch#id#"></label></td>
+        <td class="attention#id#"><i class="fas fa-exclamation-triangle icon_red att_power#id#" style="display: none;"></i></td>
+      </tr>
+    </table>
+    <br/>
+    <div style="width: 350px;">
+      <a class="btn btn-sm refresh#id#" style="background-color: green !important;">Refresh</a>
+      <a class="btn btn-sm reset#id#" style="background-color: red !important;">Reset</a>
+    </div>
+    <div style="width: 350px;" class="byphpvarious#id#">By @Phpvarious</div>
+  </div>
+  <br>
+  <!-- ///////////////////////////////////////////////////////////////
+   ///////////////////////// MODE DEBUG //////////////////////////////
+   /////////////////////////////////////////////////////////////////// -->  
+  <div class="container#id#" id="debug#id#">
+    <h1 style="margin-top: 0px; margin-bottom: 10px;">MODE DEBUG</h1>
+    <table class="data#id#">
+        <tr>
+          <td class="label_debug#id#">Id équipement :</td>
+          <td class="td_debug#id#">
+            <input type="text" id="id_lumiere#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+          </td>
+          <td> </td>
+        </tr>
+      <tr>
+        <td class="label_debug#id#"></td><td class="td_debug#id#" style="background-color: gray;">Etat</td>
+        <td class="td_debug#id#" style="background-color: gray;">Cde</td>
+        <td class="td_debug#id#" style="background-color: gray;">Min</td>
+        <td class="td_debug#id#" style="background-color: gray;">Max</td>
+      </tr>
+      <tr>
+        <td class="label_debug#id#">Luminosité :</td>
+        <td class="td_debug#id#">
+          <input type="text" id="luminosite_id#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="luminosite_cde#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="luminosite_min#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="luminosite_max#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+      </tr>
+      <tr>
+        <td class="label_debug#id#">Température:</td>
+        <td class="td_debug#id#">
+          <input type="text" id="temperature_id#id#" class="input_cache#id#" value="(none)" disabled=""  style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="temperature_cde#id#" class="input_cache#id#" value="(none)" disabled=""  style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="temperature_min#id#" class="input_cache#id#" value="(none)" disabled=""  style="background-color: red !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="temperature_max#id#" class="input_cache#id#" value="(none)" disabled=""  style="background-color: red !important;">
+        </td>
+      </tr>
+      <tr>
+        <td class="label_debug#id#">Délai :</td>
+        <td class="td_debug#id#">
+          <input type="text" id="delai_id#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="delai_cde#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="delai_min#id#" class="input_cache#id#" value="(none)" disabled=""  style="background-color: red !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="delai_max#id#" class="input_cache#id#" value="(none)" disabled=""  style="background-color: red !important;">
+        </td>
+      </tr>
+      <tr>
+        <td class="label_debug#id#">Couleur : </td>
+        <td class="td_debug#id#">
+          <input type="text" id="couleur_id#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="couleur_cde#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#"> </td>
+        <td class="td_debug#id#"> </td>
+      </tr>
+      <tr>
+        <td class="label_debug#id#"> </td>
+        <td class="label_debug#id#"> </td>
+        <td class="td_debug#id#" style="background-color: gray;">On</td>
+        <td class="td_debug#id#" style="background-color: gray;">Off</td>
+        
+      </tr>
+      <tr>
+        <td class="label_debug#id#">Power : </td>
+        <td class="td_debug#id#">
+        <input type="text" id="power_id#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="power_cde_on#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+        <td class="td_debug#id#">
+          <input type="text" id="power_cde_off#id#" class="input_cache#id#" value="(none)" disabled="" style="background-color: #ff0000 !important;">
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
