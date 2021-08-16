@@ -74,8 +74,7 @@ le widget est nativement compatible avec ces plugins :
 - Zigbee (zigbee)
 - Philips Hue (philipsHue)
 - Xiaomi home (xiaomihome)
-  - un temps de réponse important a été constaté sur ce pluging, n'hesitez pas a augmenter la tempo (delaiTempo) à 3000 si vous constatez  
-  un comportement anormal lors d'une action sur le widget.
+  - un temps de réponse important a été constaté sur ce pluging, n'hesitez pas a augmenter la tempo (delaiTempo) à 3000 si vous constatez un comportement anormal lors d'une action sur le widget.
 
 ## Debug
 
