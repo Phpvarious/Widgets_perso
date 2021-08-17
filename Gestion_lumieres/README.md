@@ -72,10 +72,10 @@ le widget est nativement compatible avec ces plugins :
   - Power on : on, on1, allumer.
   - Power off : off, off1, eteindre.
   - Power état : state, etat, statut.
-  - Luminosité état : etat luminosite, luminosite info, luminosite (valeur), luminosite etat.
-  - Luminosité cde : luminosite.
-  - Couleur état : etat couleur, couleur etat, couleur rgb, couleur (valeur).
-  - Couleur cde : couleur, definir couleur rgb.
+  - Luminosité état : etat luminosite, luminosite info, luminosite (valeur), luminosite etat, luminosite anneau.
+  - Luminosité cde : luminosite, definir luminosite.
+  - Couleur état : etat couleur, couleur etat, couleur rgb, couleur (valeur), couleur anneau.
+  - Couleur cde : couleur, definir couleur rgb, definir couleur.
   - Durée/transition cde : duree, transition.
   - Durée/transition état : etat duree, duree etat, transition statut,statut transition, transition status, status transition.
   - Température couleur : temperature couleur, temperature de blanc, couleur temp, temperature.
