@@ -18,10 +18,10 @@
                                 virgule (,) Exemple : virtual,zigbee2mqtt
   displayCat : [Binaire] -   	Permet d'afficher une séparation entre les plugins dans la liste déroulante.[Défaut : 0]
   slider : [Binaire] -       	Affiche un slider à la place des boutons.[Défaut : 0 donc mode  bouton]
-  couleurSlider :            	Couleur de la barre des sliders. Exemple : White, #ffffff ..... [Défaut : white]
-  couleurSliderRond :        	Couleur du rond des sliders. Exemple : White, #ffffff ..... [Défaut : white]
-  couleurBoutonPlus :        	Couleur du bouton + . Exemple : White, #ffffff ..... [Défaut : aliceblue]
-  couleurBoutonMoins :       	Couleur du bouton - . Exemple : White, #ffffff ..... [Défaut : aliceblue]
+  couleurSlider :            	Couleur de la barre des sliders. Exemple : white, #ffffff ..... [Défaut : white]
+  couleurSliderRond :        	Couleur du rond des sliders. Exemple : white, #ffffff ..... [Défaut : white]
+  couleurBoutonPlus :        	Couleur du bouton + . Exemple : white, #ffffff ..... [Défaut : aliceblue]
+  couleurBoutonMoins :       	Couleur du bouton - . Exemple : white, #ffffff ..... [Défaut : aliceblue]
   delaiTempo : [Numérique] - 	Temporisation pour le refresh des valeurs du widget après avoir exécuté une
 				commande sur celui-ci. Attention valeur en ms soit 5000 pour 5s.[Défaut : 700]
   debug : [Binaire] - 		Passe le Widget en mode Debugg. [Défaut : 0]
@@ -46,7 +46,7 @@ Durée/transition état : etat duree, duree etat, transition statut,statut trans
 Température couleur : temperature couleur, temperature de blanc, couleur temp, temperature
 Température couleur état : etat temperature couleur, etat couleur temp, temperature de blanc info, temperature couleur (valeur)
 
-Les noms de commandes sont insensibles au majuscule, et trait du bas (_).
+Les noms de commandes sont insensibles aux majuscules, l'underscore (_) et et caractère (é).
 Exemple : Etat_duree -> [OK]
 
 
@@ -56,7 +56,7 @@ Exemple : Etat_duree -> [OK]
   
   <div style="width: 390px;border-radius: 5px !important;display: none;" id="div_alert#id#" class="jqAlert alert-danger">
     <span href="#" class="btn_closeAlert pull-right cursor" style="position : relative; left : 30px;color : grey">×</span>
-    <span class="displayError">Veuillez selectionner un équipement !</span>
+    <span class="displayError">Veuillez sélectionner un équipement !</span>
   </div>
   <style>
    :root {
@@ -628,7 +628,7 @@ Exemple : Etat_duree -> [OK]
           }
         }
       }
-      else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+      else $('.att_delai#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       $(".span_delai#id#").hide();
     });
     ///////////////////////////////////////////////////////////////////////
@@ -765,9 +765,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         } 
-        else $('.att_power#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_power#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement!', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////// Luminosité +/-  /////////////////////////
@@ -802,9 +802,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         }
-        else $('.att_lum#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_lum#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       } 
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'});
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'});
     });
     $('.cmd[data-cmd_uid=#uid#]:last .lum_moins#id#').off('click').on('click', function () {
       var id_luminosite_cde#id# = document.getElementById('luminosite_cde#id#').value;
@@ -835,9 +835,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         }
-        else $('.att_lum#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_lum#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'});
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'});
     });
 
     ///////////////////////////////////////////////////////////////////////
@@ -873,9 +873,9 @@ Exemple : Etat_duree -> [OK]
             }                    
           }
         }
-        else $('.att_temp#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_temp#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
     $('.cmd[data-cmd_uid=#uid#]:last .temp_moins#id#').off('click').on('click', function () {
       var id_temperature_cde#id# = document.getElementById('temperature_cde#id#').value;
@@ -907,9 +907,9 @@ Exemple : Etat_duree -> [OK]
             }    
           }
         }
-        else $('.att_temp#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_temp#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     }); 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////// Delais +/-  /////////////////////////
@@ -944,9 +944,9 @@ Exemple : Etat_duree -> [OK]
             }                         
           }
         }
-        else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_delai#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
     $('.cmd[data-cmd_uid=#uid#]:last .delai_moins#id#').off('click').on('click', function () {
       var id_delai_cde#id# = document.getElementById('delai_cde#id#').value;
@@ -978,9 +978,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         }
-        else $('.att_delai#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_delai#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////// Couleur  ////////////////////////////
@@ -1016,9 +1016,9 @@ Exemple : Etat_duree -> [OK]
             }
           }
         }
-        else $('.att_couleur#id#').show().attr('title','Veuillez verifier les noms des commandes !');
+        else $('.att_couleur#id#').show().attr('title','Veuillez vérifier les noms des commandes !');
       }
-      else $('#div_alert#id#').showAlert({message: 'Veuillez selectionner un équipement !', level: 'danger'})
+      else $('#div_alert#id#').showAlert({message: 'Veuillez sélectionner un équipement !', level: 'danger'})
     });
   </script>
   <div class="container#id#">

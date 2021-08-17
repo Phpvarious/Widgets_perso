@@ -27,10 +27,10 @@
 	 plugin :			Liste des plugins pour l'import des équipements sans espace, séparés par une virgule (,) Exemple : virtual,zigbee2mqtt
      displayCat : [Binaire] -   	Permet d'afficher une séparation entre les plugins dans la liste déroulante.[Défaut : 0]
      slider : [Binaire] -       	Affiche un slider à la place des boutons.[Défaut : 0 donc mode  bouton]
-     couleurSlider :            	Couleur de la barre des sliders. Exemple : White, #ffffff ..... [Défaut : white]
-     couleurSliderRond :        	Couleur du rond des sliders. Exemple : White, #ffffff ..... [Défaut : white]
-     couleurBoutonPlus :        	Couleur du bouton + . Exemple : White, #ffffff ..... [Défaut : aliceblue]
-     couleurBoutonMoins :       	Couleur du bouton - . Exemple : White, #ffffff ..... [Défaut : aliceblue]
+     couleurSlider :            	Couleur de la barre des sliders. Exemple : white, #ffffff ..... [Défaut : white]
+     couleurSliderRond :        	Couleur du rond des sliders. Exemple : white, #ffffff ..... [Défaut : white]
+     couleurBoutonPlus :        	Couleur du bouton + . Exemple : white, #ffffff ..... [Défaut : aliceblue]
+     couleurBoutonMoins :       	Couleur du bouton - . Exemple : white, #ffffff ..... [Défaut : aliceblue]
      delaiTempo : [Numérique] - 	Temporisation pour le refresh des valeurs du widget après avoir exécuté une commande sur celui-ci.
 	 Attention valeur en ms soit 5000 pour 5s.[Défaut : 700]
      debug : [Binaire] - 		Passe le Widget en mode Debug. [Défaut : 0]
@@ -43,7 +43,7 @@
 ![](doc/images/installation_virtuel10.png)
 
 ## 5) Paramétrage des équipements.
-Votre équipement doit être 'Activer' et categorisé 'Lumière'.
+Votre équipement doit être 'Activer' et catégorisé 'Lumière'.
 
 ![](doc/images/installation_virtuel9.png)
 
@@ -63,7 +63,7 @@ le widget est nativement compatible avec ces plugins :
 - Zigbee (zigbee)
 - Philips Hue (philipsHue)
 - Xiaomi home (xiaomihome)
-  - un temps de réponse important a été constaté sur ce plugin, n'hesitez pas a augmenter la tempo (delaiTempo) à 3000 si vous constatez un comportement anormal lors d'une action sur le widget.
+  - un temps de réponse important a été constaté sur ce plugin, n'hésitez pas à augmenter la tempo (delaiTempo) à 3000 si vous constatez un comportement anormal lors d'une action sur le widget.
 
 ## Nom des commandes.
 
