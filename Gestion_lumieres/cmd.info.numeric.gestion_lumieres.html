@@ -291,14 +291,14 @@ Exemple : Etat_duree -> [OK]
           document.getElementById('id_lumiere#id#').style.setProperty('background-color', 'green', 'important');
           for (j in cmds#id#) {
             cmds#id#[j].name = cmds#id#[j].name.toLowerCase();
-            cmds#id#[j].name = cmds#id#[j].name.replace('é', 'e');
-            cmds#id#[j].name = cmds#id#[j].name.replace('_', ' ');
+            cmds#id#[j].name = cmds#id#[j].name.replace(/é/g, 'e');
+            cmds#id#[j].name = cmds#id#[j].name.replace(/_/g, ' ');
             if (debug#id# == 1) console.log(cmds#id#[j].type+" - "+cmds#id#[j].name+" - Min:"+cmds#id#[j].configuration.minValue+" - Max:"+cmds#id#[j].configuration.maxValue);
             var id_eql#id# = cmds#id#[j].id;
             ///////////////////////////////////////////////////////////////////////
             //////////////////////  Résultat Luminosité Etat //////////////////////
             ///////////////////////////////////////////////////////////////////////                
-            if (cmds#id#[j].name == 'etat luminosite' || cmds#id#[j].name == 'luminosite info' || cmds#id#[j].name == 'luminosite (valeur)' || cmds#id#[j].name == 'luminosite etat' ) {
+            if (cmds#id#[j].name == 'etat luminosite' || cmds#id#[j].name == 'luminosite info' || cmds#id#[j].name == 'luminosite (valeur)' || cmds#id#[j].name == 'luminosite etat' || cmds#id#[j].name == 'luminosite anneau') {
               $('#luminosite_id#id#').value(id_eql#id#);
               document.getElementById('luminosite_id#id#').style.setProperty('background-color', 'green', 'important');
               if (update_auto#id# == 1){
@@ -327,7 +327,7 @@ Exemple : Etat_duree -> [OK]
             ///////////////////////////////////////////////////////////////////////
             //////////////////////  Résultat Luminosité Cde ///////////////////////
             /////////////////////////////////////////////////////////////////////// 
-            else if (cmds#id#[j].name == 'luminosite') {
+            else if (cmds#id#[j].name == 'luminosite' || cmds#id#[j].name == 'definir luminosite') {
               $('#luminosite_cde#id#').value(id_eql#id#);
               document.getElementById('luminosite_cde#id#').style.setProperty('background-color', 'green', 'important');
               var min_lum#id# = cmds#id#[j].configuration.minValue;
@@ -469,7 +469,7 @@ Exemple : Etat_duree -> [OK]
             ///////////////////////////////////////////////////////////////////////
             //////////////////////  Résultat Couleur Etat  ////////////////////////
             ///////////////////////////////////////////////////////////////////////     
-            else if (cmds#id#[j].name == 'etat couleur' || cmds#id#[j].name == 'couleur etat' || cmds#id#[j].name == 'couleur rgb' || cmds#id#[j].name == 'couleur (valeur)') {
+            else if (cmds#id#[j].name == 'etat couleur' || cmds#id#[j].name == 'couleur etat' || cmds#id#[j].name == 'couleur rgb' || cmds#id#[j].name == 'couleur (valeur)' || cmds#id#[j].name == 'couleur anneau') {
               $('#couleur_id#id#').value(id_eql#id#);
               document.getElementById('couleur_id#id#').style.setProperty('background-color', 'green', 'important');
               if (update_auto#id# == 1){    
@@ -488,7 +488,7 @@ Exemple : Etat_duree -> [OK]
             ///////////////////////////////////////////////////////////////////////
             ///////////////////////  Résultat Couleur Cde  ////////////////////////
             /////////////////////////////////////////////////////////////////////// 
-            else if (cmds#id#[j].name == 'couleur' || cmds#id#[j].name == 'definir couleur rgb') {
+            else if (cmds#id#[j].name == 'couleur' || cmds#id#[j].name == 'definir couleur rgb' ||  cmds#id#[j].name == 'definir couleur') {
               document.getElementById('couleur_cde#id#').style.setProperty('background-color', 'green', 'important');
               $('#couleur_cde#id#').value(id_eql#id#);
             }
