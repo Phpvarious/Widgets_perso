@@ -158,6 +158,8 @@ Exemple : Etat_duree -> [OK]
       color: #888888;
       font-size: 12px;
       height: 30px !important;
+	  min-height: 30px !important;
+	  height: unset !important;
     }
     .lum_moins#id#, .lum_plus#id#, .temp_moins#id#, .temp_plus#id#, .delai_moins#id# , .delai_plus#id# {
       border-radius: 10px !important;
@@ -200,6 +202,7 @@ Exemple : Etat_duree -> [OK]
     var coul_sliderRond#id# = ('#couleurSliderRond#' != '#' + 'couleurSliderRond#') ? '#couleurSliderRond#' : 'white';
     var coul_boutonplus#id# = ('#couleurBoutonPlus#' != '#' + 'couleurBoutonPlus#') ? '#couleurBoutonPlus#' : 'aliceblue';
     var coul_boutonmoins#id# = ('#couleurBoutonMoins#' != '#' + 'couleurBoutonMoins#') ? '#couleurBoutonMoins#' : 'aliceblue';
+	var size_select#id# = is_numeric('#sizeSelect#') ? parseFloat('#sizeSelect#'):1;
     var tempo#id# = false;
     var delaiTempo#id# = is_numeric('#delaiTempo#') ? parseFloat('#delaiTempo#'):700;
     var plugins_array#id# = plugin#id#.split(",");
@@ -222,7 +225,7 @@ Exemple : Etat_duree -> [OK]
       /////////////////////////// Liste déroulante //////////////////////////
       ///////////////////////////////////////////////////////////////////////
       if (debug#id# == 1) console.log(plugins_array#id#.length +' Plugin(s) enregsitré(s) dans les parametres optionnels');
-      var select#id# = $("<select></select>").attr("id", "lights#id#").attr("name", "lights#id#").attr("class", "selectCmd lights#id#");
+      var select#id# = $("<select></select>").attr("id", "lights#id#").attr("name", "lights#id#").attr("class", "selectCmd lights#id#").attr("size", size_select#id#);
       select#id#.append($("<option></option>").attr("disabled", 'disabled').attr("selected", 'selected').text("Choisissez un équipement"));
       for (let i = 0; i < plugins_array#id#.length; i++) {
         if (plugins_array#id#[i] != '') 
