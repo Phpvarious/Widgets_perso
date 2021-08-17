@@ -64,11 +64,11 @@ Exemple : Etat_duree -> [OK]
       --slider-colorRond#id# : white;
       --boutonpplus-color#id# : aliceblue;
       --boutonpmoins-color#id# : aliceblue;
-	  --size-option#id# : 13px;
+      --size-option#id# : 13px;
     }
-	.cmd[data-cmd_id="#id#"] select option {
-	 font-size: var(--size-option#id#);
-	}
+    .cmd[data-cmd_id="#id#"] select option {
+      font-size: var(--size-option#id#);
+    }
     .cmd[data-cmd_id="#id#"] .ui-slider.ui-slider-horizontal .ui-slider-range {
       background-color: transparent !important;
     }
@@ -162,9 +162,9 @@ Exemple : Etat_duree -> [OK]
       color: #888888;
       font-size: 12px;
       height: 30px !important;
-	  min-height: 30px !important;
-	  height: unset !important;
-	  padding: 0px 0px 0px 5px !important;
+      min-height: 30px !important;
+      height: unset !important;
+      padding: 0px 0px 0px 5px !important;
     }
     .lum_moins#id#, .lum_plus#id#, .temp_moins#id#, .temp_plus#id#, .delai_moins#id# , .delai_plus#id# {
       border-radius: 10px !important;
@@ -181,9 +181,9 @@ Exemple : Etat_duree -> [OK]
     }
     .byphpvarious#id# {
       width: 350px;
-    font-style: italic;
-    padding-top: 5px;
-    font-size: 10px;
+      font-style: italic;
+      padding-top: 5px;
+      font-size: 10px;
       text-align: right
     }
     .td_debug#id# {
@@ -207,8 +207,8 @@ Exemple : Etat_duree -> [OK]
     var coul_sliderRond#id# = ('#couleurSliderRond#' != '#' + 'couleurSliderRond#') ? '#couleurSliderRond#' : 'white';
     var coul_boutonplus#id# = ('#couleurBoutonPlus#' != '#' + 'couleurBoutonPlus#') ? '#couleurBoutonPlus#' : 'aliceblue';
     var coul_boutonmoins#id# = ('#couleurBoutonMoins#' != '#' + 'couleurBoutonMoins#') ? '#couleurBoutonMoins#' : 'aliceblue';
-	var size_select#id# = is_numeric('#sizeSelect#') ? parseFloat('#sizeSelect#'):1;
-	var size_option#id# = is_numeric('#sizeTexte#') ? parseFloat('#sizeTexte#'):13;
+    var size_select#id# = is_numeric('#sizeSelect#') ? parseFloat('#sizeSelect#'):1;
+    var size_option#id# = is_numeric('#sizeTexte#') ? parseFloat('#sizeTexte#'):13;
     var tempo#id# = false;
     var delaiTempo#id# = is_numeric('#delaiTempo#') ? parseFloat('#delaiTempo#'):700;
     var plugins_array#id# = plugin#id#.split(",");
@@ -226,7 +226,7 @@ Exemple : Etat_duree -> [OK]
     document.documentElement.style.setProperty('--slider-colorRond#id#', coul_sliderRond#id#);
     document.documentElement.style.setProperty('--boutonpplus-color#id#', coul_boutonplus#id#);
     document.documentElement.style.setProperty('--boutonpmoins-color#id#', coul_boutonmoins#id#);
-	document.documentElement.style.setProperty('--size-option#id#', size_option#id#+'px');
+    document.documentElement.style.setProperty('--size-option#id#', size_option#id#+'px');
     $(document).ready(function () {
       ///////////////////////////////////////////////////////////////////////
       /////////////////////////// Liste déroulante //////////////////////////
