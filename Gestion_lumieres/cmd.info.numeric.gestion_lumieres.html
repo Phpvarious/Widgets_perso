@@ -531,7 +531,7 @@ Exemple : Etat_duree -> [OK]
               jeedom.cmd.execute({ 
 		        id: id_eql#id#,
                 success:  function(valeur_etat#id#) {
-                  let power#id# = (valeur_etat#id#==null || valeur_etat#id#==0 || valeur_etat#id#=='')?'Off':'On';
+                  let power#id# = (valeur_etat#id#==null || valeur_etat#id#==0 || valeur_etat#id#=='' || valeur_etat#id#=='OFF' || valeur_etat#id#=='Off' || valeur_etat#id#=='off')?'Off':'On';
                   $('#power#id#').value(power#id#);
                   if (power#id# == 'On') $('.Toggle#uid#').prop('checked', true);
                   else $('.Toggle#uid#').prop('checked', false);
