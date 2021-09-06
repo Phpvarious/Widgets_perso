@@ -67,6 +67,7 @@ le widget est nativement compatible avec ces plugins :
   - un temps de réponse important a été constaté sur ce plugin, n'hésitez pas à augmenter la tempo (delaiTempo) à 3000 si vous constatez un comportement anormal lors d'une action sur le widget.
 
 <div id='nomcommande'/>
+
 ## Nom des commandes.
 
 - Pour que le widget fonctionne correctement il y un standard dans les noms des commandes de votre équipement à respecter !
