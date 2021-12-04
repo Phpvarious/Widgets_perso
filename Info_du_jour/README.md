@@ -41,7 +41,7 @@
 
 ![](doc/images/scenario2.png)
 
-- Une fois charger, celui-ci devrait apparaitre dans le menu de gauche, cliquez dessus :
+- Une fois chargé, celui-ci devrait apparaitre dans le menu de gauche, cliquez dessus :
 
 ![](doc/images/scenario3.png)
 
@@ -50,6 +50,3 @@
 - une fenêtre demandera une confirmation, cliquez OK. puis sauvegardez le scénario.
 
 [](doc/images/scenario4.png)
-
- 
- 
