@@ -27,5 +27,29 @@
 - Exemple de paramètres optionnels :
 
 ![](doc/images/installation_virtuel4.png)
+
+## 3) Création du scénario.
+
+- Fichier source à télécharger :
+  - /widgets_perso/Info_du_jour/Info du jour.json
+  
+- une fois le scénario téléchargé créér un nouveau scénario puis ajouter un template :
+
+![](doc/images/scenario1.png)
+
+- Charger un template et ajouter le fichier téléchargé précedemment (Info du jour.json):
+
+![](doc/images/scenario2.png)
+
+- Une fois charger, celui-ci devrait apparaitre dans le menu de gauche, cliquez dessus :
+
+![](doc/images/scenario3.png)
+
+- (1) allez rechercher le virtuel créé précedemment.
+- (2) Appliquer les modifications.
+- une fenêtre demandera une confirmation, cliquez OK. puis sauvegardez le scénario.
+
+[](doc/images/scenario4.png)
+
  
  
