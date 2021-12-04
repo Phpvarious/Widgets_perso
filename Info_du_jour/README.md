@@ -12,8 +12,10 @@
 
 ## 2) Création d'un virtuel.
 - Commande info Autre :
+
 ![](doc/images/installation_virtuel1.png)
 - Associer le widget à la commande info. (créée précédemment) :
+
 ![](doc/images/installation_virtuel2.png)
 ![](doc/images/installation_virtuel3.png)
 - Paramètres Optionnels :
