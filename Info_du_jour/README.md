@@ -45,4 +45,4 @@
 
 ![](doc/images/scenario3.png)
 
-SUITE => [a relative link](README2.md)
+[SUITE =>](README2.md)
