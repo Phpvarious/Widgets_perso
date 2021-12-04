@@ -15,6 +15,7 @@
 
 ![](doc/images/installation_virtuel1.png)
 - Associer le widget à la commande info. (créée précédemment) :
+  - Attention, ne pas historiser.
 
 ![](doc/images/installation_virtuel2.png)
 ![](doc/images/installation_virtuel3.png)
