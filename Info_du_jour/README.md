@@ -88,6 +88,6 @@ Il vous faudra creer de nouvelles actions (event) dans celui-ci et ajouter des i
 |tag(vacancesEnCours)|Binaire| 1=Vacances|
 |tag(saison)|Autre| Printemps/Eté...|
 
-![](doc/images/scenario4.png)
+![](doc/images/scenario5.png)
 
 
