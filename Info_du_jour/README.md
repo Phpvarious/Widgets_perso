@@ -5,14 +5,14 @@
 - Info disponible sur le widget :
   - Date du jour.
   - Saint du jour (et du lendemain au survol).
-  - Mode Jour/nuit. (changement de couleur du Background)
-  - Férié. (Prochain férié au survol)
+  - Mode Jour/nuit (changement de couleur du Background).
+  - Férié (prochain jour férié au survol).
   - Week-end.
-  - Vacances. (Infos/prochaines au survol)
-  - coucher/lever du soleil. (avec animation de l'élévation en cours)
-  - Saison. (représentée par l'image haut a droite)
+  - Vacances (prochaines vacances au survol).
+  - coucher/lever du soleil (avec animation de l'élévation en cours).
+  - Saison (représentée par l'image haut à droite).
 
-## 1) Téléchargement du Widget.
+## 1) Téléchargement du Widget
 - Fichier source à récupérer sous :
   - /widgets_perso/Info_du_jour/cmd.info.string.Info_du_jour.html
 - Puis déposer ce fichier (avec JeeXplorer ...) dans le dossier :
@@ -21,9 +21,9 @@
  ![](doc/images/capture2.png)
 
 ## 2) Création d'un virtuel.
-- Commande info Autre, puis sauvegarder (1).
-- Attention, ne pas historiser (2).
-- Associer le widget à la commande info.(3, 4 et 5).
+- Commande Info/Autre, puis sauvegarder (1),
+- Attention, ne pas historiser (2),
+- Associer le widget à la commande Info/Autre,(3, 4 et 5).
 
 ![](doc/images/installation_virtuel2.png)
 ![](doc/images/installation_virtuel3.png)
@@ -50,29 +50,28 @@
 
 ![](doc/images/scenario3.png)
 - Dans la nouvelle fenêtre :
-  - allez rechercher le virtuel créé précedemment (1).
+  - Rechercher le virtuel créé précedemment (1).
   - Appliquer les modifications (2).
-  - une fenêtre demandera une confirmation, cliquez OK. puis sauvegardez le scénario.
+  - Demande de confirmation, cliquez sur OK puis sauvegardez le scénario.
 
 ![](doc/images/scenario4.png)
 
-Le scénario a un CRON de 5 minutes par défaut.
+Le scénario a un CRON de cinq minutes par défaut.
 
 ## 4) Configuration.
 Une fois toutes ces étapes faites, ouvrez le scénario et modifiez la zone vous concernant pour les vacances scolaire.
 
 ![](doc/images/config1.png)
 
-Ensuite il faudra configurer la zone géographique dans la configuration Jeedom.
-- Pour ceci rendez-vous dans Réglages/Sytème/Configuration.
-- puis dans l'onglet général, en bas renseignez les informations :
+Ensuite il faudra configurer la zone géographique dans la configuration Jeedom :
+- Rendez-vous dans Réglages/Sytème/Configuration.
+- Puis dans l'onglet général, en bas renseignez les informations :
 
 ![](doc/images/config2.png)
 
-## 5) Options.
+## 5) Options
 
-Il est possible d'extraire plus d'infos du scénario.
-Il vous faudra creer de nouvelles actions (event) dans celui-ci et ajouter des infos dans votre virtuel.
+Il est possible d'extraire plus d'informations du scénario, il vous faudra créer des nouvelles actions (event) dans celui-ci et ajouter des infos dans votre virtuel :
 
 |Tag scénario|Type Info virtuel|Détail|
 |---|---|---|
