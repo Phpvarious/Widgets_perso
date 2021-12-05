@@ -85,8 +85,9 @@ Il vous faudra creer de nouvelles actions (event) dans celui-ci et ajouter des i
 |tag(modeJourBinaire)|Binaire|1=Jour|
 |tag(ferie)|Binaire| 1=Férié|
 |tag(weekend)|Binaire| 1=WE|
-|tag(vacancesEnCours)|Binaire| 1=Vacances|
 |tag(saison)|Autre| Printemps/Eté...|
+|tag(vacancesEnCours)|Binaire| 1=Vacances|
+
 
 ![](doc/images/scenario5.png)
 
