@@ -2,6 +2,16 @@
 
 ![](doc/images/capture1.png)
 
+- Info disponible sur le widget :
+  - Date du jour.
+  - Saint du jour (et du lendemain au survol).
+  - Mode Jour/nuit. (changement de couleur du Background)
+  - Férié. (Prochain férié au survol)
+  - Week-end.
+  - Vacances. (Infos/prochaines au survol)
+  - coucher/lever du soleil. (avec animation de l'élévation en cours)
+  - Saison. (représentée par l'image haut a droite)
+
 ## 1) Téléchargement du Widget.
 - Fichier source à récupérer sous :
   - /widgets_perso/Info_du_jour/cmd.info.string.Info_du_jour.html
@@ -39,13 +49,11 @@
 - Une fois chargé, celui-ci devrait apparaitre dans le menu de gauche, cliquez dessus :
 
 ![](doc/images/scenario3.png)
-
-- (1) allez rechercher le virtuel créé précedemment.
-- (2) Appliquer les modifications.
-- une fenêtre demandera une confirmation, cliquez OK. puis sauvegardez le scénario.
+- Dans la nouvelle fenêtre :
+  - allez rechercher le virtuel créé précedemment (1).
+  - Appliquer les modifications (2).
+  - une fenêtre demandera une confirmation, cliquez OK. puis sauvegarder le scénario.
 
 ![](doc/images/scenario4.png)
 
-Le scénario a un CRON de 1 minute par défaut.
-
-[SUITE =>](README2.md)
+Le scénario a un CRON de 5 minutes par défaut.
