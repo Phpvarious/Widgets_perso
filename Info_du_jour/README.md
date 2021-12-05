@@ -16,6 +16,7 @@
 - Associer le widget à la commande info.(3, 4 et 5).
 
 ![](doc/images/installation_virtuel2.png)
+![](doc/images/installation_virtuel3.png)
 
 
 - Paramètres Optionnels :
