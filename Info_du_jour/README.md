@@ -1,8 +1,8 @@
-# Widget Info du jour.
+# Widget Info du jour
 
 ![](doc/images/capture1.png)
 
-- Info disponible sur le widget :
+- Informations disponibles sur le widget :
   - Date du jour.
   - Saint du jour (et du lendemain au survol).
   - Mode Jour/nuit (changement de couleur du Background).
@@ -10,7 +10,7 @@
   - Week-end.
   - Vacances (prochaines vacances au survol).
   - coucher/lever du soleil (avec animation de l'élévation en cours).
-  - Saison (représentée par l'image haut à droite).
+  - Saison (représentée par l'image en haut à droite).
 
 ## 1) Téléchargement du Widget
 - Fichier source à récupérer sous :
@@ -20,20 +20,20 @@
  
  ![](doc/images/capture2.png)
 
-## 2) Création d'un virtuel.
-- Commande Info/Autre, puis sauvegarder (1),
-- Attention, ne pas historiser (2),
-- Associer le widget à la commande Info/Autre,(3, 4 et 5).
+## 2) Création d'un virtuel
+- Ajoutez une commande Info/Autre, puis sauvegarder (1).
+- Attention, ne pas historiser (2).
+- Associez le widget à la commande Info/Autre,(3, 4 et 5).
 
 ![](doc/images/installation_virtuel2.png)
 ![](doc/images/installation_virtuel3.png)
 
 
-- Paramètres Optionnels :
+- Paramètre Optionnel :
 
      couleurText :       	Couleur du texte - . Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
 
-## 3) Création du scénario.
+## 3) Création du scénario
 
 - Fichier source à télécharger :
   - /widgets_perso/Info_du_jour/Info du jour.json
@@ -42,7 +42,7 @@
 
 ![](doc/images/scenario1.png)
 
-- Charger un template et ajouter le fichier téléchargé précedemment (Info du jour.json):
+- Selectionnez "Charger un template" puis ajoutez le fichier téléchargé précedemment (Info du jour.json):
 
 ![](doc/images/scenario2.png)
 
@@ -58,12 +58,12 @@
 
 Le scénario a un CRON de cinq minutes par défaut.
 
-## 4) Configuration.
-Une fois toutes ces étapes faites, ouvrez le scénario et modifiez la zone vous concernant pour les vacances scolaire.
+## 4) Configuration
+Une fois toutes ces étapes accomplies, ouvrez le scénario et modifiez la zone vous concernant pour les vacances scolaire.
 
 ![](doc/images/config1.png)
 
-Ensuite il faudra configurer la zone géographique dans la configuration Jeedom :
+Ensuite il vous faudra configurer la zone géographique dans la configuration Jeedom :
 - Rendez-vous dans Réglages/Sytème/Configuration.
 - Puis dans l'onglet général, en bas renseignez les informations :
 
