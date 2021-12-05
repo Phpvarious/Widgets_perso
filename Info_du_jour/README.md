@@ -59,11 +59,11 @@
 Le scénario a un CRON de 5 minutes par défaut.
 
 ## 4) Configuration.
-Une fois toutes ces étapes faites, ouvrez le scénario et modifier la zone vous concernant pour les vacances scolaire.
+Une fois toutes ces étapes faites, ouvrez le scénario et modifiez la zone vous concernant pour les vacances scolaire.
 
 ![](doc/images/config1.png)
 
-Ensuite il faudra configurer la zone géographique dans la configuration Jeeddom.
+Ensuite il faudra configurer la zone géographique dans la configuration Jeedom.
 - Pour ceci rendez-vous dans Réglages/Sytème/Configuration.
 - puis dans l'onglet général, en bas renseignez les informations :
 
@@ -72,7 +72,7 @@ Ensuite il faudra configurer la zone géographique dans la configuration Jeeddom
 ## 5) Options.
 
 Il est possible d'extraire plus d'infos du scénario.
-Il vous faudra creer de nouvelles actions dans celui-ci et ajouter des infos dans votre virtuel.
+Il vous faudra creer de nouvelles actions (event) dans celui-ci et ajouter des infos dans votre virtuel.
 
 |Tag scénario|Type Info virtuel|Détail|
 |---|---|---|
@@ -87,5 +87,7 @@ Il vous faudra creer de nouvelles actions dans celui-ci et ajouter des infos dan
 |tag(weekend)|Binaire| 1=WE|
 |tag(vacancesEnCours)|Binaire| 1=Vacances|
 |tag(saison)|Autre| Printemps/Eté...|
+
+![](doc/images/scenario4.png)
 
 
