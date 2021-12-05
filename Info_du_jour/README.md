@@ -38,7 +38,7 @@
 - Fichier source à télécharger :
   - /widgets_perso/Info_du_jour/Info du jour.json
   
-- une fois le scénario téléchargé créér un nouveau scénario puis ajouter un template :
+- une fois le fichier téléchargé crééz un nouveau scénario puis ajouter un template :
 
 ![](doc/images/scenario1.png)
 
@@ -52,8 +52,40 @@
 - Dans la nouvelle fenêtre :
   - allez rechercher le virtuel créé précedemment (1).
   - Appliquer les modifications (2).
-  - une fenêtre demandera une confirmation, cliquez OK. puis sauvegarder le scénario.
+  - une fenêtre demandera une confirmation, cliquez OK. puis sauvegardez le scénario.
 
 ![](doc/images/scenario4.png)
 
 Le scénario a un CRON de 5 minutes par défaut.
+
+## 4) Configuration.
+Une fois toutes ces étapes faites, ouvrez le scénario et modifier la zone vous concernant pour les vacances scolaire.
+
+![](doc/images/config1.png)
+
+Ensuite il faudra configurer la zone géographique dans la configuration Jeeddom.
+- Pour ceci rendez-vous dans Réglages/Sytème/Configuration.
+- puis dans l'onglet général, en bas renseignez les informations :
+
+![](doc/images/config2.png)
+
+## 5) Options.
+
+Il est possible d'extraire plus d'infos du scénario.
+Il vous faudra creer de nouvelles actions dans celui-ci et ajouter des infos dans votre virtuel.
+
+|Tag scénario|Type Info virtuel|Détail|
+|---|---|---|
+|tag(leverSoleilScenario)|Numérique|Exemple : 831 (8h31)
+|tag(zenithSoleilScenario)|Numérique|Exemple : 1249 (12h49) |
+|tag(coucherSoleilScenario)|Numérique|Exemple : 1707 (17h07) |
+|tag(saintJour)|Autre| Saint du jour|
+|tag(saintDemain)|Autre| Saint du lendemain|
+|tag(daynumber)|Numérique| |
+|tag(modeJourBinaire)|Binaire|1=Jour|
+|tag(ferie)|Binaire| 1=Férié|
+|tag(weekend)|Binaire| 1=WE|
+|tag(vacancesEnCours)|Binaire| 1=Vacances|
+|tag(saison)|Autre| Printemps/Eté...|
+
+
