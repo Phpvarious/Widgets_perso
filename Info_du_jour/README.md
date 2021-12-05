@@ -11,22 +11,16 @@
  ![](doc/images/capture2.png)
 
 ## 2) Création d'un virtuel.
-- Commande info Autre :
-
-![](doc/images/installation_virtuel1.png)
-- Associer le widget à la commande info. (créée précédemment) :
-  - Attention, ne pas historiser.
+- Commande info Autre, puis sauvegarder (1).
+- Attention, ne pas historiser (2).
+- Associer le widget à la commande info.(3, 4 et 5).
 
 ![](doc/images/installation_virtuel2.png)
-![](doc/images/installation_virtuel3.png)
+
 
 - Paramètres Optionnels :
 
      couleurText :       	Couleur du texte - . Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
-	 
-- Exemple de paramètres optionnels :
-
-![](doc/images/installation_virtuel4.png)
 
 ## 3) Création du scénario.
 
