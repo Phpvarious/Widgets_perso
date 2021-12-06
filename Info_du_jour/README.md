@@ -9,7 +9,7 @@
   - Férié (prochain jour férié au survol).
   - Week-end.
   - Vacances (prochaines vacances au survol).
-  - coucher/lever du soleil (avec animation de l'élévation en cours).
+  - Coucher/lever du soleil (avec animation de l'élévation en cours).
   - Saison (représentée par l'image en haut à droite).
 
 ## 1) Téléchargement du Widget
