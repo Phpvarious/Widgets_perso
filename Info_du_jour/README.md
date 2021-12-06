@@ -9,7 +9,7 @@
   - Férié (prochain jour férié au survol).
   - Week-end.
   - Vacances (prochaines vacances au survol).
-  - coucher/lever du soleil (avec animation de l'élévation en cours).
+  - Lever/coucher du soleil (avec animation de l'élévation en cours).
   - Saison (représentée par l'image en haut à droite).
 
 ## 1) Téléchargement du Widget
@@ -46,12 +46,12 @@
 
 ![](doc/images/scenario2.png)
 
-- Une fois chargé, celui-ci devrait apparaitre dans le menu de gauche, cliquez dessus :
+- Une fois chargé, celui-ci devrait apparaître dans le menu de gauche, cliquez dessus :
 
 ![](doc/images/scenario3.png)
 - Dans la nouvelle fenêtre :
-  - Rechercher le virtuel créé précedemment (1).
-  - Appliquer les modifications (2).
+  - Recherchez le virtuel créé précedemment (1).
+  - Appliquez les modifications (2).
   - Demande de confirmation, cliquez sur OK puis sauvegardez le scénario.
 
 ![](doc/images/scenario4.png)
@@ -59,11 +59,11 @@
 Le scénario a un CRON de cinq minutes par défaut.
 
 ## 4) Configuration
-Une fois toutes ces étapes accomplies, ouvrez le scénario et modifiez la zone vous concernant pour les vacances scolaire.
+Une fois toutes ces étapes accomplies, ouvrez le scénario et modifiez la zone vous concernant pour les vacances scolaires.
 
 ![](doc/images/config1.png)
 
-Ensuite il vous faudra configurer la zone géographique dans la configuration Jeedom :
+Ensuite configurez la zone géographique dans la configuration Jeedom :
 - Rendez-vous dans Réglages/Sytème/Configuration.
 - Puis dans l'onglet général, en bas renseignez les informations :
 
@@ -71,7 +71,7 @@ Ensuite il vous faudra configurer la zone géographique dans la configuration Je
 
 ## 5) Options
 
-Il est possible d'extraire plus d'informations du scénario, il vous faudra créer des nouvelles actions (event) dans celui-ci et ajouter des infos dans votre virtuel :
+Il est possible d'extraire plus d'informations du scénario, il faudra créer de nouvelles actions (event) dans celui-ci et ajouter des infos dans votre virtuel :
 
 |Tag scénario|Type Info virtuel|Détail|
 |---|---|---|
