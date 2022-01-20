@@ -25,7 +25,7 @@
 ![](doc/images/installation_virtuel3.png)
 
 
-- Paramètres Optionnels :
+Paramètres Optionnels :
 
 
      couleurBackground : Couleur d'arrière plan - Exemple : white, #ffffff ..... [Défaut : #7c4848]
