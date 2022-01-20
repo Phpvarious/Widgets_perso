@@ -4,9 +4,9 @@
 
 - Informations disponibles sur le widget :
   - Etat de la sauvegarde local.
-  - Etat de la sauvegarde samba (si activé).
-  - Etat de la sauvegarde market (si activé).
-  - Férié (prochain jour férié au survol).
+  - Etat de la sauvegarde samba (si activée).
+  - Etat de la sauvegarde market (si activée).
+  - Nom de la sauvegarde.
 
 ## 1) Téléchargement du Widget
 - Fichier source à récupérer sous :
@@ -25,7 +25,7 @@
 ![](doc/images/installation_virtuel3.png)
 
 
-- Paramètre Optionnel :
+- Paramètres Optionnels :
 
      couleurBackground : Couleur d'arrière plan - Exemple : white, #ffffff ..... [Défaut : #7c4848]
 	 couleurText : Couleur du texte - Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
