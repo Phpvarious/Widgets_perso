@@ -35,6 +35,10 @@ Paramètres Optionnels :
      couleurIcones : Couleur des icones - Exemple : white, #ffffff ..... [Défaut : white]
      couleurCircleSucces : Couleur du cercle en cas de succès - Exemple : white, #ffffff ..... [Défaut : green]
      couleurCircleError : Couleur du cercle en cas d'erreur - Exemple : white, #ffffff ..... [Défaut : red]
+	 
+- Exemple de paramètres optionnels :
+
+![](doc/images/virtuel.png)
 
 ## 3) Création du scénario
 
