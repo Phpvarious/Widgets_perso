@@ -28,12 +28,12 @@
 - Paramètres Optionnels :
 
      couleurBackground : Couleur d'arrière plan - Exemple : white, #ffffff ..... [Défaut : #7c4848]
-	 couleurText : Couleur du texte - Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
-	 styleLoader : style de logo "loading" - Exemple : 1, 2, 3, 4. [Défaut : 1]
-	 couleurLoader : Couleur du logo "loading" - Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
-	 couleurIcones : Couleur des icones - Exemple : white, #ffffff ..... [Défaut : white]
-	 couleurCircleSucces : Couleur du cercle en cas de succès - Exemple : white, #ffffff ..... [Défaut : green]
-	 couleurCircleError : Couleur du cercle en cas d'erreur - Exemple : white, #ffffff ..... [Défaut : red]
+     couleurText : Couleur du texte - Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
+     styleLoader : style de logo "loading" - Exemple : 1, 2, 3, 4. [Défaut : 1]
+     couleurLoader : Couleur du logo "loading" - Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
+     couleurIcones : Couleur des icones - Exemple : white, #ffffff ..... [Défaut : white]
+     couleurCircleSucces : Couleur du cercle en cas de succès - Exemple : white, #ffffff ..... [Défaut : green]
+     couleurCircleError : Couleur du cercle en cas d'erreur - Exemple : white, #ffffff ..... [Défaut : red]
 
 ## 3) Création du scénario
 
