@@ -27,6 +27,7 @@
 
 - Paramètres Optionnels :
 
+
      couleurBackground : Couleur d'arrière plan - Exemple : white, #ffffff ..... [Défaut : #7c4848]
      couleurText : Couleur du texte - Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
      styleLoader : style de logo "loading" - Exemple : 1, 2, 3, 4. [Défaut : 1]
