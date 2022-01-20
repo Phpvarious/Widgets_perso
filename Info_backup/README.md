@@ -1,6 +1,8 @@
 # Widget Info backup
 
+![](doc/images/widget2.png)
 ![](doc/images/widget.png)
+
 
 - Informations disponibles sur le widget :
   - Etat de la sauvegarde local.
