@@ -1,4 +1,4 @@
-# Widget Info backup
+# Widget/scénario Info backup
 
 ![](doc/images/widget2.png)
 ![](doc/images/widget.png)
