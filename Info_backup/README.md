@@ -38,7 +38,7 @@ Paramètres Optionnels :
 	 
 - Exemple de paramètres optionnels :
 
-![](doc/images/virtuel.png)
+![](doc/images/installation_virtuel1.png)
 
 ## 3) Création du scénario
 
