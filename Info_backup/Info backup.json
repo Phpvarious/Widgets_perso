@@ -1,12 +1,13 @@
 {
-    "name": "Info backup",
+    "name": "Info backupV2",
     "isActive": "1",
     "group": "",
     "mode": "provoke",
     "schedule": "",
     "trigger": [
         "#begin_backup#",
-        "#end_backup#"
+        "#end_backup#",
+        "#begin_update#"
     ],
     "timeout": "0",
     "object_id": null,
@@ -19,7 +20,7 @@
         "sendToApp": "1"
     },
     "order": "9999",
-    "description": "But du scénario : Ce scénario test le bon fonctionnement de la sauvegarde.\nAuthor : Phpvarious\nDate de création: 20\/01\/2022\nVersion 1.0",
+    "description": "But du scénario : Ce scénario test le bon fonctionnement de la sauvegarde.\nAuteur : @Phpvarious",
     "configuration": {
         "timeDependency": 0,
         "has_return": 0,
@@ -31,24 +32,24 @@
     },
     "elements": [
         {
-            "name": "",
+            "name": null,
             "type": "comment",
             "options": [],
             "order": "0",
             "subElements": [
                 {
-                    "name": "",
+                    "name": null,
                     "type": "comment",
                     "subtype": "comment",
                     "options": {
-                        "collapse": "1"
+                        "collapse": "0"
                     },
                     "order": "0",
                     "expressions": [
                         {
                             "type": "comment",
-                            "subtype": "",
-                            "expression": "\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Début de la sauvegarde \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/",
+                            "subtype": null,
+                            "expression": "Auteur : @Phpvarious\nDate de création: 20\/01\/2022\nChange Log :\n20\/01\/2022 : Création.\n21\/01\/2022 : Modification du code pour qu'il n'y est pas de vérification de sauvegarde cloud (samba & market) lorsque le backup est lancé par un update.",
                             "options": [],
                             "order": "0"
                         }
@@ -57,44 +58,39 @@
             ]
         },
         {
-            "name": "",
-            "type": "if",
+            "name": null,
+            "type": "action",
             "options": [],
             "order": "0",
             "subElements": [
                 {
-                    "name": "",
-                    "type": "if",
-                    "subtype": "condition",
+                    "name": null,
+                    "type": "action",
+                    "subtype": "action",
                     "options": {
-                        "enable": "1",
-                        "allowRepeatCondition": "0",
-                        "collapse": "0"
+                        "collapse": "0",
+                        "enable": "1"
                     },
                     "order": "0",
                     "expressions": [
                         {
-                            "type": "condition",
-                            "subtype": "",
-                            "expression": "trigger(begin_backup) == 1",
-                            "options": [],
+                            "type": "action",
+                            "subtype": null,
+                            "expression": "tag",
+                            "options": {
+                                "enable": "1",
+                                "background": "0",
+                                "name": "lastSave",
+                                "value": "#[TEST][Virtuel_Backup][json]#"
+                            },
                             "order": "0"
-                        }
-                    ]
-                },
-                {
-                    "name": "",
-                    "type": "then",
-                    "subtype": "action",
-                    "options": [],
-                    "order": "1",
-                    "expressions": [
+                        },
                         {
                             "type": "element",
-                            "subtype": "",
-                            "expression": "1355",
+                            "subtype": null,
+                            "expression": "1365",
                             "options": [],
-                            "order": "0",
+                            "order": "1",
                             "element": {
                                 "name": "",
                                 "type": "code",
@@ -114,136 +110,7 @@
                                             {
                                                 "type": "code",
                                                 "subtype": "",
-                                                "expression": "\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ CODE NE PAS MODIFIER \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$debug = false; \/\/ pour widget\n$tags = $scenario->getTags();\n$array = Array(); \/\/ pour json (widget)\nif ($debug) $array['debug'] = 1;\/\/ pour json (widget)\n$scenario->setLog('┌────────────────────── [START BACKUP] ──────────────────────');\n$scenario->setLog('|');\n$lastSave = date(\"Y-m-d-H\").\"h\".date(\"i\");\n$scenario->setLog('| date sauvegarde : ' . $lastSave);\n$scenario->setLog('|┌───────────────────────── [TAG] ───────────────────────────');\n$scenario->setLog('||');\n$array['lastSave'] = $lastSave;\/\/ pour json (widget)\n\n$tags['#action#'] = 'startBackup'; \/\/ pour user\n$array['action'] = 'startBackup';\/\/ pour json (widget)\n$scenario->setLog('|| tags[\"#action#\"] --> '.$tags['#action#']); \/\/ log\n  \n$tags['#errorScenario#'] = 0; \/\/ pour user\n$array['errorScenario'] = 0; \/\/ pour json (widget)\n$scenario->setLog('|| tags[\"#errorScenario#\"] --> '.$tags['#errorScenario#']); \/\/ log\n  \n$tags['#errorLog#'] = 0; \/\/ pour user\n$scenario->setLog('|| tags[\"#errorLog#\"] --> '.$tags['#errorLog#']); \/\/ log\n  \n$tags['#errorLocal#'] = -1; \/\/ pour user\n$scenario->setLog('|| tags[\"#errorLocal#\"] --> '.$tags['#errorLocal#']); \/\/ log\n  \n$tags['#errorSize#'] = 0; \/\/ pour user\n$scenario->setLog('|| tags[\"#errorSize#\"] --> '.$tags['#errorSize#']); \/\/ log\n  \n$tags['#errorSamba#'] = -1; \/\/ pour user\n$scenario->setLog('|| tags[\"#errorSamba#\"] --> '.$tags['#errorSamba#']); \/\/ log\n  \n$tags['#errorMarket#'] = -1; \/\/ pour user\n$scenario->setLog('|| tags[\"#errorMarket#\"] --> '.$tags['#errorMarket#']); \/\/ log\n\n$scenario->setLog('|└───────────────────────────────────────────────────────────');\n$scenario->setLog('└───────────────────────────────────────────────────────────');\n\n$json = json_encode($array);\n$tags['#json#'] = $json;\n$scenario->setTags($tags);",
-                                                "options": [],
-                                                "order": "0"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            "type": "action",
-                            "subtype": null,
-                            "expression": "event",
-                            "options": {
-                                "enable": "1",
-                                "background": "0",
-                                "cmd": "#[TEST][Virtuel_Backup][json]#",
-                                "value": "\"tag(json)\""
-                            },
-                            "order": "1"
-                        }
-                    ]
-                },
-                {
-                    "name": "",
-                    "type": "else",
-                    "subtype": "action",
-                    "options": [],
-                    "order": "2",
-                    "expressions": []
-                }
-            ]
-        },
-        {
-            "name": null,
-            "type": "comment",
-            "options": [],
-            "order": "0",
-            "subElements": [
-                {
-                    "name": null,
-                    "type": "comment",
-                    "subtype": "comment",
-                    "options": {
-                        "collapse": "1"
-                    },
-                    "order": "0",
-                    "expressions": [
-                        {
-                            "type": "comment",
-                            "subtype": null,
-                            "expression": "\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Fin de la sauvegarde \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/",
-                            "options": [],
-                            "order": "0"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "",
-            "type": "if",
-            "options": [],
-            "order": "0",
-            "subElements": [
-                {
-                    "name": "",
-                    "type": "if",
-                    "subtype": "condition",
-                    "options": {
-                        "enable": "1",
-                        "allowRepeatCondition": "0",
-                        "collapse": "0"
-                    },
-                    "order": "0",
-                    "expressions": [
-                        {
-                            "type": "condition",
-                            "subtype": "",
-                            "expression": "trigger(end_backup) == 1",
-                            "options": [],
-                            "order": "0"
-                        }
-                    ]
-                },
-                {
-                    "name": "",
-                    "type": "then",
-                    "subtype": "action",
-                    "options": [],
-                    "order": "1",
-                    "expressions": [
-                        {
-                            "type": "action",
-                            "subtype": null,
-                            "expression": "tag",
-                            "options": {
-                                "enable": "1",
-                                "background": "0",
-                                "name": "lastSave",
-                                "value": "#[TEST][Virtuel_Backup][json]#"
-                            },
-                            "order": "0"
-                        },
-                        {
-                            "type": "element",
-                            "subtype": "",
-                            "expression": "1358",
-                            "options": [],
-                            "order": "1",
-                            "element": {
-                                "name": "",
-                                "type": "code",
-                                "options": [],
-                                "order": "0",
-                                "subElements": [
-                                    {
-                                        "name": "",
-                                        "type": "code",
-                                        "subtype": "action",
-                                        "options": {
-                                            "enable": "1",
-                                            "collapse": "0"
-                                        },
-                                        "order": "0",
-                                        "expressions": [
-                                            {
-                                                "type": "code",
-                                                "subtype": "",
-                                                "expression": "$alertsizebackup = 1024*1024*100; \/\/ taille mini de la sauvegarde en octet pour déclencher une erreur. (1024*1024*100 = 100Mo)\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ CODE NE PAS MODIFIER \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$debug = false;\n$tags = $scenario->getTags();\n$Json = json_decode($tags['#lastSave#'], true); \/\/ decodage du tag json\n$lastSaveJson = $Json['lastSave']; \/\/ extraction de lastSave\n$array = Array(); \/\/ pour json (widget)\nif ($debug) $array['debug'] = 1; \/\/ pour json (widget)\n$backupAction = 'endBackup';\n$errorScenario = 1;\n$scenario->setLog('┌─────────────────────── [END BACKUP] ───────────────────────');\n$scenario->setLog('|');\nif($lastSaveJson!='')\n{\n  $errorScenario = 0;\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Verification d'erreurs dans le log \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n  $errorLog = 1;  \n  $array['date'] = substr($lastSaveJson,0, 10);\n  $array['heure'] = substr($lastSaveJson, -5);\n  $array['minSizeBackup'] = sizeFormat($alertsizebackup);  \n  $log = '\/var\/www\/html\/log\/backup'; \/\/ chemin du log backup\n  $date_format = date('Y-m-d');\n  $pattern = \"#\\[$date_format.*ERROR.*#\";\n  $content_log = (file_get_contents($log)); \/\/ ouverture du fichier log\n  preg_match_all($pattern, $content_log, $out, PREG_PATTERN_ORDER); \/\/ verifie si Erreur existe\n  $errorLog = count($out[0]);\n  $scenario->setLog('|┌────────────────────── [LOG BACKUP] ───────────────────────');\n  $scenario->setLog('||');\n  if ($errorLog > 0) $scenario->setLog('|| [ERROR] Des erreurs ont été détecté dans le log \"backup\"');\n  else $scenario->setLog('|| [SUCCESS] Pas d\\'erreur présent dans le log \"backup\"');\n  $errorLog = ( $errorLog >= 1 ) ? 1 : 0;  \n  $scenario->setLog('|└───────────────────────────────────────────────────────────');\n  $scenario->setLog('|');\n  \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n  \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Verification des sauvegardes Locales \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n  \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n  $scenario->setLog('|┌───────────────────── [Backup LOCAL] ──────────────────────');\n  $scenario->setLog('||');\n  $errorLocal = 1;\n  $errorSize = 1;\n  $fileSizeFormat = 0;\n  $filenameFormat = 0;\n  $nb_backup_local = 0;\n  $backup_local_dir = calculPath(config::byKey('backup::path')); \/\/ fonction jeedom (utils.inc.php)  \n  foreach (glob($backup_local_dir.\"\/*.gz\") as $filename) {\n    if (substr($filename, -23, -7) == $lastSaveJson) \n    {\n      $errorLocal = 0;\n      $fileSize = filesize($filename);\n      $fileSizeFormat = sizeFormat($fileSize);\n      $filenameFormat = str_replace($backup_local_dir.'\/', '', $filename);\n      $array['backup']['local']['fileName'] = $filenameFormat;\n      $array['backup']['local']['fileSize'] = $fileSizeFormat;\n    }\n    $nb_backup_local++;\n  }\n  if ($errorLocal === 1) $scenario->setLog('|| [ERROR] La sauvegarde est absente du dossier local');\n  else {\n    $scenario->setLog('|| [SUCCESS] La sauvegarde est présente dans le dossier local');\n    $scenario->setLog('|| -- Nom : ' . $filenameFormat);\n    if ($fileSize <= $alertsizebackup) $scenario->setLog('|| [ERROR] La taille de la sauvegarde '. $fileSizeFormat .' < ' . sizeFormat($alertsizebackup)); \n    else {\n      $scenario->setLog('|| -- Taille de la sauvegarde : '.$fileSizeFormat);\n      $errorSize = 0;\n      $array['backup']['local']['erreurFileSize'] = 0;\n    }\n  }\n  $array['backup']['local']['fileName'] = $filenameFormat;\n  $array['backup']['local']['fileSize'] = $fileSizeFormat;\n  $scenario->setLog('|| -- Nombre de sauvegardes : ' . $nb_backup_local);\n  $scenario->setLog('|└───────────────────────────────────────────────────────────');\n  \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n  \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Verification des sauvegardes Externes \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n  \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n  global $NO_CLOUD_BACKUP;\n  $errorSamba = -1;\n  $errorMarket = -1;\n  if ((!isset($NO_CLOUD_BACKUP) || $NO_CLOUD_BACKUP === false)) {\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ SAMBA \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    if (config::byKey('samba::enable') != 0 && config::byKey('samba::cloudUpload') != 0) {\n      $errorSamba = 1;\n      $scenario->setLog('|┌────────────────────── [Backup Samba] ────────────────────');\n\t  $scenario->setLog('||');\n      require_once('\/var\/www\/html\/core\/repo\/samba.repo.php');\n      $backupSamba = new repo_samba(); \/\/ On créé une instance de la classe\n      $backupsListeSamba = $backupSamba->backup_list(); \/\/ On appelle la fonction listeBackup de l’instance $backupSamba\n      $lastSaveSamba = substr($backupsListeSamba[0], -23, -7);\n      if ($lastSaveSamba != $lastSaveJson) {\n        $scenario->setLog('|| [ERROR] La sauvegarde est absente du cloud samba'); \/\/ log\n      }\n      else {\n        $scenario->setLog('|| [SUCCESS] La sauvegarde est présente dans le cloud samba');\n        $errorSamba = 0;\n      }\n      $scenario->setLog('|| -- Nombre de sauvegardes : ' . count($backupsListeSamba));\n      $scenario->setLog('|└───────────────────────────────────────────────────────────');\n      $scenario->setLog('|');\n    }\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ MARKET \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    if (config::byKey('market::enable') != 0 && config::byKey('market::cloudUpload') != 0) {\n      $errorMarket = 1;\n      $scenario->setLog('|┌────────────────────── [Backup Market] ────────────────────');\n\t  $scenario->setLog('||');\n      require_once('\/var\/www\/html\/core\/repo\/market.repo.php');\n      $backupMarket = new repo_market(); \/\/ On créé une instance de la classe\n      $backupsListeMarket = $backupMarket->backup_list(); \/\/ On appelle la fonction listeBackup de l’instance $backupMarket\n      $lastSaveMarket = substr($backupsListeMarket[0], -23, -7);\n      if ($lastSaveMarket != $lastSaveJson) {\n        $scenario->setLog('|| [ERROR] La sauvegarde est absente du cloud market'); \/\/ log\n      }\n      else {\n        $scenario->setLog('|| [SUCCESS] La sauvegarde est présente dans le cloud market');\n        $errorMarket = 1;\n      }\n      $scenario->setLog('|| -- Nombre de sauvegardes : ' . count($backupsListeMarket));\n      $scenario->setLog('|└───────────────────────────────────────────────────────────');\n      $scenario->setLog('|');\n    }   \n  }\n  $scenario->setLog('|┌───────────────────────── [TAG] ───────────────────────────');\n  $tags['#action#'] = $backupAction; \/\/ pour user\n  $array['action'] = $backupAction; \/\/ pour json (widget)\n  $scenario->setLog('|| tags[\"#action#\"] --> '.$tags['#action#']); \/\/ log\n  \n  $tags['#errorScenario#'] = $errorScenario; \/\/ pour user\n  $array['errorScenario'] = $errorScenario;  \/\/ pour json (widget)\n  $scenario->setLog('|| tags[\"#errorScenario#\"] --> '.$tags['#errorScenario#']); \/\/ log\n  \n  $tags['#errorLog#'] = $errorLog; \/\/ pour user\n  $array['errorLogBackup'] = $errorLog; \/\/ pour json (widget)\n  $scenario->setLog('|| tags[\"#errorLog#\"] --> '.$tags['#errorLog#']); \/\/ log\n  \n  $tags['#errorLocal#'] = $errorLocal; \/\/ pour user\n  $array['backup']['local']['error'] = $errorLocal;\/\/ pour json (widget)\n  $scenario->setLog('|| tags[\"#errorLocal#\"] --> '.$tags['#errorLocal#']); \/\/ log\n  \n  $tags['#errorSize#'] = $errorSize; \/\/ pour user\n  $array['backup']['local']['erreurFileSize'] = $errorSize; \/\/ pour json (widget)\n  $scenario->setLog('|| tags[\"#errorSize#\"] --> '.$tags['#errorSize#']); \/\/ log\n  \n  $tags['#errorSamba#'] = $errorSamba; \/\/ pour user\n  $array['backup']['samba']['error'] = $errorSamba; \/\/ pour json (widget)\n  $scenario->setLog('|| tags[\"#errorSamba#\"] --> '.$tags['#errorSamba#']); \/\/ log\n  \n  $tags['#errorMarket#'] = $errorMarket; \/\/ pour user\n  $array['backup']['market']['error'] = $errorMarket; \/\/ pour json (widget)\n  $scenario->setLog('|| tags[\"#errorMarket#\"] --> '.$tags['#errorMarket#']); \/\/ log\n  $scenario->setLog('|└───────────────────────────────────────────────────────────');\n}\nelse\n{\n  $scenario->setLog('|┌───────────────────── [ERREUR SCENARIO] ────────────────────');\n  $scenario->setLog('|| Une erreur c\\'est produite dans le scénario.');\n  $scenario->setLog('|| la valeur lastSaveJson n\\'a pas été transmise.');\n  $scenario->setLog('|| - Verifier que le tag \"lastSave\" est présent avant le bloc code.');\n  $scenario->setLog('|| - Verifier que le 1er bloc code (begin_backup) a bien été lancé avant.');\n  $scenario->setLog('|└───────────────────────────────────────────────────────────');\n  $scenario->setLog('|┌───────────────────────── [TAG] ───────────────────────────');\n  $tags['#errorScenario#'] = $errorScenario;\n  $array['errorScenario'] = $errorScenario; \n  $scenario->setLog('|| tags[\"#errorScenario#\"] --> '.$tags['#errorScenario#']);\n  $scenario->setLog('|└───────────────────────────────────────────────────────────');\n}\n$scenario->setLog('└───────────────────────────────────────────────────────────');\n\n$json = json_encode($array);\n$tags['#json#'] = $json;\n$scenario->setTags($tags);",
+                                                "expression": "$alertsizebackup = 1024*1024*100; \/\/ taille mini de la sauvegarde en octet pour déclencher une erreur. (1024*1024*100 = 100Mo)\n$debug = false; \/\/ pour widget, affiche les infos en console lorsque $debug = true;\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ CODE A NE PAS MODIFIER \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$tags = $scenario->getTags();\n$getRealTrigger = $scenario->getRealTrigger();\n$Json = json_decode($tags['#lastSave#'], true); \/\/ decodage du tag json\n$array = Array(); \/\/ pour json (widget)\nif ($debug) $array['debug'] = 1; \/\/ pour json (widget)\n\/\/$lastSave = \"2022-01-21-04h54\";\n$lastSave = date(\"Y-m-d-H\").\"h\".date(\"i\");\n$update = 0;\n$errorScenario = 1;\n$errorLog = 1;\n$errorLocal = -1;\n$errorSize = 1;\n$errorSamba = -1;\n$errorMarket = -1;\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ UPDATE \/ BACKUP \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/  \nif ($getRealTrigger == \"begin_update\" || $getRealTrigger == \"begin_backup\") {\n  if ($getRealTrigger == \"begin_update\") {  \n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ START UPDATE \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    $backupAction = 'startUpdate';\n    $update = 1;\n    $scenario->setLog('┌────────────────────── [START UPDATE] ──────────────────────');\n    $scenario->setLog('|');\n    $scenario->setLog('| date update : ' . $lastSave);\n  } \n  else if ($getRealTrigger == \"begin_backup\") {\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ START BACKUP \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    $backupAction = 'startBackup';\n    $scenario->setLog('┌────────────────────── [START BACKUP] ──────────────────────');\n    $scenario->setLog('|');\n    if(array_key_exists(\"update\", $Json) && $Json['update'] == 1) {\n      $update = 1;\n      $scenario->setLog('|  !! Backup lancé suite a une Maj du core');\n      $scenario->setLog('|  !! La vérification de la sauvegarde market et samba ne sera pas prise en compte');\n    }\n    $scenario->setLog('| date backup : ' . $lastSave);\n  }\n  $errorScenario = 0;\n  $errorLog = 0;\n  $errorLocal = -1;\n  $errorSize = 0;\n  $scenario->setLog('└────────────────────────────────────────────────────────────');\n}\nelse if ($getRealTrigger == \"end_backup\") {\n  $lastSaveJson = $Json['lastSave']; \/\/ extraction de lastSave\n  if($lastSaveJson!='')\n  {\n    $scenario->setLog('┌─────────────────────── [END BACKUP] ───────────────────────');\n    $scenario->setLog('|');  \n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ END BACKUP \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    $backupAction = 'endBackup'; \n    $errorScenario = 0;\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ \n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Verification d'erreurs dans le log \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    $array['date'] = substr($lastSaveJson,0, 10);\n    $array['heure'] = substr($lastSaveJson, -5);\n    $array['minSizeBackup'] = sizeFormat($alertsizebackup);  \n    $log = '\/var\/www\/html\/log\/backup'; \/\/ chemin du log backup\n    $date_format = date('Y-m-d');\n    $pattern = \"#\\[$date_format.*ERROR.*#\";\n    $content_log = (file_get_contents($log)); \/\/ ouverture du fichier log\n    preg_match_all($pattern, $content_log, $out, PREG_PATTERN_ORDER); \/\/ verifie si Erreur existe\n    $errorLog = ( count($out[0]) >= 1) ? 1 : 0;\n    $scenario->setLog('|┌────────────────────── [LOG BACKUP] ───────────────────────');\n    $scenario->setLog('||');\n    if ($errorLog > 0) $scenario->setLog('|| [ERROR] Des erreurs ont été détecté dans le log \"backup\"');\n    else $scenario->setLog('|| [SUCCESS] Pas d\\'erreur présent dans le log \"backup\"'); \n    $scenario->setLog('|└───────────────────────────────────────────────────────────');\n    $scenario->setLog('|');\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Verification des sauvegardes Locales \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    $scenario->setLog('|┌───────────────────── [Backup LOCAL] ──────────────────────');\n    $scenario->setLog('||');\n    $errorLocal = 1;\n    $fileSizeFormat = 0;\n    $filenameFormat = 0;\n    $nb_backup_local = 0;\n    $backup_local_dir = calculPath(config::byKey('backup::path')); \/\/ fonction jeedom (utils.inc.php)  \n    foreach (glob($backup_local_dir.\"\/*.gz\") as $filename) {\n      if (substr($filename, -23, -7) == $lastSaveJson) \n      {\n        $errorLocal = 0;\n        $fileSize = filesize($filename);\n        $fileSizeFormat = sizeFormat($fileSize);\n        $filenameFormat = str_replace($backup_local_dir.'\/', '', $filename);\n        $array['backup']['local']['fileName'] = $filenameFormat;\n        $array['backup']['local']['fileSize'] = $fileSizeFormat;\n      }\n      $nb_backup_local++;\n    }\n    if ($errorLocal === 1) $scenario->setLog('|| [ERROR] La sauvegarde est absente du dossier local');\n    else {\n      $scenario->setLog('|| [SUCCESS] La sauvegarde est présente dans le dossier local');\n      $scenario->setLog('|| -- Nom : ' . $filenameFormat);\n      if ($fileSize <= $alertsizebackup) $scenario->setLog('|| [ERROR] La taille de la sauvegarde '. $fileSizeFormat .' < ' . sizeFormat($alertsizebackup)); \n      else {\n        $scenario->setLog('|| -- Taille de la sauvegarde : '.$fileSizeFormat);\n        $errorSize = 0;\n        $array['backup']['local']['erreurFileSize'] = 0;\n      }\n    }\n    $array['backup']['local']['fileName'] = $filenameFormat;\n    $array['backup']['local']['fileSize'] = $fileSizeFormat;\n    $scenario->setLog('|| -- Nombre de sauvegardes : ' . $nb_backup_local);\n    $scenario->setLog('|└───────────────────────────────────────────────────────────');\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Verification des sauvegardes Externes \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n    if (array_key_exists(\"update\", $Json) && $Json['update'] == 0) {\n      global $NO_CLOUD_BACKUP;\n      if ((!isset($NO_CLOUD_BACKUP) || $NO_CLOUD_BACKUP === false)) {\n        \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n        \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ SAMBA \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n        \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n        if (config::byKey('samba::enable') != 0 && config::byKey('samba::cloudUpload') != 0) {\n          $errorSamba = 1;\n          $scenario->setLog('|┌─────────────────────── [Backup Samba] ────────────────────');\n\t      $scenario->setLog('||');\n          require_once('\/var\/www\/html\/core\/repo\/samba.repo.php');\n          $backupSamba = new repo_samba(); \/\/ On créé une instance de la classe\n          $backupsListeSamba = $backupSamba->backup_list(); \/\/ On appelle la fonction listeBackup de l’instance $backupSamba\n          $lastSaveSamba = substr($backupsListeSamba[0], -23, -7);\n          if ($lastSaveSamba != $lastSaveJson) {\n            $scenario->setLog('|| [ERROR] La sauvegarde est absente du cloud samba'); \/\/ log\n          }\n          else {\n            $scenario->setLog('|| [SUCCESS] La sauvegarde est présente dans le cloud samba');\n            $errorSamba = 0;\n          }\n          $scenario->setLog('|| -- Nombre de sauvegardes : ' . count($backupsListeSamba));\n          $scenario->setLog('|└───────────────────────────────────────────────────────────');\n          $scenario->setLog('|');\n        }\n      }\n    }\n    else\n    {\n      $scenario->setLog('|┌────────────────────── [Backup CLOUD] ────────────────────');\n      $scenario->setLog('||  !! Backup lancé suite a une Maj du core');\n      $scenario->setLog('||  !! La vérification de la sauvegarde market et samba n\\'est pas prise en compte');\n      $scenario->setLog('|└───────────────────────────────────────────────────────────');      \n    }\n  }\n  else {\n    $scenario->setLog('|┌───────────────────── [ERREUR SCENARIO] ────────────────────');\n    $scenario->setLog('|| Une erreur c\\'est produite dans le scénario.');\n    $scenario->setLog('|| la valeur lastSaveJson n\\'a pas été transmise.');\n    $scenario->setLog('|| - Verifier que le tag \"lastSave\" est présent avant le bloc code.');\n    \/\/$scenario->setLog('|| - Verifier que le 1er bloc code (begin_backup) a bien été lancé avant.');\n    $scenario->setLog('|└───────────────────────────────────────────────────────────');\n    \/\/$scenario->setLog('|┌───────────────────────── [TAG] ───────────────────────────');\n    \/\/$tags['#errorScenario#'] = $errorScenario;\n    \/\/$array['errorScenario'] = $errorScenario; \n    \/\/$scenario->setLog('|| tags[\"#errorScenario#\"] --> '.$tags['#errorScenario#']);\n    \/\/$scenario->setLog('|└───────────────────────────────────────────────────────────');\n  } \n  $scenario->setLog('└────────────────────────────────────────────────────────────');\n}\nelse {\n  $scenario->setLog('┌─────────────────────── [ERROR] ───────────────────────');\n  $scenario->setLog('|');\n  $scenario->setLog('| Le scenario a été declenché par '.$getRealTrigger);\n  $scenario->setLog('|');\n  $scenario->setLog('└────────────────────────────────────────────────────────────');\n  $backupAction = \"\";\n}\n\/\/$scenario->setLog('└────────────────────────────────────────────────────────────');\n$scenario->setLog('┌────────────────────────── [TAG] ───────────────────────────');\n$scenario->setLog('|');\n  \n$array['lastSave'] = $lastSave;\/\/ pour json (widget)\n$array['update'] = $update;\/\/ pour json (widget)\n  \n$tags['#action#'] = $backupAction; \/\/ pour user\n$array['action'] = $backupAction; \/\/ pour json (widget)\n$scenario->setLog('| tags[\"#action#\"] --> '.$tags['#action#']); \/\/ log\n  \n$tags['#errorScenario#'] = $errorScenario; \/\/ pour user\n$array['errorScenario'] = $errorScenario;  \/\/ pour json (widget)\n$scenario->setLog('| tags[\"#errorScenario#\"] --> '.$tags['#errorScenario#']); \/\/ log\n  \n$tags['#errorLog#'] = $errorLog; \/\/ pour user\n$array['errorLogBackup'] = $errorLog; \/\/ pour json (widget)\n$scenario->setLog('| tags[\"#errorLog#\"] --> '.$tags['#errorLog#']); \/\/ log\n  \n$tags['#errorLocal#'] = $errorLocal; \/\/ pour user\n$array['backup']['local']['error'] = $errorLocal;\/\/ pour json (widget)\n$scenario->setLog('| tags[\"#errorLocal#\"] --> '.$tags['#errorLocal#']); \/\/ log\n  \n$tags['#errorSize#'] = $errorSize; \/\/ pour user\n$array['backup']['local']['erreurFileSize'] = $errorSize; \/\/ pour json (widget)\n$scenario->setLog('| tags[\"#errorSize#\"] --> '.$tags['#errorSize#']); \/\/ log\n  \n$tags['#errorSamba#'] = $errorSamba; \/\/ pour user\n$array['backup']['samba']['error'] = $errorSamba; \/\/ pour json (widget)\n$scenario->setLog('| tags[\"#errorSamba#\"] --> '.$tags['#errorSamba#']); \/\/ log\n  \n$tags['#errorMarket#'] = $errorMarket; \/\/ pour user\n$array['backup']['market']['error'] = $errorMarket; \/\/ pour json (widget)\n$scenario->setLog('| tags[\"#errorMarket#\"] --> '.$tags['#errorMarket#']); \/\/ log\n\n$scenario->setLog('└────────────────────────────────────────────────────────────');\n\n\n$json = json_encode($array);\n$tags['#json#'] = $json;\n$scenario->setTags($tags);",
                                                 "options": [],
                                                 "order": "0"
                                             }
@@ -265,14 +132,6 @@
                             "order": "2"
                         }
                     ]
-                },
-                {
-                    "name": "",
-                    "type": "else",
-                    "subtype": "action",
-                    "options": [],
-                    "order": "2",
-                    "expressions": []
                 }
             ]
         },
