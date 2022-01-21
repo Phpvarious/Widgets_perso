@@ -1,0 +1,419 @@
+<div class="cmd cmd-widget" data-type="info" data-subtype="string" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#">
+  <!-- ################ Distribution de l'energie ################ 
+  Widget name : cmd.info.string.Info_backup
+  Author : Phpvarious
+  Last Uptade : 2022/01/20 - Phpvarious -> Création.
+
+				************************************************		
+				********** Paramètres Optionnels ***************
+				************************************************
+
+     couleurBackground : Couleur d'arrière plan - Exemple : white, #ffffff ..... [Défaut : #7c4848]
+     couleurText : Couleur du texte - Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
+     styleLoader : style de logo "loading" - Exemple : 1, 2, 3, 4. [Défaut : 1]
+     couleurLoader : Couleur du logo "loading" - Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
+     couleurIcones : Couleur des icones - Exemple : white, #ffffff ..... [Défaut : white]
+     couleurCircleSucces : Couleur du cercle en cas de succès - Exemple : white, #ffffff ..... [Défaut : green]
+     couleurCircleError : Couleur du cercle en cas d'erreur - Exemple : white, #ffffff ..... [Défaut : red]
+
+  -->
+  <div id="widget#id#">
+    <div class="alert#id#" id="alert#id#" style="display:none;"><h1>Données inexistantes !!</h1></div>
+    <div class="startBackup#id#" id="startBackup#id#" style="display:none;">
+      <div class="lds#id#" id="lds#id#">
+        <div class="lds-dual-ring#id#"></div>
+        <div class="lds-ripple#id#"><div></div><div></div></div>
+      </div>
+      <div class="startBackupAtt#id#" id="startBackupAtt#id#"><h1>Sauvegarde en cours ...</h1></div>
+    </div>
+    <div class="endBackup#id#" id="endBackup#id#" style="display:none;">
+      <div class="endBackupAtt#id#" id="endBackupAtt#id#"><h1>Sauvegarde Terminée</h1>
+        <span class="BackupName#id#" id="BackupName#id#"></span></div>
+    </div>
+    <div class="BackupLocal#id#" id="BackupLocal#id#" style="display:none;">
+      <div class="container#id#">
+        <div class="circle#id# circleBackupLocal#id#">
+          <i class="fas fa-folder-open"></i>
+        </div>
+        Locale
+      </div>
+    </div>
+    <div class="BackupSamba#id#" id="BackupSamba#id#" style="display:none;">
+      <div class="container#id#">
+        <div class="circle#id# circleBackupSamba#id#">
+          <i class="fas fa-network-wired"></i>
+        </div>
+        Samba
+      </div>
+    </div>
+    <div class="BackupMarket#id#" id="BackupMarket#id#" style="display:none;">
+      <div class="container#id#">
+        <div class="circle#id# circleBackupMarket#id#">
+          <i class="fas fa-cloud"></i>
+        </div>
+        Market
+      </div>
+    </div>
+  </div>
+  <script>
+    $( document ).ready(function() {
+      function deleteAll#id#() {
+        var cmd = $('.cmd[data-cmd_id=#id#]');
+        document.getElementById('startBackup#id#').style.display='none';
+        document.getElementById('alert#id#').style.display='none';
+        cmd.find('#alert#id#').attr('title', '');
+        document.getElementById('BackupSamba#id#').style.display='none';
+        cmd.find('#BackupSamba#id#').attr('title', '');
+        document.getElementById('BackupLocal#id#').style.display='none';
+        cmd.find('#BackupLocal#id#').attr('title', '');
+        document.getElementById('BackupMarket#id#').style.display='none';
+        cmd.find('#BackupMarket#id#').attr('title', '');
+        document.getElementById('endBackup#id#').style.display='none';
+        document.getElementById('alert#id#').style.display='none';
+        cmd.find('#BackupName#id#').html('');
+        cmd.find('#endBackupAtt#id#').attr('title', '');        
+      }
+      jeedom.cmd.update['#id#'] = function(_options){
+        deleteAll#id#();
+        var couleurText#id# = ('#couleurText#' != '#'+'couleurText#') ? "#couleurText#" : "#c3c3c3";
+        document.documentElement.style.setProperty('--couleurText#id#', couleurText#id#);
+        var couleurBackground#id# = ('#couleurBackground#' != '#'+'couleurBackground#') ? "#couleurBackground#" : "#7c4848";
+        document.documentElement.style.setProperty('--background#id#', couleurBackground#id#);
+        var couleurLoader#id# = ('#couleurLoader#' != '#'+'couleurLoader#') ? "#couleurLoader#" : "#c3c3c3";
+        document.documentElement.style.setProperty('--couleurLoader#id#', couleurLoader#id#);
+        var couleurIcones#id# = ('#couleurIcones#' != '#'+'couleurIcones#') ? "#couleurIcones#" : "white";
+        document.documentElement.style.setProperty('--couleurIcones#id#', couleurIcones#id#);
+        var couleurCircleSucces#id# = ('#couleurCircleSucces#' != '#'+'couleurCircleSucces#') ? "#couleurCircleSucces#" : "green";
+        var couleurCircleError#id# = ('#couleurCircleError#' != '#'+'couleurCircleError#') ? "#couleurCircleError#" : "red";
+        var styleLoader#id# = is_numeric('#styleLoader#') ? parseFloat('#styleLoader#'):1;
+        var cmd = $('.cmd[data-cmd_id=#id#]');
+        var IS_JSON = true;
+        try
+        {
+          var obj = JSON.parse(_options.display_value)
+        }
+        catch(err)
+        {
+               IS_JSON = false;
+        }
+        if (_options.display_value != "" && IS_JSON) // si json
+        {                    
+          var action = obj['action'];
+          var debug = obj['debug'];
+          debug = (debug)?debug:false;
+          if (debug) console.log('debug --> '+debug);
+          if (obj['errorScenario'] == 0) {
+            if (debug) console.log('errorScenario --> 0');
+            var lastSave = obj['lastSave'];            
+            if (action == 'endBackup') {
+              if (debug) console.log('action --> endBackup');
+              document.getElementById('startBackup#id#').style.display='none';
+              document.getElementById('endBackup#id#').style.display='block';            
+              ////////////////////////// SAMBA ///////////////////////////
+              var backupSambaError = obj['backup']['samba']['error'];
+              if (debug) console.log('backupSambaError --> '+backupSambaError);
+              if (_options.display_value.includes("samba") && backupSambaError != -1) {
+                document.getElementById('BackupSamba#id#').style.display='inline-block';
+                if (backupSambaError >= 1) {
+                  document.documentElement.style.setProperty('--couleurCircleBackupSamba#id#', couleurCircleError#id#);
+                  var txtError = '<center>------ [ERREUR] ------</center>';
+                  if (backupSambaError >= 1) txtError += '<br>- La Sauvegarde est absente du dossier samba.';
+                  txtError += '<br><br>';
+                  cmd.find('#BackupSamba#id#').attr('title', txtError);
+                }
+                else {
+                  document.documentElement.style.setProperty('--couleurCircleBackupSamba#id#', couleurCircleSucces#id#);
+                  cmd.find('#BackupSamba#id#').attr('title', '');
+                }
+              }
+              ////////////////////////// LOCAL ///////////////////////////
+              var backupLocalError = obj['backup']['local']['error'];
+              if (debug) console.log('backupLocalError --> '+backupLocalError);
+              if (_options.display_value.includes("local") && backupLocalError != -1) {
+                var errorLogBackup = obj['errorLogBackup'];
+                if (debug) console.log('errorLogBackup --> '+errorLogBackup);
+                var erreurFileSize = obj['backup']['local']['erreurFileSize'];
+                if (debug) console.log('erreurFileSize --> '+erreurFileSize);
+                var fileSize = obj['backup']['local']['fileSize'];
+                if (debug) console.log('fileSize --> '+fileSize);
+                var fileName = obj['backup']['local']['fileName'];
+                if (debug) console.log('fileName --> '+fileName);
+                var minSizeBackup = obj['minSizeBackup'];
+                if (debug) console.log('minSizeBackup --> '+minSizeBackup);
+                
+                if (backupLocalError >= 1 || errorLogBackup >= 1 || erreurFileSize >=1) {
+                  document.documentElement.style.setProperty('--couleurCircleBackupLocal#id#', couleurCircleError#id#);
+                  var txtError = '<center>------ [ERREUR] ------</center>';
+                  if (backupLocalError >= 1) txtError += '<br>- La Sauvegarde est absente du dossier local.';
+                  else if (erreurFileSize >= 1) txtError += '<br>- Taille de la sauvegarde '+fileSize+' < '+minSizeBackup+'.';
+                  if (errorLogBackup >= 1) txtError += '<br>- Une erreur est présente dans le log "backup."';
+                  txtError += '<br><br>';
+                  cmd.find('#BackupLocal#id#').attr('title', txtError);
+                  if (backupLocalError >= 1) cmd.find('#BackupName#id#').html('');
+                  else cmd.find('#BackupName#id#').html('['+fileName+']');
+                }
+                else {                  
+                  document.documentElement.style.setProperty('--couleurCircleBackupLocal#id#', couleurCircleSucces#id#);
+                  cmd.find('#BackupLocal#id#').attr('title', '');
+                  cmd.find('#BackupName#id#').html('[ '+fileName+' ]<br>('+fileSize+')');
+                }
+                document.getElementById('BackupLocal#id#').style.display='inline-block';                
+              }
+              else document.getElementById('BackupLocal#id#').style.display='none';                          
+              ////////////////////////// MARKET ///////////////////////////
+              var backupMarketError = obj['backup']['market']['error'];
+              if (debug) console.log('backupMarketError --> '+backupMarketError);
+              if (_options.display_value.includes("market") && backupMarketError != -1) {
+                if (backupMarketError == 1) {
+                  document.documentElement.style.setProperty('--couleurCircleBackupMarket#id#', couleurCircleError#id#);
+                  var txtError = '<center>------ [ERREUR] ------</center>';
+                  if (backupMarketError >= 1) txtError += '<br>- La Sauvegarde est absente du Market.';
+                  txtError += '<br><br>';
+                  cmd.find('#BackupMarket#id#').attr('title', txtError);               
+                }
+                else {
+                  document.documentElement.style.setProperty('--couleurCircleBackupMarket#id#', couleurCircleSucces#id#);
+                  cmd.find('#BackupMarket#id#').attr('title', '');
+                }
+                document.getElementById('BackupMarket#id#').style.display='inline-block';               
+              }
+              else document.getElementById('BackupMarket#id#').style.display='none';
+            }
+            else if (action == 'startBackup' || action == 'startUpdate') {
+              if (debug) console.log('action --> startBackup');
+              if (debug) console.log('styleLoader --> '+styleLoader#id#);
+              if (debug) console.log('lastSave --> '+lastSave);
+              document.getElementById('endBackup#id#').style.display='none';
+              document.getElementById('BackupLocal#id#').style.display='none';
+              document.getElementById('BackupSamba#id#').style.display='none';
+              document.getElementById('BackupMarket#id#').style.display='none';
+              document.getElementById('startBackup#id#').style.display='block';
+    		  if (styleLoader#id# == 1) cmd.find('#lds#id#').html('<div class="lds-dual-ring#id#"></div>');
+              else if (styleLoader#id# == 2) cmd.find('#lds#id#').html('<div class="lds-ripple#id#"><div></div><div></div></div>');
+              else if (styleLoader#id# == 3) cmd.find('#lds#id#').html('<div class="lds-facebook#id#"><div></div><div></div><div></div></div>');
+              else if (styleLoader#id# == 4) cmd.find('#lds#id#').html('<div class="lds-ring#id#"><div></div><div></div><div></div><div></div></div>');
+              else cmd.find('#lds#id#').html('<div class="lds-dual-ring#id#"></div>'); 
+              cmd.find('#startBackupAtt#id#').html('<h1>Sauvegarde en cours ...</h1> ['+lastSave+']');
+            }
+            else {
+              deleteAll#id#();
+              document.getElementById('alert#id#').style.display='block';
+              cmd.find('#alert#id#').html('<h1>--- [ERROR] ---<br><br>Aucune action envoyée !!!');
+            }
+          }
+          else {
+           deleteAll#id#(); 
+           document.getElementById('alert#id#').style.display='block';
+           cmd.find('#alert#id#').html('<h1>--- [ERROR] ---<br><br>Vérifier les logs du scénario !!!');
+          }
+          cmd.find('#endBackupAtt#id#').attr('title', 'Valeur du '+_options.valueDate);
+        }
+        else
+        {
+          deleteAll#id#(); 
+           document.getElementById('alert#id#').style.display='block';
+           cmd.find('#alert#id#').html('<h1>--- [ERROR] ---<br><br>Json invalide !!!');
+           cmd.find('#alert#id#').attr('title', 'Valeur du '+_options.valueDate);
+        }       
+      }
+      jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});  
+    });
+  </script>
+  <style>
+    :root {
+      --couleurText#id#: #c3c3c3;
+      --background#id#: #7c4848;
+      --couleurLoader#id#: #c3c3c3;
+      --couleurCircleBackupLocal#id#: red;
+      --couleurCircleBackupSamba#id#: red;
+      --couleurCircleBackupMarket#id#: red;
+      --couleurIcones#id#: white;
+    }
+    #widget#id# {
+      transition: background 1000ms ease-in-out 0s;
+      width: 540px;
+      height: 220px;
+      border-radius: 25px;
+      background-color: var(--background#id#);
+      padding-top: 15px;
+      color: var(--couleurText#id#);
+    }
+    .alert#id# {
+      text-align: center;
+    }
+    .alert#id# h1 {
+      color: var(--couleurText#id#);
+    }
+     .action#id# {
+      text-align: center;
+    }
+    .startBackup#id# h1, .endBackup#id# h1 {
+      color: var(--couleurText#id#);
+      line-height: unset;
+      margin-bottom: 20px;
+    }
+    .startBackup#id#, .endBackup#id# {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .BackupLocal#id#, .BackupSamba#id#, .BackupMarket#id# {
+      display: inline-block;
+    }  
+    .container#id# {
+      display: inline-block;
+      padding: 10px;
+      height: 90px;
+      width: 90px;
+    }
+    .circle#id# {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      margin-bottom: 5px;
+    }
+    .circleBackupLocal#id# {
+      background: radial-gradient(ellipse at center, rgba(255, 113, 12, 0) 60%, var(--couleurCircleBackupLocal#id#) 51.5%);
+    }
+    .circleBackupSamba#id# {
+      background: radial-gradient(ellipse at center, rgba(255, 113, 12, 0) 60%, var(--couleurCircleBackupSamba#id#) 51.5%);
+    }
+    .circleBackupMarket#id# {
+      background: radial-gradient(ellipse at center, rgba(255, 113, 12, 0) 60%, var(--couleurCircleBackupMarket#id#) 51.5%);
+    }  
+    .circle#id# i {
+      font-size: 25px;
+      color: var(--couleurIcones#id#);
+    }
+    .lds-ripple#id# {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .lds-ripple#id# div {
+      position: absolute;
+      border: 4px solid var(--couleurLoader#id#);
+      opacity: 1;
+      border-radius: 50%;
+      animation: lds-ripple#id# 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    .lds-dual-ring#id# {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+    }
+    .lds-ripple#id# div:nth-child(2) {
+      animation-delay: -0.5s;
+    }
+    @keyframes lds-ripple#id# {
+      0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+      }
+      100% {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+      }
+    }
+    .lds-dual-ring#id#:after {
+      content: " ";
+      display: block;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      border-color: var(--couleurLoader#id#) transparent var(--couleurLoader#id#) transparent;
+      animation: lds-dual-ring#id# 1.2s linear infinite;
+    }
+    @keyframes lds-dual-ring#id# {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .lds-facebook#id# {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .lds-facebook#id# div {
+      display: inline-block;
+      position: absolute;
+      left: 8px;
+      width: 16px;
+      background: var(--couleurLoader#id#);
+      animation: lds-facebook#id# 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+    }
+    .lds-facebook#id# div:nth-child(1) {
+      left: 8px;
+      animation-delay: -0.24s;
+    }
+    .lds-facebook#id# div:nth-child(2) {
+      left: 32px;
+      animation-delay: -0.12s;
+    }
+    .lds-facebook#id# div:nth-child(3) {
+      left: 56px;
+      animation-delay: 0;
+    }
+    @keyframes lds-facebook#id# {
+      0% {
+        top: 8px;
+        height: 64px;
+      }
+      50%, 100% {
+        top: 24px;
+        height: 32px;
+      }
+    }
+    .lds-ring#id# {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .lds-ring#id# div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border: 8px solid #fff;
+      border-radius: 50%;
+      animation: lds-ring#id# 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: var(--couleurLoader#id#) transparent transparent transparent;
+    }
+    .lds-ring#id# div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    .lds-ring#id# div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    .lds-ring#id# div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+    @keyframes lds-ring#id# {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</div>
