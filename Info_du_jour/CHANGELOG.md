@@ -5,4 +5,4 @@ par [getSunPosition()](https://github.com/KiboOst/php-sunPos/blob/master/phpSunP
 
      
      /!\ Attention, n'oubliez pas de reconfigurer le paramètre "$zone" dans le bloc code, si vous mettez a jour le scénario, car celui-ci sera reconfigurer en zone B.
-	 
+
