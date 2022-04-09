@@ -2,16 +2,6 @@
 
 ![](doc/images/capture1.gif)
 
-- Informations disponibles sur le widget :
-  - Date du jour.
-  - Saint du jour (et du lendemain au survol).
-  - Mode Jour/nuit (changement de couleur du Background).
-  - Férié (prochain jour férié au survol).
-  - Week-end.
-  - Vacances (prochaines vacances au survol).
-  - Lever/coucher du soleil (avec animation de l'élévation en cours).
-  - Saison (représentée par l'image en haut à droite).
-
 ## 1) Téléchargement du Widget
 - Fichier/dossier source à récupérer sous :
   - (dossier) /widgets_perso/swiper_battery_jeedom/cmd.info.string.swiper_battery_jeedom
