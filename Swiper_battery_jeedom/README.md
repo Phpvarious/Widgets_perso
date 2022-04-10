@@ -33,6 +33,7 @@
 	 freeMode (2) : [Binaire] - 	Effet d'inertie lors d'un swippe. [Défaut : 0 -> désactiver]
 	 grabCursor : [Binaire] - 	Curseur "grab" sur les tuiles. [Défaut : 1 -> activer]
 	 (3) Attention lorsque cette option est activée, il n'est plus possible de redimensionner la tuile sur le dashboard.
+	 backgroundColor : Couleur de fond de la tuile. [Défaut : white]
 	 loop (3) : [Binaire] - 	Boucle sur le widget [Défaut : 0 -> désactiver]
 	  
 - Exemple de paramètres optionnels :
