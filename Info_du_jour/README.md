@@ -31,6 +31,7 @@
 
 - Paramètre Optionnel :
 
+
      borderRadius :         Taille arrondi du widget - Exemple : 10, 20 ...  [Défaut : 30]
 	 couleurText :       	Couleur du texte - . Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
 	 couleurBackground :    Couleur du dond - Exemple : #fffff, white ...
