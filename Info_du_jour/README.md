@@ -29,7 +29,7 @@
 ![](doc/images/installation_virtuel3.png)
 
 
-- Paramètre Optionnel :
+Paramètres Optionnels :
 
 
      borderRadius :         Taille arrondi du widget - Exemple : 10, 20 ...  [Défaut : 30]
