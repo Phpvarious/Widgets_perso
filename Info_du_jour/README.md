@@ -31,7 +31,11 @@
 
 - Paramètre Optionnel :
 
-     couleurText :       	Couleur du texte - . Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
+     borderRadius :         Taille arrondi du widget - Exemple : 10, 20 ...  [Défaut : 30]
+	 couleurText :       	Couleur du texte - . Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
+	 couleurBackground :    Couleur du dond - Exemple : #fffff, white ...
+	 saisonText :           Affiche/cache le texte saison - 1=Afficher, 0=cacher [défaut : 0]
+	 saisonLogo :           Affiche/cache le logo saison - 1=Afficher, 0=cacher [défaut : 1]
 
 ## 3) Création du scénario
 
