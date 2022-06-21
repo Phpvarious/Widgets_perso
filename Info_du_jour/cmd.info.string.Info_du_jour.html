@@ -7,10 +7,12 @@
       <div>colorTextDay : Couleur du texte lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
       <div>colorLogoNight : Couleur du logo saison lorsque le widget est en Mode nuit - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
       <div>colorLogoDay : Couleur du logo saison lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
+      <div>opacityLogo : opacité du logo saison - Exemple : 10, 20 ... [Défaut : 50 (50%)]</div> 
       <div>borderRadius : Taille arrondi du widget - Exemple : 10, 20 ... [Défaut : 30]</div>
       <div>displaySaisonText : Affiche/cache le texte saison - 1=Afficher, 0=cacher [défaut : 0]</div>
       <div>displaySaisonLogo : Affiche/cache le logo saison - 1=Afficher, 0=cacher [défaut : 1]</div>
       <div>displayLeverCoucher : Affiche/cache le div Lever/Coucher du soleil - 1=Afficher, 0=cacher [défaut : 1]</div>
+      <div>themeJeedom : Le widget se base sur le theme Jeedom pour basculer en mode Day/Night - 1=Jeedom, 0=scénario(widget) [défaut : 0]</div>
     </template>
     <div class="alert#id#" id="alert#id#" style="display:none;"><h1>Données inexistantes !!</h1></div>
     <div class="saison_div#id#" id="saison_div#id#"></div>
@@ -37,6 +39,7 @@
   </div>
   <script>
     $( document ).ready(function() {
+      
       jeedom.cmd.update['#id#'] = function(_options){
         var cmd = $('.cmd[data-cmd_id=#id#]');
         var IS_JSON = true;
@@ -101,6 +104,16 @@
             
             document.getElementById('leverCoucher').style.display='block';
             document.getElementById('alert#id#').style.display='none';
+            var themeJeedom#id# = "light"
+            /* code récupéré sur community https://community.jeedom.com/t/widgets-v4-recuperer-theme-en-cours/51881/2?u=phpvarious */
+            /**/ if ($('body')[0].hasAttribute('data-theme')) {
+			/**/		if ($('body').attr('data-theme').endsWith('Light')) {
+			/**/			themeJeedom#id# = "light";
+			/**/		} else {
+			/**/			themeJeedom#id# = "dark";
+			/**/		}
+			/**/	}
+            /* ////////////////////////////////////////////////////////  */
             
             var colorBackgroundNight#id# = ('#colorBackgroundNight#' != '#'+'colorBackgroundNight#') ? "#colorBackgroundNight#" : "linear-gradient(to right, #366ae1ad, rgba(201, 231, 225, 0.44))";
             var colorBackgroundDay#id# = ('#colorBackgroundDay#' != '#'+'colorBackgroundDay#') ? "#colorBackgroundDay#" : "linear-gradient(to right, #c79c9cad, #c9e7e170)";
@@ -147,19 +160,44 @@
             ///////// JOUR
             cmd.find('#dateToday').html(dateJour);
             cmd.find('#dateToday').attr('title', 'Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
+            
+            if ('#themeJeedom#' == 1)
+            {
+              if (themeJeedom#id# == 'light')
+              {
+                document.documentElement.style.setProperty('--couleurText#id#', colorTextDay#id#);
+                document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoDay#id#);
+                document.getElementById('widget#id#').style = 'background: '+colorBackgroundDay#id#;
+              }
+              else
+              {
+                document.documentElement.style.setProperty('--couleurText#id#', colorTextNight#id#);
+                document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoNight#id#);
+                document.getElementById('widget#id#').style = 'background: '+colorBackgroundNight#id#;
+              }
+            }
+            else
+            {
+              if (modeJour == "Jour") {
+                document.documentElement.style.setProperty('--couleurText#id#', colorTextDay#id#);
+                document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoDay#id#);
+                document.getElementById('widget#id#').style = 'background: '+colorBackgroundDay#id#;
+              }
+              else
+              {
+                document.documentElement.style.setProperty('--couleurText#id#', colorTextNight#id#);
+                document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoNight#id#);
+                document.getElementById('widget#id#').style = 'background: '+colorBackgroundNight#id#;
+              }
+            }
+            
             if (modeJour == "Jour") {
               cmd.find('#mode').html('Mode : <i class="fas fa-sun icon_yellow"></i>').attr('title', modeJour);
-              document.documentElement.style.setProperty('--couleurText#id#', colorTextDay#id#);
-              document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoDay#id#);
-              document.getElementById('widget#id#').style = 'background: '+colorBackgroundDay#id#;
               document.getElementById('soleil_actuel#id#').style.color = '#fdd30e';
             }
             else 
             {
               cmd.find('#mode').html('Mode : <i class="fas fa-moon icon_blue"></i>').attr('title', modeJour);
-              document.documentElement.style.setProperty('--couleurText#id#', colorTextNight#id#);
-              document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoNight#id#);
-              document.getElementById('widget#id#').style = 'background: '+colorBackgroundNight#id#;
               document.getElementById('soleil_actuel#id#').style.color = '#4a4a4a';
             }
             
