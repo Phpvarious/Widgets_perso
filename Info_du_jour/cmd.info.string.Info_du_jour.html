@@ -16,7 +16,6 @@
     <div class="saison_div#id#" id="saison_div#id#"></div>
     <div class="titre#id#"><span id="dateToday"></span></div>
     <div class="titre#id#"><span id="saintToday#id#"></span></div>
-    <!--<div class="titre#id#"><span style="vertical-align: middle;display: table-cell;" id="saintToday#id#"></span></div>-->
     <div class="detail#id#" style="margin-top: 10px;"><span id="mode"></span></div>
     <div class="detail#id#"><span id="ferie"></span></div>
     <div class="detail#id#"><span id="weekend"></span></div>
@@ -146,15 +145,12 @@
             document.getElementById("soleil_actuel#id#").style.bottom = positionVerticalSun+"px";        
         
             ///////// JOUR
-            //cmd.find('#dateToday').html('Aujourd\'hui : '+dateJour);
             cmd.find('#dateToday').html(dateJour);
             cmd.find('#dateToday').attr('title', 'Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
             if (modeJour == "Jour") {
               cmd.find('#mode').html('Mode : <i class="fas fa-sun icon_yellow"></i>').attr('title', modeJour);
               document.documentElement.style.setProperty('--couleurText#id#', colorTextDay#id#);
               document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoDay#id#);
-              //if (couleurBackground#id# == "Auto") document.getElementById('widget#id#').style = 'background: linear-gradient(to right, #c79c9cad, #c9e7e170)';
-              //else
               document.getElementById('widget#id#').style = 'background: '+colorBackgroundDay#id#;
               document.getElementById('soleil_actuel#id#').style.color = '#fdd30e';
             }
@@ -163,8 +159,6 @@
               cmd.find('#mode').html('Mode : <i class="fas fa-moon icon_blue"></i>').attr('title', modeJour);
               document.documentElement.style.setProperty('--couleurText#id#', colorTextNight#id#);
               document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoNight#id#);
-              //if (couleurBackground#id# == "Auto") document.getElementById('widget#id#').style = 'background: linear-gradient(to right, #366ae1ad, rgba(201, 231, 225, 0.44))';
-              //else 
               document.getElementById('widget#id#').style = 'background: '+colorBackgroundNight#id#;
               document.getElementById('soleil_actuel#id#').style.color = '#4a4a4a';
             }
@@ -289,9 +283,6 @@
       font-size: 15px;
       height: 21px;
     }
-    /*.detail#id# span {
-      vertical-align: middle; 
-    }*/
     .detail#id# span div {
       display: inline;
       vertical-align: middle;
