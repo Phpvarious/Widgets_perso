@@ -13,4 +13,6 @@ Rajout des dates de vacances jusqu'au 2023/09/01
   - Ajout de paramètres optionnels. [Demande](https://community.jeedom.com/t/widget-perso-info-du-jour/86118)
   - Modification de la taille du widget par défaut.
 - 20/06/2022 : [widget]
-  - Bugfix lorsque l'option "Centrage vertical des tuiles" est cochées dans l'interface Jeedom. (Merci @jpty)  
+  - Bugfix lorsque l'option "Centrage vertical des tuiles" est cochées dans l'interface Jeedom. (Merci @jpty)
+- 21/06/2022 : [widget]
+  - Ajouts / Modification des paramètres optionnels.

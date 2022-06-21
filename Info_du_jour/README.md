@@ -32,11 +32,16 @@
 ## Paramètres Optionnels :
 
 
-     borderRadius :         Taille arrondi du widget - Exemple : 10, 20 ...  [Défaut : 30]
-	 couleurText :       	Couleur du texte - . Exemple : white, #ffffff ..... [Défaut : #c3c3c3]
-	 couleurBackground :    Couleur du dond - Exemple : #fffff, white ...
-	 saisonText :           Affiche/cache le texte saison - 1=Afficher, 0=cacher [défaut : 0]
-	 saisonLogo :           Affiche/cache le logo saison - 1=Afficher, 0=cacher [défaut : 1]
+     colorBackgroundNight : Couleur du fond lorsque le widget est en Mode nuit - Exemple : #fffff, white ... (accepte linear-gradient...)
+	 colorBackgroundDay :   Couleur du fond lorsque le widget est en Mode jour - Exemple : #fffff, white ... (accepte linear-gradient...)
+	 colorTextNight :       Couleur du texte lorsque le widget est en Mode nuit - Exemple : #fffff, white ... [Défaut : #c3c3c3]
+	 colorTextDay :         Couleur du texte lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]
+	 colorLogoNight :       Couleur du logo saison lorsque le widget est en Mode nuit - Exemple : #fffff, white ... [Défaut : #c3c3c3]
+	 colorLogoDay :         Couleur du logo saison lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]
+	 borderRadius :         Taille arrondi du widget - Exemple : 10, 20 ...  [Défaut : 30]
+	 displaySaisonText :    Affiche/cache le texte saison - 1=Afficher, 0=cacher [défaut : 0]
+	 displaySaisonLogo :    Affiche/cache le logo saison - 1=Afficher, 0=cacher [défaut : 1]
+	 displayLeverCoucher :  Affiche/cache le div Lever/Coucher du soleil - 1=Afficher, 0=cacher [défaut : 1]
 
 ## 3) Création du scénario
 
