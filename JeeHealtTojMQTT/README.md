@@ -24,7 +24,7 @@ Il vous faudra avant tout creer un équipement jMQTT sur le broker de votre choi
 
 ![](doc/images/jMQTT_Source_1.png)
 
-Telecharger le template "JeeHealtTojMQTT_Source" [LIEN].
+Telecharger le template "[a relative link](JeeHealtTojMQTT_Source.json)".
 
 Importer ce template dans le plugin jMQTT :
 
