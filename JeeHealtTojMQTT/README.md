@@ -49,7 +49,8 @@ A ce stade, vous devriez avoir un équipement jMQTT de ce type :
 ![](doc/images/jMQTT_Source_7.png)
 
 Veuillez noter l'id de la comande entourer ci-dessus, vous en aurez besoin pour le scénario.
---------------------------------------------
+
+----------------------------------------------------------------------------------------------
 
 Maintenant nous allons creer les 2 scénarios.
 
