@@ -23,7 +23,7 @@ Pour résumer les éléments a mettre en place :
 1) jMQTT
     1) Telecharger le template "[Template_JeeHealtTojMQTT_Source](Template_JeeHealtTojMQTT_Source.json)".
 
-![](doc/images/jMQTT_Source_1.png)
+    ![](doc/images/jMQTT_Source_1.png)
 
     2) Importer le template dans le plugin jMQTT.
 
