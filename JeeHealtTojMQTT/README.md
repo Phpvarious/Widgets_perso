@@ -20,17 +20,17 @@ Pour résumer les éléments a mettre en place :
   - Le widget.
 
 ## 1) Installation sur le Jeedom "source".
-1. jMQTT
-    1. Telecharger le template "[Template_JeeHealtTojMQTT_Source](Template_JeeHealtTojMQTT_Source.json)".
+1) jMQTT
+    1) Telecharger le template "[Template_JeeHealtTojMQTT_Source](Template_JeeHealtTojMQTT_Source.json)".
 
 ![](doc/images/jMQTT_Source_1.png)
 
-    2. Importer le template dans le plugin jMQTT :
+    2) Importer le template dans le plugin jMQTT :
 
 ![](doc/images/jMQTT_Source_2.png)
 ![](doc/images/jMQTT_Source_3.png)
 
-    3. Toujours dans le plugin, creer un nouvel équipement sur le broker de votre choix.
+    3) Toujours dans le plugin, creer un nouvel équipement sur le broker de votre choix.
 Nommer le comme vous le souhaitez, mais pour une meilleur compréhension de ce tuto, je vais le nommer "JeeHealtTojMQTT_Source".
 1) Appliquer le template :
 
