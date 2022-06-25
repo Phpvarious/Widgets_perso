@@ -50,6 +50,7 @@ Pour résumer les éléments a mettre en place :
 
 ----------------------------------------------------------------------------------------------
 ## Scénarios
+
     1) Scénario qui permet de publier l'état de jeedom.
      * Telecharger le template scenario "[JeeToJmqttSource_publish](JeeToJmqttSource_publish.json)".
      * Creer un nouveau scénario (JeeToJmqttSource_publish).
