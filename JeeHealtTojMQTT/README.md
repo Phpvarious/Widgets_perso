@@ -23,15 +23,14 @@ Pour résumer les éléments a mettre en place :
 ## jMQTT
 * Telecharger le template "[Template_JeeHealtTojMQTT_Source](Template_JeeHealtTojMQTT_Source.json)".
 
-     ![](doc/images/jMQTT_Source_1.png)
-	  
 * Importer le template dans le plugin jMQTT.
 
      ![](doc/images/jMQTT_Source_2.png)
      ![](doc/images/jMQTT_Source_3.png)
 
 * Toujours dans le plugin, creer un nouvel équipement sur le broker de votre choix. Nommer le comme vous le souhaitez, mais pour une meilleur compréhension de ce tuto, je vais le nommer "JeeHealtTojMQTT_Source" et ensuite appliquer le template précédemment telechargé.
-
+     ![](doc/images/jMQTT_Source_1.png)
+	 
      ![](doc/images/jMQTT_Source_4.png)
 
 * Choisir le template et saisir le Topic de base "JeeHealtTojMQTT_Source".
