@@ -29,7 +29,8 @@ Pour résumer les éléments a mettre en place :
      ![](doc/images/jMQTT_Source_3.png)
 
 * Toujours dans le plugin, creer un nouvel équipement sur le broker de votre choix. Nommer le comme vous le souhaitez, mais pour une meilleur compréhension de ce tuto, je vais le nommer "JeeHealtTojMQTT_Source" et ensuite appliquer le template précédemment telechargé.
-     ![](doc/images/jMQTT_Source_1.png)
+     
+	 ![](doc/images/jMQTT_Source_1.png)
 	 
      ![](doc/images/jMQTT_Source_4.png)
 
@@ -49,8 +50,24 @@ Pour résumer les éléments a mettre en place :
 
 ----------------------------------------------------------------------------------------------
 ## Scénarios
-1) Scénario qui permet de publier l'état de jeedom.
-
+    1) Scénario qui permet de publier l'état de jeedom.
+     * Telecharger le template scenario "[JeeToJmqttSource_publish](JeeToJmqttSource_publish.json)".
+     * Creer un nouveau scénario (JeeToJmqttSource_publish).
+	 * Dans celui-ci, importer le template.
+	 
+	 ![](doc/images/JeeToJmqttSource_publish_1.png)
+	 
+	 ![](doc/images/JeeToJmqttSource_publish_2.png)
+	 
+	 * Une fois importer ,il devrait apparaitre dans la fenêtre de gauche. cliquer dessus, "Appliquer" puis confirmer sur la fenêtre suivante.
+	 
+	 ![](doc/images/JeeToJmqttSource_publish_3.png)
+	 
+	 * Ouvrez le scénario (1) et modifiez la variable $id_Source(2) en remplacant par l'id notée dans l'étape precedente.
+	 
+	 ![](doc/images/JeeToJmqttSource_publish_4.png)
+	 
+	 
 
 
 
