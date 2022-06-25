@@ -27,28 +27,26 @@ Pour résumer les éléments a mettre en place :
 
     * Importer le template dans le plugin jMQTT.
 
-![](doc/images/jMQTT_Source_2.png)
-![](doc/images/jMQTT_Source_3.png)
+     ![](doc/images/jMQTT_Source_2.png)
+     ![](doc/images/jMQTT_Source_3.png)
 
-    * Toujours dans le plugin, creer un nouvel équipement sur le broker de votre choix.  Nommer le comme vous le souhaitez, mais pour une meilleur compréhension de ce tuto, je vais le nommer "JeeHealtTojMQTT_Source"
+    * Toujours dans le plugin, creer un nouvel équipement sur le broker de votre choix. Nommer le comme vous le souhaitez, mais pour une meilleur compréhension de ce tuto, je vais le nommer "JeeHealtTojMQTT_Source" et ensuite appliquer le template précédemment telechargé.
 
-    * Appliquer le template.
-
-![](doc/images/jMQTT_Source_4.png)
+     ![](doc/images/jMQTT_Source_4.png)
 
     * Choisir le template et saisir le Topic de base "JeeHealtTojMQTT_Source".
 
-![](doc/images/jMQTT_Source_5.png)
+     ![](doc/images/jMQTT_Source_5.png)
 
     * Activer et sauvegarder l'équipement.
 
-![](doc/images/jMQTT_Source_6.png)
+     ![](doc/images/jMQTT_Source_6.png)
 
-A ce stade, vous devriez avoir un équipement jMQTT de ce type :
+     A ce stade, vous devriez avoir un équipement jMQTT de ce type :
 
-![](doc/images/jMQTT_Source_7.png)
+     ![](doc/images/jMQTT_Source_7.png)
 
-Veuillez noter l'id de la comande entourer ci-dessus, vous en aurez besoin pour le scénario suivant.
+> Veuillez noter l'id de la comande entourer ci-dessus, vous en aurez besoin pour le scénario suivant.
 
 ----------------------------------------------------------------------------------------------
 
