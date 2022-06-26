@@ -1,6 +1,6 @@
 {
-    "JeeHealtTojMQTT_cible": {
-        "name": "JeeHealtTojMQTT_cible",
+    "Template_JeeHealtTojMQTT_Cible": {
+        "name": "JeeHealtTojMQTT_Cible",
         "eqType_name": "jMQTT",
         "configuration": {
             "type": "eqpt",
@@ -8,7 +8,7 @@
             "auto_add_cmd": "0",
             "auto_add_topic": "%s\/#",
             "Qos": "1",
-            "updatetime": "2022-06-26 17:44:57"
+            "updatetime": "2022-06-26 18:11:24"
         },
         "category": {
             "heating": "0",
@@ -56,7 +56,7 @@
                 "subType": "string",
                 "isHistorized": "0",
                 "configuration": {
-                    "topic": "%s\/plugins",
+                    "topic": "%s\/Healt",
                     "timeline::enable": "0",
                     "influx::enable": "0",
                     "interact::auto::disable": "0",
