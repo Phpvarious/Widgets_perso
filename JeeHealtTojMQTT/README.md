@@ -95,9 +95,11 @@ et verifier que tout se passe correctement dans les log de celui-ci.
 * Toujours dans le plugin, creer un nouvel équipement "JeeHealtTojMQTT_Cible", il faudra bien sur que celui-ci soit sur le même broker que sur le "source".
 * Choisir le template (1) et saisir le Topic de base(2) JeeHealtTojMQTT_Source.
 
-     ![](doc/images/jMQTT_Cible_2.png)
+     ![](doc/images/jMQTT_Cible_1.png)
 	 
 * Activer et rendre visible l'équipement.
+
+     ![](doc/images/jMQTT_Cible_2.png)
 
  ## Widget
  * Telecharger le widget "[cmd.info.string.JeeHealtTojMQTT](cmd.info.string.JeeHealtTojMQTT.html)".
