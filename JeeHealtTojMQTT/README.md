@@ -72,7 +72,7 @@ Pour résumer les éléments a mettre en place :
      > Voila pour ce scénario, vous constaterez que le scénario a un CRON 5 donc le payload sera mis à jour toute les 5 minutes, vous pouvez dès a présent faire un test de celui-ci en cliquant sur "Exécuter".
 et verifier que tout se passe correctement dans les log de celui-ci.
 
-     ![](doc/images/JeeToJmqttSource_publish_4.png)
+     ![](doc/images/JeeToJmqttSource_publish_5.png)
 
 2) Scénario qui permet d'exécuter des actions sur Jeedom.
 
@@ -83,8 +83,22 @@ et verifier que tout se passe correctement dans les log de celui-ci.
 	 
 	 Dans les paramètres de l'import selectionner la commande info créé dans l'étape 1 (jMQTT)
 	 
-	 ![](doc/images/JeeToJmqttSource_publish_4.png)
+	 ![](doc/images/JeeToJmqttSource_action_1.png)
+	 
+	 > Voila on en a terminé pour ce qui est du Jeedom Source, passons maintenant au la partie "Cible" (widget).
 
+# 2) Installation sur le Jeedom "cible".
+## jMQTT
+* Telecharger le template "[Template_JeeHealtTojMQTT_Cible](Template_JeeHealtTojMQTT_Cible.json)".
+* Importer le template dans le plugin jMQTT.
+* Toujours dans le plugin, creer un nouvel équipement "JeeHealtTojMQTT_Cible", il faudra bien sur que celui-ci soit sur le même broker que sur le "source".
+* Choisir le template (1) et saisir le Topic de base(2) JeeHealtTojMQTT_Source.
+
+     ![](doc/images/jMQTT_Cible_2.png)
+	 
+* Activer et rendre visible l'équipement.
+
+ 
 
 ## Paramètres Optionnels :
 
