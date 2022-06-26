@@ -69,10 +69,21 @@ Pour résumer les éléments a mettre en place :
 	 
 	 ![](doc/images/JeeToJmqttSource_publish_4.png)
 	 
-> Voila pour ce scénario, vous constaterez que le scénario a un CRON 5 donc le payload sera mis à jour toute les 5 minutes, vous pouvez dès a présent faire un test de celui-ci en cliquant sur "Exécuter".
+     > Voila pour ce scénario, vous constaterez que le scénario a un CRON 5 donc le payload sera mis à jour toute les 5 minutes, vous pouvez dès a présent faire un test de celui-ci en cliquant sur "Exécuter".
 et verifier que tout se passe correctement dans les log de celui-ci.
 
+     ![](doc/images/JeeToJmqttSource_publish_4.png)
 
+2) Scénario qui permet d'exécuter des actions sur Jeedom.
+
+     * Telecharger le template scenario "[JeeToJmqttSource_action](JeeToJmqttSource_action.json)".
+     * Creer un nouveau scénario (JeeToJmqttSource_action).
+	 * Dans celui-ci, importer le template.
+	 > Je ne re-détail pas les manipulations, car c'est les mêmes que le scénario précèdent.
+	 
+	 Dans les paramètres de l'import selectionner la commande info créé dans l'étape 1 (jMQTT)
+	 
+	 ![](doc/images/JeeToJmqttSource_publish_4.png)
 
 
 ## Paramètres Optionnels :

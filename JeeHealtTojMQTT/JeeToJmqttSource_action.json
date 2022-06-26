@@ -1,0 +1,57 @@
+{
+    "name": "JeeToJmqttSource_action",
+    "isActive": "1",
+    "group": "",
+    "mode": "provoke",
+    "schedule": "",
+    "trigger": [
+        "#[JeeToJmqttSoure][JeeHealtTojMQTT_Source][Action]#"
+    ],
+    "timeout": "0",
+    "object_id": null,
+    "isVisible": "0",
+    "display": {
+        "name": "",
+        "icon": ""
+    },
+    "order": "9999",
+    "description": "",
+    "configuration": {
+        "timeDependency": 0,
+        "has_return": 0,
+        "logmode": "default",
+        "allowMultiInstance": "0",
+        "syncmode": "0",
+        "timeline::enable": "0",
+        "timeline::folder": ""
+    },
+    "elements": [
+        {
+            "name": null,
+            "type": "code",
+            "options": [],
+            "order": "0",
+            "subElements": [
+                {
+                    "name": null,
+                    "type": "code",
+                    "subtype": "action",
+                    "options": {
+                        "collapse": "0",
+                        "enable": "1"
+                    },
+                    "order": "0",
+                    "expressions": [
+                        {
+                            "type": "code",
+                            "subtype": null,
+                            "expression": "$deamonForceRestart = false;\n\n$scenario->setLog('┌─────────────────── DEBUT BLOC CODE');\n$triggerId = $scenario->getRealTrigger(); \/\/ renvoie #ID#\n$triggerName = cmd::cmdToHumanReadable($scenario->getRealTrigger());\nif ($triggerName != \"user\" && $triggerName != \"schedule\" && $triggerName != \"scenario\")\n{\n    $value = cmd::byId(str_replace('#','',$triggerId))->execCmd();\n    $scenario->setLog('| Payload : ' . $value);\n    $array = json_decode($value, true);\n    \n    foreach ($array as $key => $value)\n    {\n      \/\/$key = 'ertyu';\n      if ($key == 'delete_message') {\n        $scenario->setLog('|┌─────────────────── Demande de suppression message');\n        $message = message::byId($value);\n        if (is_object($message)){\n          $message->remove();\n          $verif = message::byId($value);\n          if (!is_object($verif)) $scenario->setLog('|| Le message N° '. $value . ' a été supprimé avec succès !!!');\n          else $scenario->setLog('|| Une erreur c\\'est produite, il semble que le message n\\'ai pas pu être supprimé !!!');\n        }\n        else $scenario->setLog('|| Le message N° '. $value . ' n\\'éxiste pas !!!');\n        $scenario->setLog('|└────────────────────────────');\n      }\n      elseif ($key == 'startDeamon') {\n        $scenario->setLog('|┌─────────────────── Demande de demarrage\/redemmarrage d\\'un démon');\n        $plugin = plugin::byId($value);\n        if (is_object($plugin)){\n          $deamon_info = $plugin->deamon_info();\n          if (isset($deamon_info['last_launch'])) {\n            \/\/$scenario->setLog('|| Dernier lancement '. $deamon_info['last_launch'] . '.');\n            if ($deamonForceRestart) $scenario->setLog('|| Demande de demarrage\/redémarrage du démon '. $value . ' avec la méthode \"ForceRestart\"');\n            else $scenario->setLog('|| Demande de demarrage\/redémarrage du démon '. $value);\n            $plugin->deamon_start($deamonForceRestart);\n          }\n        }\n        $scenario->setLog('|└────────────────────────────');\n      }\n      elseif ($key == 'stopDeamon') {\n        $scenario->setLog('|┌─────────────────── Demande d\\'arrêt d\\'un démon');\n        $plugin = plugin::byId($value);\n        if (is_object($plugin)){\n          $deamon_info = $plugin->deamon_info();\n          if (isset($deamon_info['auto'])) {\n            if ($deamon_info['auto'] == 0)\n            {\n              $scenario->setLog('|| Demande de d\\'arrêt du démon '. $value);\n              $plugin->deamon_stop();\n            }\n            else\n            {\n              $scenario->setLog('|| L\\'arrêt du démon '. $value . ' ne peut pas être effectué car celui-ci est en \"gestion automatique\".');\n            }\n          }\n          \n        }\n        $scenario->setLog('|└────────────────────────────');\n      }\n      elseif ($key == 'doUpdate') {\n        $update = update::byLogicalId($value);\n        if (is_object($update)){\n          if ($update->getConfiguration('doNotUpdate') == 1  && $update->getType() != 'core') {\n            $scenario->setLog('|| [NOK] Vérification des mises à jour, mise à jour et réinstallation désactivées sur le plugin '. $value);\n            \n          }\n          else\n          {\n          $scenario->setLog('|| Demande de mise à jour du plugin '. $value);\n          $update->doUpdate();\n          }\n        }\n        else\n        {\n          $scenario->setLog('|| LogicalId '. $value .' n\\'a pas été trouvé !!!');\n        }\n      }\n      else\n      {\n        $scenario->setLog('|');\n        $scenario->setLog('| !!! AUCUNE METHODE CORRESPONDANTE !!!');\n        $scenario->setLog('|');\n      }\n    }\n}\nelse {\n  $scenario->setLog('| ATTENTION LE SCENARIO N\\'A PAS ETE PROVOQUE PAR UNE COMMANDE.(triggerName = ' . $triggerName . ')');\n}\n$scenario->setLog('└────────────────────────────');",
+                            "options": [],
+                            "order": "0"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
