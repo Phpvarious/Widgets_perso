@@ -1,0 +1,739 @@
+<div class="cmd cmd-widget" data-type="info" data-subtype="string" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#">
+  <div class="row#id# notification-container">
+    <div class="text-center">
+      <span style="" id="statut#id#" class="statut#id#"></span>
+      <span id="name#id#" class="name#id#"></span>
+      <span class="version#id#" id="version#id#">dsfsdf</span></div>
+    <div class="card notification-card notification-invitation">
+      <div class="card-body">
+        <table>
+          <tr style="background-color: transparent !important;">
+            <td style="width:70%"><div class="card-title">
+              <span class="nav-counter nav-counter-orange nav-counter-message" id="message#id#" style="display: none;"></span>
+              <b>Message</b></div></td>
+            <td style="width:30%">
+              <a href="#" class="btn#id# btn-primary message#id# disabled" id="viewMessage#id#">View</a>
+              <!--<a href="#" class="btn#id# btn-danger dismiss-notification" style="color:var(--colorPrimary#id#) !important; background-color: #FF7851 !important;">Dismiss</a>-->
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <div class="card notification-card notification-deamon">
+    <div class="card-body">
+      <table>
+        <tr style="background-color: transparent !important;">
+          <td style="width:70%"><div class="card-title">
+            <span class="nav-counter nav-counter-red nav-counter-deamon" id="deamon#id#" style="display: none;"></span>
+            <b>Deamon</b></div></td>
+          <td style="width:30%">
+            <a href="#" class="btn#id# btn-primary deamon#id#" id="viewDeamon#id#">View</a>
+            <!--<a href="#" class="btn#id# btn-danger dismiss-notification" style="color:var(--colorPrimary#id#) !important; background-color: #FF7851 !important;">Dismiss</a>-->
+          </td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    
+    <div class="card notification-card notification-update">
+      <div class="card-body">
+        <table>
+          <tr style="background-color: transparent !important;">
+            <td style="width:70%"><div class="card-title">
+              <span class="nav-counter nav-counter-red nav-counter-update" id="update#id#" style="display: none;"></span>
+              <b>Update</b></div></td>
+            <td style="width:30%">
+              <a href="#" class="btn#id# btn-primary update#id#" style="color:var(--colorPrimary#id#) !important; background-color: #78C2AD !important;" id="viewUpdate#id#">View</a>
+              <!--<a href="#" class="btn#id# btn-danger dismiss-notification" style="color:var(--colorPrimary#id#) !important; background-color: #FF7851 !important;">Dismiss</a>-->
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!--
+  <div id="widget#id#" class="widget#id#">
+    
+    <div class="infoJeedom#id#">
+      <div class="alert#id#" id="alert#id#" style="display:none;"><h1>Données inexistantes !!</h1></div>
+      <div>
+        <span class="name#id#" id="name#id#"></span><span class="erreurName#id#" id="erreurName#id#"><sup><i class="fas fa-question-circle" title="Le nom de votre Jeedom ne semble pas être configuré"></i></sup></span>
+        <span class="version#id#" id="version#id#"></span>
+      </div>
+      <ul>-->
+        <!--<li><span class="message#id# succes#id#" id="message#id#" title="Nombre message">0</span></li>-->
+        <!--<li><span class="update#id# succes#id#" id="update#id#" title="Nombre update">0</span></li>-->
+  <!--
+        <li><span class="statut#id# succes#id#" id="statut#id#" title="Statut"></span></li>
+        <li><span class="lastCommunication#id#" id="lastCommunication#id#" title="Date de la dernière mise à jour du Payload"></span></li>
+-->
+        <!-- <li><span><i class="fas fa-question-circle tooltips tooltipstered"></i></span></li>-->
+      <!--</ul>
+      
+    </div>  -->
+
+    <!--
+    <div class="detail#id#" style="margin-top: 10px;"><span id="mode"></span></div>
+    <div class="detail#id#"><span id="ferie"></span></div>
+    <div class="detail#id#"><span id="weekend"></span></div>
+    <div class="detail#id#"><span id="vacanceCours"></span></div>
+    <div id="leverCoucher" class="leverCoucher"></div>    -->
+  </div>
+  <script>
+    var debug#id# = is_numeric('#debug#') ? parseFloat('#debug#'):0
+    var succes#id# = false
+    var idAction#id# = false
+    if (debug#id# != 0) console.log('----------- WIDGET JeedomTojMQTT EN MODE DEBUG -------------------')
+    
+    //////////////////////////////////////////////////////////////    
+    /////////// RECHERCHE DE LA CMD ACTION ///////////////////////
+    //////////////////////////////////////////////////////////////
+    jeedom.eqLogic.getCmd({
+      id: #eqLogic_id#,
+      async: false,
+      success: function (cmds#id#) {
+      
+        for (j in cmds#id#) {
+         //if (debug#id# != 0) console.log(cmds#id#[j].name)
+         //if (debug#id# != 0) console.log(cmds#id#[j].type)
+         //if (debug#id# != 0) console.log(cmds#id#[j].subType)
+         //if (debug#id# != 0) console.log(cmds#id#[j]['configuration'].topic)
+         if (cmds#id#[j].name == 'Action' && cmds#id#[j].type == 'action' && cmds#id#[j].subType == 'message') {
+         //if (cmds#id#[j].name == 'Action' && cmds#id#[j].type == 'action' && cmds#id#[j].subType == 'other') {
+           if (debug#id# != 0) console.log('[OK] La commande action a été trouvée (id : '+cmds#id#[j].id+')') 
+           succes#id# = true
+           idAction#id# = cmds#id#[j].id
+           break
+         }
+        }
+      }
+    })
+    
+    if (debug#id# != 0 && !succes#id#) console.log('[NOK] La commande action n\'a pas été trouvée')
+          
+    $( document ).ready(function() {
+      
+      jeedom.cmd.update['#id#'] = function(_options){
+        
+        var cmd = $('.cmd[data-cmd_id=#id#]');
+        
+        var IS_JSON = true;
+        
+        try
+        {
+          var obj = JSON.parse(_options.display_value)
+          
+        }
+        catch(err)
+        {
+          IS_JSON = false;
+          if (debug#id# != 0) console.log('[NOK] catch -> obj n\'est pas un Json') 
+        }
+        if (debug#id# != 0 && _options.display_value == "") console.log('[NOK] _options.display_value vaut "" ')
+        
+        if (_options.display_value != "" && IS_JSON)
+        {          
+          var result = Object.keys(obj).length;
+          if (debug#id# != 0) console.log('[OK] nombres d\'info dans le payload : '+result) 
+          if (debug#id# != 0) console.table(Object.keys(obj)) 
+          if (result >= 1)
+          {
+            
+            /* Name */
+            if(obj['Name'] != undefined && obj['Name'] != "") {
+              cmd.find('#name#id#').html(obj['Name']);
+            }
+            else {
+              if (debug#id# != 0) console.log('[NOK] la clé "Name" n\'a pas été trouvé, ou est vide dans le payload')
+              cmd.find('#name#id#').html('#name#');
+            }
+            
+            /* Version + Branch */
+            if(obj['Version'] != undefined) {
+              var version = 'v'+obj['Version']
+              if (obj['Branch'] != undefined) {
+                version += ' ['+obj['Branch']+']';
+                cmd.find('#version#id#').html(version);
+              }
+              else console.log('[NOK] la clé "Branch" n\'a pas été trouvé dans le payload')
+            }
+            else {
+              if (debug#id# != 0) console.log('[NOK] la clé "Version" n\'a pas été trouvé dans le payload')
+              cmd.find('#version#id#').html('');
+            }
+            
+            /* Nombre messages */
+            if(obj['Nombre de message'] != undefined) {
+              if (debug#id# != 0) console.log('[OK] Nombre de message : '+obj['Nombre de message'])
+              if (obj['Nombre de message'] == 0) {
+                cmd.find('#message#id#').hide();
+              }
+              else 
+              {
+                cmd.find('#message#id#').removeClass( "nav-counter-blue nav-counter-green nav-counter-red" ).addClass("nav-counter-orange")
+                cmd.find('#message#id#').html(obj['Nombre de message']).show()
+              }
+              cmd.find('#viewMessage#id#').removeClass("disabled")
+            }
+            else {
+              if (debug#id# != 0) console.log('[NOK] la clé "Nombre de message" n\'a pas été trouvé dans le payload')
+              cmd.find('#viewMessage#id#').addClass("disabled")
+              cmd.find('#message#id#').removeClass( "nav-counter-orange nav-counter-green nav-counter-red" ).addClass("nav-counter-blue")
+              cmd.find('#message#id#').html('?').show()
+            }
+            
+            /* Nombre update */
+            if(obj['Nombre update'] != undefined) {
+              if (debug#id# != 0) console.log('[OK] Nombre de update : '+obj['Nombre update'])
+              if (obj['Nombre update'] == 0) {
+                cmd.find('#update#id#').hide()
+              }
+              else
+              {
+                cmd.find('#update#id#').removeClass( "nav-counter-blue nav-counter-green nav-counter-orange" ).addClass("nav-counter-red")
+                cmd.find('#update#id#').html(obj['Nombre update']).show()
+              }
+              cmd.find('#viewUpdate#id#').removeClass("disabled")
+            }
+            else {
+              if (debug#id# != 0) console.log('[NOK] la clé "Nombre update" n\'a pas été trouvé dans le payload')
+              cmd.find('#viewUpdate#id#').addClass("disabled")
+              cmd.find('#update#id#').removeClass( "nav-counter-orange nav-counter-green nav-counter-red" ).addClass("nav-counter-blue")
+              cmd.find('#update#id#').html('?').show()
+            }
+            
+            /* Deamon */
+            //obj['Deamon'] = undefined
+            if(obj['Deamon'] != undefined) {
+              var DeamonOk = 0
+              var DeamonNok = 0
+              var DeamonNotAuto = 0
+              for(var i= 0; i < obj['Deamon'].length; i++)
+              {
+                if (obj['Deamon'][i]['info']['state'] == 'nok') {
+                  console.log(obj['Deamon'][i]['info']['state'])
+                  DeamonNok++;
+                }
+                else if (obj['Deamon'][i]['info']['state'] == 'ok') {
+                  DeamonOk++;
+                }
+                if (obj['Deamon'][i]['info']['auto'] == "0") {
+                  DeamonNotAuto++;
+                }
+              }
+              if (debug#id# != 0) console.log('[OK] Nombre de demon [NOK] : '+DeamonNok)
+              if (debug#id# != 0) console.log('[OK] Nombre de demon [OK] : '+DeamonOk)
+              if (debug#id# != 0) console.log('[OK] Nombre de demon en Auto: '+DeamonNotAuto)
+              if (DeamonNok >= 1) {
+                cmd.find('#deamon#id#').removeClass( "nav-counter-orange nav-counter-green nav-counter-blue" ).addClass("nav-counter-red")
+                cmd.find('#deamon#id#').html(DeamonNok).show()
+              }
+              else if (DeamonNotAuto >= 1)
+              {
+                cmd.find('#deamon#id#').removeClass( "nav-counter-red nav-counter-green nav-counter-blue" ).addClass("nav-counter-orange")
+                cmd.find('#deamon#id#').html(DeamonNotAuto).show()
+              }
+              else 
+              {
+                cmd.find('#deamon#id#').removeClass( "nav-counter-red nav-counter-blue nav-counter-orange" ).addClass("nav-counter-green")
+                cmd.find('#deamon#id#').html(DeamonOk).show()
+              }
+              cmd.find('#viewDeamon#id#').removeClass("disabled")
+            }
+            else
+            {
+              if (debug#id# != 0) console.log('[NOK] la clé "Deamon" n\'a pas été trouvé dans le payload')
+              cmd.find('#viewDeamon#id#').addClass("disabled")
+              cmd.find('#deamon#id#').removeClass( "nav-counter-orange nav-counter-green nav-counter-red" ).addClass("nav-counter-blue")
+              cmd.find('#deamon#id#').html('?').show()
+            }
+            
+            /* Statut */
+            if(obj['Statut'] != undefined) {
+              if (obj['Statut'] == 1) {
+                cmd.find('#statut#id#').html('<i class="icon_green fas fa-check"></i>').attr('title', 'Statut [OK]');
+              }
+              else {
+                cmd.find('#statut#id#').html('<i class="icon_red fas fa-times"></i>').attr('title', 'Statut [NOK]');
+              }
+            }
+            else
+            {
+              if (debug#id# != 0) console.log('[NOK] la clé "Statut" n\'a pas été trouvé dans le payload')
+              cmd.find('#statut#id#').html('<i class="fas fa-exclamation-triangle" style="color: #90CAF9;"></i>').attr('title', 'Error statut');
+            }
+            
+            /* lastCommunication */
+            if(obj['lastCommunication']['0']['date'] != undefined && obj['lastCommunication']['0']['heure'] != undefined) {
+              //cmd.find('#lastCommunication#id#').html(obj['lastCommunication']['0']['date']+'<br>'+obj['lastCommunication']['0']['heure']);
+            }
+            
+            ////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////// MODAL ///////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////
+           
+            
+            $('#viewMessage#id#').on('click',function() {
+              jeedomUtils.closeModal('md_modal')
+              var tr = '<table class="table table-condensed table-bordered tablesorter tablesorter-bootstrap hasResizable table-striped" id="table_message" style="margin-top: 5px;" role="grid">'
+              tr += '<thead>'
+                tr += '<tr role="row" class="tablesorter-headerRow">'
+                  tr += '<th style="width: 50px;"><div class="tablesorter-header-inner"></div></th>'
+                  tr += '<th style="width: 140px;"><div class="tablesorter-header-inner">Date et heure</div></th>'
+                  tr += '<th style="width: 100px;"><div class="tablesorter-header-inner">Source</div></th>'
+                  tr += '<th><div class="tablesorter-header-inner">Description</div></th>'
+                  tr += '<th style="width: 90px;"><div class="tablesorter-header-inner">Action</div></th>'
+                  tr += '<th style="width: 120px;"><div class="tablesorter-header-inner">Occurrences</div></th>'
+                tr += '</tr>'
+              tr += '</thead>'
+              tr +='<tbody aria-live="polite" aria-relevant="all">'
+              if(obj['Message'] != undefined) {
+                for(var i= 0; i < obj['Message'].length; i++)
+                {
+                  tr +='<tr data-message_id="'+obj['Message'][i]['id']+'" role="row"><td></td>'
+                  tr +='<td class="datetime">'+obj['Message'][i]['date']+'</td>'
+                  tr +='<td class="plugin">'+obj['Message'][i]['plugin']+'</td>'
+                  tr +='<td class="message">'+obj['Message'][i]['message']+'</td>'
+                  tr +='<td class="message_action"><a href="#" class="btn btn-danger btn-xs deleteMessage#id#'
+                  if (!succes#id#) tr +=' disabled'
+                  tr +='"><i class="far fa-trash-alt cursor"></i> Supprimer</a></td>'
+                  var occurence = (obj['Message'][i]['occurrences'] != undefined)?obj['Message'][i]['occurrences']:1
+                  tr +='<td class="occurrences" style="text-align: center">'+occurence+'</td>'
+                  tr +='</tr>'
+                }
+              }
+              tr +='</tbody>'
+              tr += '</table>'
+              
+              $('#md_modal').dialog({title: "{{Centre de Messages pour Jeedom Source (jmqtt)}}"}).html(tr).dialog('open')
+              $('#table_message').on({
+                'click': function(event) {
+                  var tr = $(this).closest('tr')
+                  var data_message_id = tr.attr('data-message_id')
+                  if (idAction#id#){
+                    tr.remove()
+                    console.log('[OK] Suppression du message '+data_message_id)
+                    jeedom.cmd.execute({id: idAction#id#, value: {title: 'delete_message', message: data_message_id}});
+                    //jeedom.cmd.execute({id: idAction#id#, value: {title: 'action', message: '{"delete_message":"'+data_message_id+'"}'}});
+                  }
+                  else
+                  {
+                    console.log('[NOK] Impossible de supprimer le message '+data_message_id+' car La commande action n\'a pas été trouvée')
+                  }
+                }
+              }, '.deleteMessage#id#')
+            })
+            
+            $('#viewDeamon#id#').on('click',function() {
+              jeedomUtils.closeModal('md_modal')
+              var tr = '<table class="table table-condensed table-bordered tablesorter tablesorter-bootstrap hasResizable table-striped" id="table_deamon" style="margin-top: 5px;" role="grid">'
+              tr += '<thead>'
+                tr += '<tr role="row" class="tablesorter-headerRow">'
+                  tr += '<th style="width: 50px;"><div class="tablesorter-header-inner"></div></th>'
+                  tr += '<th style="width: 160px;"><div class="tablesorter-header-inner">Plugin</div></th>'
+                  tr += '<th style="width: 100px;"><div class="tablesorter-header-inner">Statut</div></th>'
+                  tr += '<th style="width: 120px;"><div class="tablesorter-header-inner">Configuration</div></th>'
+                  tr += '<th style="width: 160px;"><div class="tablesorter-header-inner">Gestion automatique</div></th>'
+                  tr += '<th><div class="tablesorter-header-inner">Dernier lancement</div></th>'
+                  tr += '<th style="width: 160px;"><div class="tablesorter-header-inner">Action</div></th>'
+                tr += '</tr>'
+              tr += '</thead>'
+              tr +='<tbody aria-live="polite" aria-relevant="all">'
+              if(obj['Deamon'] != undefined) {
+                for(var i= 0; i < obj['Deamon'].length; i++)
+                {
+                  tr +='<tr data-deamon_id="'+obj['Deamon'][i]['id']+'" role="row">'
+                  tr +='<td></td>'
+                  tr +='<td>'+obj['Deamon'][i]['name']+'</td>'
+                  if (obj['Deamon'][i]['info']['state'] == 'ok') tr +='<td><span class="label label-success">OK</span></td>'
+                  else tr +='<td><span class="label label-danger">NOK</span></td>'
+                  if (obj['Deamon'][i]['info']['launchable'] == 'ok') tr +='<td><span class="label label-success">OK</span></td>'
+                  else tr +='<td><span class="label label-danger">NOK</span></td>'
+                  if (obj['Deamon'][i]['info']['auto'] == '1') tr +='<td><span class="label label-success">OK</span></td>'
+                  else tr +='<td><span class="label label-warning">NOK</span></td>'
+                  //tr +='<td class="message">'+obj['Deamon'][i]['info']['auto']+'</td>'
+                  tr +='<td>'+obj['Deamon'][i]['info']['last_launch']+'</td>'
+                  tr +='<td class="">'
+                  if (obj['Deamon'][i]['info']['launchable'] == 'ok')
+                  {
+                    tr +='<a class="btn btn-success btn-sm bt_startDeamon#id#" style="position:relative;top:-5px;"><i class="fas fa-play"></i></a>'
+                    tr +='<a class="btn btn-danger btn-sm bt_stopDeamon#id#" style="position: relative; top: -5px;"><i class="fas fa-stop"></i></a>'
+                  }
+                  tr +='</td>'
+                  tr +='</tr>'
+                }
+                
+              }
+              tr +='</tbody>'
+              tr += '</table>'
+              
+              $('#md_modal').dialog({title: "{{Etat des démons pour Jeedom Source (jmqtt)}}"}).html(tr).dialog('open')
+              $('#table_deamon').on({
+                'click': function(event) {
+                  var tr = $(this).closest('tr')
+                  var data_deamon_id = tr.attr('data-deamon_id')
+                  if (idAction#id#){
+                    //tr.remove()
+                    console.log('[OK] Demarrage/redemarrage du Démon '+data_deamon_id)
+                    jeedom.cmd.execute({id: idAction#id#, value: {title: 'startDeamon', message: data_deamon_id}});
+                  }
+                  else
+                  {
+                    console.log('[NOK] Impossible de demarrer/redemarrer le Démon '+data_deamon_id+' car La commande action n\'a pas été trouvée')
+                  }
+                }
+              }, '.bt_startDeamon#id#')
+              
+              $('#table_deamon').on({
+                'click': function(event) {
+                  var tr = $(this).closest('tr')
+                  var data_deamon_id = tr.attr('data-deamon_id')
+                  if (idAction#id#){
+                    console.log('[OK] Arrêt du Démon '+data_deamon_id)
+                    jeedom.cmd.execute({id: idAction#id#, value: {title: 'stopDeamon', message: data_deamon_id}});
+                  }
+                  else
+                  {
+                    console.log('[NOK] Impossible d\'arrêter le Démon '+data_deamon_id+' car La commande action n\'a pas été trouvée')
+                  }
+                }
+              }, '.bt_stopDeamon#id#')
+            })
+            
+            $('#viewUpdate#id#').on('click',function() {
+              jeedomUtils.closeModal('md_modal')
+              var tr = '<table class="table table-condensed table-bordered tablesorter tablesorter-bootstrap hasResizable table-striped" id="table_update" style="margin-top: 5px;" role="grid">'
+              tr += '<thead>'
+                tr += '<tr role="row" class="tablesorter-headerRow">'
+                  tr += '<th style="width: 50px;"><div class="tablesorter-header-inner">Etat</div></th>'
+                  tr += '<th style="width: 500px;"><div class="tablesorter-header-inner">Nom</div></th>'
+                  tr += '<th style="width: 160px;"><div class="tablesorter-header-inner">Version installée</div></th>'
+                  tr += '<th style="width: 160px;"><div class="tablesorter-header-inner">Dernière version</div></th>'
+                  tr += '<th style=""><div class="tablesorter-header-inner">Action</div></th>'
+                tr += '</tr>'
+              tr += '</thead>'
+              tr +='<tbody aria-live="polite" aria-relevant="all">'
+              if(obj['update'] != undefined) {
+                for(var i= 0; i < obj['update'].length; i++)
+                {
+                  if (obj['update'][i]["status"] == '') obj['update'][i]["status"] = 'OK'
+                  obj['update'][i]["status"] = obj['update'][i]["status"].toUpperCase()
+                
+                  if (
+                       (
+                         (obj['update'][i]["doNotUpdate"] != '0' && '#hideDoNotUpdate#' != '1') || (obj['update'][i]["doNotUpdate"] == '0')
+                       ) 
+                       && 
+                       (
+                         (obj['update'][i]["status"] == 'OK' && '#hideOkUpdate#' != '1') || (obj['update'][i]["status"] != 'OK')
+                       )
+                     ){
+                  
+                    var labelClass = 'label-success'
+                    if (obj['update'][i]["status"] == 'UPDATE') {
+                      labelClass = 'label-warning'
+                      if (obj['update'][i]["type"] == 'core' || obj['update'][i]["type"] == 'plugin') {
+                        if (obj['update'][i]["doNotUpdate"] == '0') {
+                      
+                        }
+                      }
+                    }
+                    tr += '<tr data-id="' + obj['update'][i]["id"] + '" data-logicalId="' + obj['update'][i]["logicalId"] + '" data-type="' + obj['update'][i]["type"] + '">'
+                    tr += '<td><span class="updateAttr label ' + labelClass + '" data-l1key="status">' + obj['update'][i]["status"] + '</span></td>'
+                    tr += '<td>'
+                    tr += '<span class="updateAttr" data-l1key="source">' + obj['update'][i]["source"] + '</span> / <span class="updateAttr" data-l1key="type">' + obj['update'][i]["type"] + '</span> : <span class="updateAttr label label-info" data-l1key="name">' + obj['update'][i]["id"] + '</span>'
+                    if (obj['update'][i]["version"]) {
+                      var updClass;
+                      switch (obj['update'][i]["version"].toLowerCase()) {
+                        case 'stable':
+                        case 'master':
+                          updClass = 'label-success';
+                          break;
+                        case 'beta':
+                          updClass = 'label-warning';
+                          break;
+                        default:
+                        updClass = 'label-danger';
+                      }
+                      tr += ' <span class="label ' + updClass + '">' + obj['update'][i]["version"] + '</span>'
+                    }
+                
+                    if (obj['update'][i]["localVersion"] !== null && obj['update'][i]["localVersion"].length > 19) obj['update'][i]["localVersion"] = obj['update'][i]["localVersion"].substring(0, 16) + '...'
+                    if (obj['update'][i]["remoteVersion"] !== null && obj['update'][i]["remoteVersion"].length > 19) obj['update'][i]["remoteVersion"] = obj['update'][i]["remoteVersion"].substring(0, 16) + '...'
+                    tr += '<td><span class="label label-primary" data-l1key="localVersion">' + obj['update'][i]["localVersion"] + '</span></td>'
+                    tr += '<td><span class="label label-primary" data-l1key="remoteVersion">' + obj['update'][i]["remoteVersion"] + '</span></td>'
+                
+                    //if(obj['update'][i]["doNotUpdate"] == '1' && '#hideDoNotUpdate#' != '1')
+                    //{
+                    //tr += '<td>'
+                    if (obj['update'][i]["type"] != 'core') {
+                      if (obj['update'][i]["status"] == 'UPDATE') {
+                        if (obj['update'][i]["doNotUpdate"] == '0') {
+                          tr += '<td><a class="btn btn-warning btn-xs bt_update#id#"><i class="fas fa-sync"></i><span class="hidden-1280"> {{Mettre à jour}}</span></a></td> '
+                        } else {
+                          tr += '<td><a class="btn btn-warning btn-xs bt_update#id# disabled"><i class="fas fa-sync"></i><span class="hidden-1280"> {{Mettre à jour}}</span></a></td> '
+                        }
+                      } else {
+                        tr += '<td><a class="btn btn-warning btn-xs bt_update#id# disabled"><i class="fas fa-sync"></i><span class="hidden-1280"> {{Réinstaller}}</span></a></td> '
+                        //if (obj['update'][i]["doNotUpdate"] == '0') {
+                          //tr += '<a class="btn btn-warning btn-xs update#id#"><i class="fas fa-sync"></i><span class="hidden-1280"> {{Réinstaller}}</span></a> '
+                        //} else {
+                          //tr += '<a class="btn btn-warning btn-xs update#id# disabled"><i class="fas fa-sync"></i><span class="hidden-1280"> {{Réinstaller}}</span></a> '
+                        //}
+                      }
+                    }
+                    //tr += '</td>'
+                    //tr += '<td><span class="label label-primary" data-l1key="updateDate">' + _update.updateDate + '</span></td>'
+                    tr +='</tr>'
+                  }
+                }
+              }
+              tr +='</tbody>'
+              tr += '</table>'
+            
+              $('#md_modal').dialog({title: "{{Etat des mises à jours pour Jeedom Source}}"}).html(tr).dialog('open')
+              $('#table_update').on({
+                'click': function(event) {
+                  var tr = $(this).closest('tr')
+                  var data_id = tr.attr('data-id')
+                  if (data_id){
+                    console.log('[OK] Demande de MaJ du plugin '+data_id+'.')
+                    jeedom.cmd.execute({id: idAction#id#, value: {title: 'doUpdate', message: data_id}});
+                  }
+                  else
+                  {
+                    console.log('[NOK] Impossible de mettre à jour le plugin '+data_id+' car La commande action n\'a pas été trouvée')
+                  }
+                }
+              }, '.bt_update#id#')
+            })
+          }
+          else
+          {
+            //console.log("erreur json null")
+            deleteAll#id#()
+          }
+
+        }
+        else
+        {
+          deleteAll#id#()
+        }
+      }
+      jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});  
+    });
+    function deleteAll#id#(){
+      var cmd = $('.cmd[data-cmd_id=#id#]');
+      cmd.find('#name#id#').html('#name#');
+      cmd.find('#version#id#').html('')
+      cmd.find('#message#id#').html('?').hide()
+      cmd.find('#update#id#').html('?').hide()
+      cmd.find('#deamon#id#').html('?').hide()
+      cmd.find('#viewMessage#id#').addClass("disabled")
+      cmd.find('#viewDeamon#id#').addClass("disabled")
+      cmd.find('#viewUpdate#id#').addClass("disabled")
+      
+    }
+  </script>
+<style>
+  :root {
+    --colorCard#id#: #fff;
+    --colorPrimary#id#: #fff;
+    --background-color: white;
+    
+    --colorWarning#id#: #c37d28;
+    --colorError#id#: #b93a3e;
+    --colorSucces#id#: #96c927;
+    
+    --couleurText#id#: #c3c3c3;
+    
+    --background#id#: #7c4848;
+  }
+  /* */
+  [data-cmd_id="#id#"] .row#id# {
+  margin: auto;
+    /* font-size: 24px; */
+    line-height: 24px;
+    padding: 15px;
+    padding-top: 0px;
+    width: 460px;
+    display: flex;
+    flex-flow: column;
+    background-color: var(--background-color);
+    border-radius: 20px;
+  
+}
+  [data-cmd_id="#id#"] .card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: var(--colorCard#id#);
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,0.125);
+    border-radius: 0.4rem;
+    
+    width: 100%;
+    margin-bottom: 5px;
+    display: block;
+    transition: opacity 0.3s;
+  }
+  [data-cmd_id="#id#"] .row#id# .card .card-body {
+    padding: 10px;
+  }
+  [data-cmd_id="#id#"] .card-body table {
+    width: 100%;
+  }
+  [data-cmd_id="#id#"] tr {
+      display:flex;
+    background-color: var(--colorCard#id#) !important;
+  }
+  [data-cmd_id="#id#"] .card-body table tr td:nth-child(2) {
+    text-align: right;
+    justify-content: space-around;
+  }
+  
+  [data-cmd_id="#id#"] .card-title:before {
+  display:inline-block;
+  /* font-family: 'Font Awesome\ 5 Free';*/
+  font-family: 'Font Awesome 5 Free';
+  font-weight:900;
+  font-size: 18px;
+  text-align: center;
+  border: 2px solid grey;
+  border-radius: 100px;
+  width: 30px;
+  height: 30px;
+  padding-bottom: 3px;
+  margin-right: 10px;
+}
+  
+  [data-cmd_id="#id#"] .notification-invitation .card-title:before {
+      color: #90CAF9;
+      border-color: #90CAF9;
+      /* content: "\f007";*/
+    content: "\f0e0";
+    }
+  
+  [data-cmd_id="#id#"] .notification-deamon .card-title:before {
+      color: #90CAF9;
+      border-color: #90CAF9;
+      /* content: "\f007";*/
+    content: "\f21e";
+    }
+  
+  [data-cmd_id="#id#"] .notification-update .card-title:before {
+      color: #90CAF9;
+      border-color: #90CAF9;
+      /* content: "\f007";*/
+    content: "\f021";
+    }
+  
+  [data-cmd_id="#id#"] .card-body table tr td a.btn {
+    font-size: 0.8rem;
+    padding: 3px;
+}
+  
+  [data-cmd_id="#id#"] .card-body table tr td a.btn#id#{
+    font-family: "Montserrat", sans-serif;
+    display: inline-block;
+    text-align: center;
+    border-radius: 1rem;
+    min-width: 35px !important;
+    font-size: 14px;
+    padding: 0px 5px 0px 5px
+}
+  [data-cmd_id="#id#"] .btn-primary {
+    color: #fff !important;
+    background-color: #78C2AD;
+    border-color: #78C2AD;
+}
+  #md_modal td.message_action a.btn-primary {
+    color: #fff !important;
+    background-color: var(--al-danger-color);
+    border-color: var(--al-danger-color);
+  }
+  [data-cmd_id="#id#"] .nav-counter {
+  font-size: 10px;
+    position: absolute;
+    top: 7px;
+    left: 32px;
+    height: 15px;
+    width: 15px;
+    line-height: 13px;
+    margin-top: 0px;
+    color: white;
+    text-align: center;
+    border-radius: 11px;
+    
+  }
+  /*
+  [data-cmd_id="#id#"] .nav-counter-green {
+    background: #75a940;
+    border: 1px solid #42582b;
+    background-image: -webkit-linear-gradient(top, #8ec15b, #689739);
+    background-image: -moz-linear-gradient(top, #8ec15b, #689739);
+    background-image: -o-linear-gradient(top, #8ec15b, #689739);
+    background-image: linear-gradient(to bottom, #8ec15b, #689739);
+  }
+  */
+  [data-cmd_id="#id#"] .nav-counter-green {
+    background: #75a940;
+    border: 1px solid #42582b;
+  }
+  [data-cmd_id="#id#"] .nav-counter-orange {
+    background: #c37d28;
+    border: 1px solid #42582b;
+  }
+  [data-cmd_id="#id#"] .nav-counter-red {
+    background: #b93a3e;
+    border: 1px solid #42582b;
+  }
+  [data-cmd_id="#id#"] .nav-counter-blue {
+    background: #5078aa;
+    border: 1px solid #42582b;
+  }
+  
+  [data-cmd_id="#id#"] .name#id# {
+    display: inline-block;
+    font-weight: 400;
+    color: var(--link-color);
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  [data-cmd_id="#id#"] .version#id# {
+    vertical-align: top;
+    position: relative;
+    top: 10px;
+    left: 5px;
+  }
+  /* */
+  #widget#id# {
+    transition: background 1000ms ease-in-out 0s;
+    width: 460px;
+    height: 220px;
+    border-radius: 25px;
+    background-color: transparent;
+    text-align: left;
+    padding-top: 15px;
+    color: var(--couleurText#id#);
+  }
+  [data-cmd_id="#id#"] .statut#id# {
+    margin-right: 5px;
+  }
+  [data-cmd_id="#id#"] .statut#id# i {
+    font-size: 30px;
+  }
+  
+</style>
+  </div>
