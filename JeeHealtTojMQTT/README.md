@@ -9,8 +9,9 @@ Il est ainsi possible au travers d'un widget, sur un ou plusieurs Jeedom seconda
  - Démarrer / arrêter les deamons.
  - Mettre à jour un plugin.
 
-Dans ce tuto, tout au long des étapes, je mettrai à disposition les liens vers les éléménts a télécharger.
+Dans ce tuto, tout au long des étapes, je mettrai à disposition les liens vers les éléménts a télécharger.  
 Pour résumer les éléments a mettre en place :
+
 - Jeedom source :
   - le plugin jMQTT.
   - Un scénario qui se chargera de rassembler les infos (messages, deamon ...) et ainsi les envoyer sur une commande Info du plugin jMQTT qui se chargera de publier sur un broker.
