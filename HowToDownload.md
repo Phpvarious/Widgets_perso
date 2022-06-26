@@ -4,7 +4,7 @@ Voici un exemple pour telecharger ce fichier "[cmd.info.string.JeeHealtTojMQTT](
 
 Vous arriverez sur cette page, il vous suffira de cliquer sur le bouton "Raw".
 
-![](doc/images/help_download_1.png)
+![](doc/images/help_download_4.png)
 
 Ensuite dans la fenêtre suivante, faites un clic droit, puis "Enregistrer sous"
 
