@@ -22,3 +22,4 @@ Rajout des dates de vacances jusqu'au 2023/09/01
   - Affichage de tous les tag disponibles, dans le log. [scénario]
   - mise a dispo du tag « dureeJourEcart » en secondes. [scénario]
   - Restructuration du code, il est possible de désactiver chaque catégorie (vacances, saint, soleil, widget ...) individuellement. [scénario]
+  - Affichage de la durée du jour (par paramètre optionnel) entre lever et coucher du soleil. [widget]
