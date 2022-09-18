@@ -28,11 +28,12 @@
 ![](doc/images/installation_virtuel2.png)
 ![](doc/images/installation_virtuel3.png)
 
-**** Widget en version mobile
+********** Widget en version mobile *******************
 - Fichier source à récupérer sous :
   - /widgets_perso/Info_du_jour/mobile/cmd.info.string.Info_du_jour.html
 - Puis déposer ce fichier (avec JeeXplorer ...) dans le dossier :
   - /html/data/customTemplates/mobile/
+********************************************************
 
 ## Paramètres Optionnels :
 
