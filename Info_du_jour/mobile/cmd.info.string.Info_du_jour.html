@@ -1,0 +1,430 @@
+<div class="cmd cmd-widget" data-type="info" data-subtype="string" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#" style="width:100%;">
+  <div id="widget#id#">
+    <template>
+      <div>colorBackgroundNight : Couleur du fond lorsque le widget est en Mode nuit - Exemple : #fffff, white ... (accepte linear-gradient...)</div>
+      <div>colorBackgroundDay : Couleur du fond lorsque le widget est en Mode jour - Exemple : #fffff, white ... (accepte linear-gradient...)</div>
+      <div>colorTextNight : Couleur du texte lorsque le widget est en Mode nuit - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
+      <div>colorTextDay : Couleur du texte lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
+      <div>colorLogoNight : Couleur du logo saison lorsque le widget est en Mode nuit - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
+      <div>colorLogoDay : Couleur du logo saison lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
+      <div>opacityLogo : opacité du logo saison - Exemple : 10, 20 ... [Défaut : 50 (50%)]</div> 
+      <div>borderRadius : Taille arrondi du widget - Exemple : 10, 20 ... [Défaut : 30]</div>
+      <div>displaySaisonText : Affiche/cache le texte saison - 1=Afficher, 0=cacher [défaut : 0]</div>
+      <div>displaySaisonLogo : Affiche/cache le logo saison - 1=Afficher, 0=cacher [défaut : 1]</div>
+      <div>displayLeverCoucher : Affiche/cache le div Lever/Coucher du soleil - 1=Afficher, 0=cacher [défaut : 1]</div>
+      <div>displayDureeJour : Affiche/cache la durée du jour dans le widget - 1=Afficher, 0=cacher [défaut : 1]</div>
+      <div>themeJeedom : Le widget se base sur le theme Jeedom pour basculer en mode Day/Night - 1=Jeedom, 0=scénario(widget) [défaut : 0]</div>
+    </template>
+    <div class="alert#id#" id="alert#id#" style="display:none;"><h1>Données inexistantes !!</h1></div>
+    <div class="titre#id#"><span id="dateToday#id#"></span></div>
+    <div class="titre#id#"><span id="saintToday#id#"></span></div>
+    <div id="leverCoucher#id#" class="leverCoucher#id#">     
+      <svg viewBox="0 0 185.44316 48.083736">
+        <g inkscape:label="Calque 1" inkscape:groupmode="layer" id="layer1" transform="translate(-10.465918,-47.3181)">
+          <path style="fill:none;stroke-width:0.383879px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 195.79167,95.25 C 164.92336,71.379791 134.05533,47.509801 103.18719,47.51004 72.319052,47.510278 41.451605,71.379821 10.583333,95.25" id="path788" inkscape:path-effect="#path-effect790" inkscape:original-d="M 195.79167,95.25 C 164.92358,71.379506 134.05557,47.509493 103.1875,23.639963 72.318814,47.50997 41.451369,71.379516 10.583333,95.25"></path>
+        </g>
+      </svg>
+      <div class="soleil_leve#id#"><i class="fas fa-sun"></i></div>
+      <div class="soleil_couche#id#" id="soleil_couche#id#"><i class="fas fa-sun"></i></div>
+      <div class="soleil_zenith#id#"  id="soleil_zenith#id#"><i class="fas fa-sun"></i></div>
+      <div class="soleil_actuel_div#id#">
+        <div class="soleil_actuel#id#"  id="soleil_actuel#id#"><i class="fas fa-sun"></i></div>
+      </div>
+      <div id="lever#id#" class="lever#id#"></div>
+      <div id="zenith#id#" class="zenith#id#"></div>
+      <div id="dureeJour#id#" class="dureeJour#id#"></div>
+      <div id="coucher#id#" class="coucher#id#"></div>
+    </div>    
+    <div class="detail#id#"><span id="mode"></span></div>
+    <div class="detail#id#"><span id="ferie#id#"></span></div>
+    <div class="detail#id#"><span id="weekend#id#"></span></div>
+    <div class="detail#id#"><span id="vacanceCours#id#"></span></div>
+    <div class="detail#id#" id="saison_text"></div>
+    
+  </div>
+  <script>
+    $( document ).ready(function() {
+      
+      jeedom.cmd.update['#id#'] = function(_options){
+        var cmd = $('.cmd[data-cmd_id=#id#]');
+        var IS_JSON = true;
+        try
+        {
+          var obj = JSON.parse(_options.display_value)
+        }
+        catch(err)
+        {
+               IS_JSON = false;
+        }                
+        if (_options.display_value != "" && IS_JSON)
+        {          
+          var result = Object.keys(obj).length;
+          if (result == 4) 
+          {
+            
+            ///////// SOLEIL
+            var nbreObjSoleil = Object.keys(obj['Soleil']).length;
+            var elevation = obj['Soleil']['elevation'];
+            var elevationZenith = obj['Soleil']['elevationZenith'];
+            var leverSoleil = obj['Soleil']['leverSoleil'];
+            var zenithSoleil = obj['Soleil']['zenithSoleil'];
+            var coucherSoleil = obj['Soleil']['coucherSoleil'];
+            var positionHorizontalsun = obj['Soleil']['positionHorizontalSun'];
+            var positionVerticalSun = obj['Soleil']['positionVerticalSun'];
+            ///////// JOUR
+            var nbreObjJour = Object.keys(obj['Jour']).length;
+            var dureeJour = obj['Jour']['dureeJour'];
+            var dureeJourEcart = obj['Jour']['dureeJourEcart'];
+            var modeJour = obj['Jour']['modeJour'];
+            var weekend = obj['Jour']['weekend'];
+            var ferie = obj['Jour']['ferie'];
+            var ferieLibelle = obj['Jour']['libelleFerie'];
+            var ferieDateProchain = obj['Jour']['dateProchainFerie'];  
+            var ferieLibelleProchain = obj['Jour']['libelleProchainFerie'];
+            var nbProchainFerie = obj['Jour']['nbProchainFerie'];
+            var saison = obj['Jour']['saison'];
+            var dateJour = obj['Jour']['dateJour'];       
+            
+            ///////// VACANCE
+            var nbreObjVacances = Object.keys(obj['Vacances']).length;
+            var vacancesEnCours = obj['Vacances']['vacancesEnCours'];
+            var vacancesEnCoursLibelle = obj['Vacances']['vacancesEnCoursLibelle'];
+            var debutVacancesEnCours = obj['Vacances']['debutVacancesEnCours'];
+            var finVacancesEnCours = obj['Vacances']['finVacancesEnCours'];
+            var vacancesPochainesLibelle = obj['Vacances']['vacancesPochainesLibelle'];
+            var debutVacancesProchaines = obj['Vacances']['debutVacancesProchaines'];
+            var finVacancesProchaines = obj['Vacances']['finVacancesProchaines'];
+            var nbProchainesVacances = obj['Vacances']['nbProchainesVacances'];
+            
+            ///////// SAINT
+            var nbreObjSaints = Object.keys(obj['Saints']).length;
+            var saintJour = obj['Saints']['saintJour'];
+            var saintDemain = obj['Saints']['saintDemain'];
+            
+            ///////// SOLEIL
+            document.getElementById('leverCoucher#id#').style.display='block';
+            document.getElementById('alert#id#').style.display='none';
+            var themeJeedom#id# = "light" 
+            
+  
+            /* code récupéré sur community https://community.jeedom.com/t/widgets-v4-recuperer-theme-en-cours/51881/2?u=phpvarious */
+            /**/ if ($('body')[0].hasAttribute('data-theme')) {
+			/**/		if ($('body').attr('data-theme').endsWith('Light')) {
+			/**/			themeJeedom#id# = "light";
+			/**/		} else {
+			/**/			themeJeedom#id# = "dark";
+			/**/		}
+			/**/	}
+            /* ////////////////////////////////////////////////////////  */
+            
+            var colorBackgroundNight#id# = ('#colorBackgroundNight#' != '#'+'colorBackgroundNight#') ? "#colorBackgroundNight#" : "linear-gradient(to right, #366ae1ad, rgba(201, 231, 225, 0.44))";
+            var colorBackgroundDay#id# = ('#colorBackgroundDay#' != '#'+'colorBackgroundDay#') ? "#colorBackgroundDay#" : "linear-gradient(to right, #c79c9cad, #c9e7e170)";
+            
+            var colorTextNight#id# = ('#colorTextNight#' != '#'+'colorTextNight#') ? "#colorTextNight#" : "#c3c3c3";
+            var colorTextDay#id# = ('#colorTextDay#' != '#'+'colorTextDay#') ? "#colorTextDay#" : "#c3c3c3";
+            
+            var colorLogoNight#id# = ('#colorLogoNight#' != '#'+'colorLogoNight#') ? "#colorLogoNight#" : "#c3c3c3";
+            var colorLogoDay#id# = ('#colorLogoDay#' != '#'+'colorLogoDay#') ? "#colorLogoDay#" : "#c3c3c3";
+            
+            if (is_numeric('#borderRadius#')) document.documentElement.style.setProperty('--borderRadius#id#', '#borderRadius#px');
+            if (is_numeric('#opacityLogo#')) document.documentElement.style.setProperty('--opacityLogo#id#', '#opacityLogo#%');
+            
+            cmd.find('#saison_text').html('Saison : <span>' + saison + '</span>').show()
+            
+            var displayleverCoucher#id# = ('#displayLeverCoucher#' != '#'+'displayLeverCoucher#') ? '#displayLeverCoucher#' : 1;
+            if (displayleverCoucher#id# == 1) cmd.find('#leverCoucher#id#').show()
+            else cmd.find('#leverCoucher#id#').hide()
+            
+            var displayDureeJour#id# = ('#displayDureeJour#' != '#'+'displayDureeJour#') ? '#displayDureeJour#' : 1;
+            if (displayDureeJour#id# == 1) cmd.find('#dureeJour#id#').show()
+            else cmd.find('#dureeJour#id#').hide()
+            
+            cmd.find('#lever#id#').html(leverSoleil);
+            cmd.find('#zenith#id#').html(zenithSoleil);
+            cmd.find('#coucher#id#').html(coucherSoleil);
+            cmd.find('#dureeJour#id#').html('<i class="fas fa-sun icon_yellow"></i> ' + dureeJour + "<br>("+dureeJourEcart+")");
+            //cmd.find('#soleil_actuel#id#').attr('title', "Elevation en cours : "+elevation);
+            //cmd.find('#zenith#id#').attr('title', "Elevation au Zenith : "+elevationZenith);
+            document.getElementById("soleil_actuel#id#").style.left = positionHorizontalsun+"px";
+            document.getElementById("soleil_actuel#id#").style.bottom = positionVerticalSun+"px";        
+        
+            ///////// JOUR
+            cmd.find('#dateToday#id#').html(dateJour);
+            cmd.find('#dateToday#id#').attr('title', 'Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
+            
+            if ('#themeJeedom#' == 1)
+            {
+              if (themeJeedom#id# == 'light')
+              {
+                document.documentElement.style.setProperty('--couleurText#id#', colorTextDay#id#);
+                document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoDay#id#);
+                document.getElementById('widget#id#').style = 'background: '+colorBackgroundDay#id#;
+              }
+              else
+              {
+                document.documentElement.style.setProperty('--couleurText#id#', colorTextNight#id#);
+                document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoNight#id#);
+                document.getElementById('widget#id#').style = 'background: '+colorBackgroundNight#id#;
+              }
+            }
+            else
+            {
+              if (modeJour == "Jour") {
+                document.documentElement.style.setProperty('--couleurText#id#', colorTextDay#id#);
+                document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoDay#id#);
+                document.getElementById('widget#id#').style = 'background: '+colorBackgroundDay#id#;
+              }
+              else
+              {
+                document.documentElement.style.setProperty('--couleurText#id#', colorTextNight#id#);
+                document.documentElement.style.setProperty('--couleurLogo#id#', colorLogoNight#id#);
+                document.getElementById('widget#id#').style = 'background: '+colorBackgroundNight#id#;
+              }
+            }
+            
+            if (modeJour == "Jour") {
+              cmd.find('#mode').html('Mode : <i class="fas fa-sun icon_yellow"></i>');
+              document.getElementById('soleil_actuel#id#').style.color = '#fdd30e';
+            }
+            else 
+            {
+              cmd.find('#mode').html('Mode : <i class="fas fa-moon icon_blue"></i>');
+              document.getElementById('soleil_actuel#id#').style.color = '#4a4a4a';
+            }
+            
+            if (weekend == 1) cmd.find('#weekend#id#').html('Week-end : <i class="icon_green fas fa-check"></i>');
+            else cmd.find('#weekend#id#').html('Week-end : <i class="icon_red fas fa-times"></i>');
+            
+            if (ferie == 1) cmd.find('#ferie#id#').html('Férié : <i class="icon_green fas fa-check"></i>');
+            else cmd.find('#ferie#id#').html('Férié : <i class="icon_red fas fa-times"></i>');
+            
+            ///////// VACANCES
+            if (vacancesEnCours == 1) cmd.find('#vacanceCours#id#').html('Vacances : <i class="icon_green fas fa-check"></i>');
+            else cmd.find('#vacanceCours#id#').html('Vacances : <i class="icon_red fas fa-times"></i>');
+            
+            cmd.find('#saintToday#id#').html('<i class="far fa-calendar-check"></i> '+saintJour);
+            //cmd.find('#saintToday#id#').attr('title', 'Demain : '+saintDemain);
+          }
+          else
+          {
+            deleteAll();
+            document.getElementById('leverCoucher#id#').style.display='none';
+            document.getElementById('alert#id#').style.display='block';
+          }
+        }
+        else
+        {
+          deleteAll();
+          document.getElementById('leverCoucher#id#').style.display='none';
+          document.getElementById('alert#id#').style.display='block';          
+        }
+		function deleteAll(){
+		  var cmd = $('.cmd[data-cmd_id=#id#]');
+          cmd.find('#saison_div#id#').html("");
+          //cmd.find('#saison_div#id#').attr('title', "");
+          cmd.find('#saison_text').html("")
+          cmd.find('#lever#id#').html("");
+          cmd.find('#zenith#id#').html("");
+          cmd.find('#coucher#id#').html("");
+          //cmd.find('#soleil_actuel#id#').attr('title', "");
+          //cmd.find('#zenith#id#').attr('title', "");
+          cmd.find('#dateToday#id#').html('');
+          //cmd.find('#dateToday#id#').attr('title', '');
+          cmd.find('#mode').html('');
+          //cmd.find('#mode').attr('title', '');
+          cmd.find('#weekend#id#').html('');
+          cmd.find('#ferie#id#').html('');
+          //cmd.find('#ferie#id#').attr('title', "");
+          cmd.find('#vacanceCours#id#').html('');
+          //cmd.find('#vacanceCours#id#').attr('title', "");
+          cmd.find('#saintToday#id#').html('');
+          //cmd.find('#saintToday#id#').attr('title', '');	  	  
+        }
+      }
+      jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});  
+      
+    });
+    function deleteAll(){
+      var cmd = $('.cmd[data-cmd_id=#id#]');
+      cmd.find('#saison_div#id#').html("");
+      cmd.find('#saison_div#id#').attr('title', "");
+      cmd.find('#saison_text').html("")
+      cmd.find('#lever#id#').html("");
+      cmd.find('#zenith#id#').html("");
+      cmd.find('#coucher#id#').html("");
+      cmd.find('#soleil_actuel#id#').attr('title', "");
+      //cmd.find('#zenith#id#').attr('title', "");
+      cmd.find('#dateToday#id#').html('');
+      cmd.find('#dateToday#id#').attr('title', '');
+      cmd.find('#mode').html('');
+      cmd.find('#mode').attr('title', '');
+      cmd.find('#weekend#id#').html('');
+      cmd.find('#ferie#id#').html('');
+      cmd.find('#ferie#id#').attr('title', "");
+      cmd.find('#vacanceCours#id#').html('');
+      cmd.find('#vacanceCours#id#').attr('title', "");
+      cmd.find('#saintToday#id#').html('');
+      cmd.find('#saintToday#id#').attr('title', '');	  	  
+    }
+  </script>
+  <style>
+    :root {
+      --couleurText#id#: #c3c3c3;
+      --background#id#: #7c4848;
+      --couleurSoleilLeve#id#: #9d9d9d;
+      --borderRadius#id#: 30px;
+      --couleurLogo#id#: #c3c3c3;
+      --opacityLogo#id#: 50%
+    }
+    #widget#id# {
+      /* transition: background 1000ms ease-in-out 0s; */
+      /* width: 100%; */
+      /* border-radius: var(--borderRadius#id#); */
+      /* background-color: transparent; */
+      /* text-align: left; */
+      /* padding-top: 10px; */
+      /* /* padding-bottom: 10px; */
+      /* color: var(--couleurText#id#); */
+    }
+    .leverCoucher#id# {
+      transform: scale(0.8);
+      width: 265px;
+      height: 90px;
+      position: relative;
+      top: -10px;
+      right: 30px;
+      /* text-align: center; */
+      /*font-size: 18px;*/
+    }
+    .lever#id# {
+      /* width: 43px;*/
+      position: absolute;
+      top: 72px;
+      /*padding: 2px 2px 2px 2px;*/
+    }
+    .zenith#id# {
+      width: 43px;
+      position: absolute;
+      top: 35px;
+      left: 110px;
+      padding: 2px 2px 2px 2px;
+    }
+    .dureeJour#id# {
+      /*width: 90px;*/
+      position: absolute;
+      top: 72px;
+      left: 90px;
+      /*padding: 2px 2px 2px 2px;*/
+    }
+    .coucher#id# {
+      /*width: 43px;*/
+      position: absolute;
+      top: 72px;
+      right: 0px;
+      /*padding: 2px 2px 2px 2px;*/
+    }
+    .titre#id# {
+      /*height: 30px;*/
+      /*display: table;*/
+      /*font-size: 22px;*/
+      /*width: 100%;*/
+      /*text-align: center;*/
+      }
+    .titre#id# span {
+      /*vertical-align: middle;*/
+      /*display: table-cell;*/
+      /*line-height: 18px;*/
+    }
+    .detail#id# {
+      /*margin-left: 15px;*/
+      /*padding-bottom: 5px;*/
+      /*display: table;*/
+      /*font-size: 15px;*/
+      /*height: 21px;*/
+      text-align: left;
+    }
+    .detail#id# span div {
+      display: inline;
+      vertical-align: middle;
+    }
+    .detail#id# i {
+      vertical-align: middle;
+    }
+    .soleil_leve#id# {
+      height: 15px;
+      font-size: 30px;
+      position: absolute;
+      color: var(--couleurSoleilLeve#id#);
+      top: 55px;
+      left: 5px;
+      overflow: hidden;
+    }
+    .soleil_couche#id# {  
+      height: 15px;
+      font-size: 30px;
+      position: absolute;
+      color: var(--couleurSoleilLeve#id#);
+      top: 55px;
+      right: 5px;
+      overflow: hidden;
+    }
+    .soleil_zenith#id# {
+      height: 30px;
+      font-size: 30px;
+      position: absolute;
+      color: var(--couleurSoleilLeve#id#);
+      left: 117.5px;   
+    }
+    .soleil_actuel#id# {
+      height: 30px;
+      font-size: 30px;
+      position: absolute;
+      left: 117.5px;  
+    }
+    .leverCoucher#id# svg {
+      width: 225px;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      stroke: #9f9f9f;
+      
+    }
+    .automne#id# {
+      width: 70px;
+      height: 90px;
+    }
+    .hiver#id# {
+      width: 80px;
+      height: 80px;
+    }
+    .printemps#id# {
+      width: 80px;
+      height: 80px;
+    }
+    .ete#id# {
+      width: 57px;
+      height: 80px;
+   }
+    .saison_div#id# {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      overflow: hidden;
+    }
+    .saison_div#id# svg {
+      fill: var(--couleurLogo#id#);
+      opacity: var(--opacityLogo#id#);
+    }
+    .soleil_actuel_div#id# {
+      width: 100%;
+      height: 70px;
+      position: absolute;
+      text-align: center;
+      font-size: 12px;
+      overflow: hidden;
+    }
+    .alert#id# {
+      text-align: center;
+    }
+  </style>
+</div>
