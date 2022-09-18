@@ -265,28 +265,6 @@
       jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});  
       
     });
-    function deleteAll(){
-      var cmd = $('.cmd[data-cmd_id=#id#]');
-      cmd.find('#saison_div#id#').html("");
-      cmd.find('#saison_div#id#').attr('title', "");
-      cmd.find('#saison_text').html("")
-      cmd.find('#lever#id#').html("");
-      cmd.find('#zenith#id#').html("");
-      cmd.find('#coucher#id#').html("");
-      cmd.find('#soleil_actuel#id#').attr('title', "");
-      cmd.find('#zenith#id#').attr('title', "");
-      cmd.find('#dateToday#id#').html('');
-      cmd.find('#dateToday#id#').attr('title', '');
-      cmd.find('#mode').html('');
-      cmd.find('#mode').attr('title', '');
-      cmd.find('#weekend#id#').html('');
-      cmd.find('#ferie#id#').html('');
-      cmd.find('#ferie#id#').attr('title', "");
-      cmd.find('#vacanceCours#id#').html('');
-      cmd.find('#vacanceCours#id#').attr('title', "");
-      cmd.find('#saintToday#id#').html('');
-      cmd.find('#saintToday#id#').attr('title', '');	  	  
-    }
   </script>
   <style>
     :root {
