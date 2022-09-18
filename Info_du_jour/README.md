@@ -1,6 +1,6 @@
 # Widget Info du jour
 
-![](doc/images/capture3.png)
+![](doc/images/capture4.png)
 
 - Informations disponibles sur le widget :
   - Date du jour.
@@ -43,6 +43,7 @@
 	 displaySaisonText :    Affiche/cache le texte saison - 1=Afficher, 0=cacher [défaut : 0]
 	 displaySaisonLogo :    Affiche/cache le logo saison - 1=Afficher, 0=cacher [défaut : 1]
 	 displayLeverCoucher :  Affiche/cache le div Lever/Coucher du soleil - 1=Afficher, 0=cacher [défaut : 1]
+	 displayDureeJour :     Affiche/cache la durée du jour dans le widget - 1=Afficher, 0=cacher [défaut : 1]
 	 themeJeedom :          Le widget se base sur le thème Jeedom pour basculer en mode Day/Night - 1=Jeedom, 0=scénario(widget) [défaut : 0]
 
 ## 3) Création du scénario
@@ -73,7 +74,7 @@ Le scénario a un CRON de cinq minutes par défaut.
 ## 4) Configuration
 Une fois toutes ces étapes accomplies, ouvrez le scénario et modifiez la zone vous concernant pour les vacances scolaires.
 
-![](doc/images/config1.png)
+![](doc/images/config1_2.png)
 
 Ensuite configurez la zone géographique dans la configuration Jeedom :
 - Rendez-vous dans Réglages/Sytème/Configuration.
@@ -85,21 +86,46 @@ Ensuite configurez la zone géographique dans la configuration Jeedom :
 
 Il est possible d'extraire plus d'informations du scénario, il faudra créer de nouvelles actions (event) dans celui-ci et ajouter des infos dans votre virtuel :
 
+### VACANCES SCOLAIRE
 |Tag scénario|Type Info virtuel|Détail|
 |---|---|---|
+|tag(vacancesEnCours)|Binaire| 1=Vacances|
+|tag(vacancesEnCoursLibelle)|Autre| Ex : Vacances de la Toussaint|
+|tag(debutVacancesEnCours)|Autre| Ex : 2022-10-22|
+|tag(finVacancesEnCours)|Autre| Ex : 2022-11-07|
+|tag(vacancesPochainesLibelle)|Autre| Ex : Vacances de la Toussaint|
+|tag(debutVacancesProchaines)|Autre| Ex : 2022-10-22|
+|tag(finVacancesProchaines)|Autre| Ex : 2022-11-07|
+|tag(nbProchainesVacances)|Numérique| Ex : 34 (34 jours)|
+
+### SAINT DU JOUR
+|Tag scénario|Type Info virtuel|Détail|
+|---|---|---|
+|tag(saintJour)|Autre| Saint du jour|
+|tag(saintDemain)|Autre| Saint du lendemain|
+
+### SOLEIL / JOUR
+|Tag scénario|Type Info virtuel|Détail|
+|---|---|---|
+|tag(dateDuJour)|Autre| Ex : 2022-09-18 |
+|tag(daynumber)|Numérique| |
 |tag(leverSoleilScenario)|Numérique|Exemple : 831 (8h31)
 |tag(zenithSoleilScenario)|Numérique|Exemple : 1249 (12h49) |
 |tag(coucherSoleilScenario)|Numérique|Exemple : 1707 (17h07) |
-|tag(saintJour)|Autre| Saint du jour|
-|tag(saintDemain)|Autre| Saint du lendemain|
-|tag(daynumber)|Numérique| |
+|tag(elevation)|Numérique| |
+|tag(elevationZenith)|Numérique| |
+|tag(dureeJour)|Autre|Exemple : 15:10:51 (hh:mm:ss) |
+|tag(dureeJourEcart)|Autre|Exemple : -207 (-207 secondes) |
 |tag(modeJourBinaire)|Binaire|1=Jour|
-|tag(ferie)|Binaire| 1=Férié|
 |tag(weekend)|Binaire| 1=WE|
+|tag(ferie)|Binaire| 1=Férié|
+|tag(libelleFerie)|Autre| Ex : Toussaint|
+|tag(dateProchainFerie)|Autre| Ex : 2022-11-01|
+|tag(libelleProchainFerie)|Autre| Ex : Toussaint|
+|tag(nbProchainFerie)|Numérique| Ex : 44 (44jours restant avant prochain jour férié|
 |tag(saison)|Autre| Printemps/Eté...|
-|tag(vacancesEnCours)|Binaire| 1=Vacances|
 
 
-![](doc/images/scenario5.png)
+![](doc/images/scenario5_1.png)
 
 

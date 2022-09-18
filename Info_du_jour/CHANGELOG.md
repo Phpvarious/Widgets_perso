@@ -16,3 +16,12 @@ Rajout des dates de vacances jusqu'au 2023/09/01
   - Bugfix lorsque l'option "Centrage vertical des tuiles" est cochées dans l'interface Jeedom. (Merci @jpty)
 - 21/06/2022 : [widget]
   - Ajouts / Modification des paramètres optionnels.
+- 18/09/2022 : 
+[scénario]
+ - Ajout des dates de vacances jusqu'au 2023/09/01.
+ - Modification de l'affichage : St -> Saint et Ste -> Sainte.
+ - Affichage de tous les tag disponibles, dans le log.
+ - mise a dispo du tag « dureeJourEcart » en secondes.
+ - Restructuration du code, il est possible de désactiver chaque catégorie (vacances, saint, soleil, widget ...) individuellement.
+
+[widget]
