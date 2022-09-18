@@ -119,7 +119,7 @@
                                         "type": "code",
                                         "subtype": "action",
                                         "options": {
-                                            "collapse": "0",
+                                            "collapse": "1",
                                             "enable": "1"
                                         },
                                         "order": "0",
