@@ -10,6 +10,8 @@
   - /html/data/customTemplates/dashboard/
  
  ![](doc/images/capture3.png)
+ 
+ ![](doc/images/capture4.png)
 
 ## 2) Création d'un virtuel
 - Ajoutez une commande Info/Autre, puis sauvegarder (1).
