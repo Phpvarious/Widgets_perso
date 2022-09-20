@@ -14,8 +14,8 @@ Pour résumé, voici les étapes que nous allons aborder :
 
 - Jeedom source :
   - le plugin jMQTT.
-  - Un scénario qui se chargera de rassembler les infos (messages, deamon ...) et ainsi les envoyer sur une commande Info du plugin jMQTT qui se chargera de publier sur un broker.
-  - Un scénario qui se chargera de lancer les actions (suppression message, redemarrer deamon...).
+  - Un scénario (JeeHealtToJmqttSource_publish) qui rassemblera les infos (messages, deamon ...) pour les envoyer sur une commande Info du plugin jMQTT qui se chargera de publier sur un broker.
+  - Un scénario (JeeHealtToJmqttSource_action)qui se chargera de lancer les actions (suppression message, redemarrer deamon...).
 - Jeedom cible :
   - Le plugin jMQTT.
   - Le widget.
@@ -54,37 +54,37 @@ Pour résumé, voici les étapes que nous allons aborder :
 
 1) Scénario qui permet de publier l'état de jeedom.
 
-     * Telecharger le template scenario "[JeeToJmqttSource_publish](JeeToJmqttSource_publish.json)".
+     * Telecharger le template scenario "[JeeHealtToJmqttSource_publish](JeeHealtToJmqttSource_publish.json)".
      * Creer un nouveau scénario (JeeToJmqttSource_publish).
 	 * Dans celui-ci, importer le template.
 	 
-	 ![](doc/images/JeeToJmqttSource_publish_1.png)
+	 ![](doc/images/JeeHealtToJmqttSource_publish_1.png)
 	 
-	 ![](doc/images/JeeToJmqttSource_publish_2.png)
+	 ![](doc/images/JeeHealtToJmqttSource_publish_2.png)
 	 
 	 * Une fois importer ,il devrait apparaitre dans la fenêtre de gauche. cliquer dessus, "Appliquer" puis confirmer sur la fenêtre suivante.
 	 
-	 ![](doc/images/JeeToJmqttSource_publish_3.png)
+	 ![](doc/images/JeeHealtToJmqttSource_publish_3.png)
 	 
 	 * Ouvrez le scénario (1) et modifiez la variable $id_Source(2) en remplacant par l'id notée dans l'étape precedente.
 	 
-	 ![](doc/images/JeeToJmqttSource_publish_4.png)
+	 ![](doc/images/JeeHealtToJmqttSource_publish_4.png)
 	 
      > Voila pour ce scénario, vous constaterez que le scénario a un CRON 5 donc le payload sera mis à jour toute les 5 minutes, vous pouvez dès a présent faire un test de celui-ci en cliquant sur "Exécuter".
 et verifier que tout se passe correctement dans les log de celui-ci.
 
-     ![](doc/images/JeeToJmqttSource_publish_5.png)
+     ![](doc/images/JeeHealtJmqttSource_publish_5.png)
 
 2) Scénario qui permet d'exécuter des actions sur Jeedom.
 
-     * Telecharger le template scenario "[JeeToJmqttSource_action](JeeToJmqttSource_action.json)".
-     * Creer un nouveau scénario (JeeToJmqttSource_action).
+     * Telecharger le template scenario "[JeeHealtToJmqttSource_action](JeeHealtToJmqttSource_action.json)".
+     * Creer un nouveau scénario (JeeHealtToJmqttSource_action).
 	 * Dans celui-ci, importer le template.
 	 > Je ne re-détail pas les manipulations, car c'est les mêmes que le scénario précèdent.
 	 
 	 Dans les paramètres de l'import selectionner la commande info créé dans l'étape 1 (jMQTT)
 	 
-	 ![](doc/images/JeeToJmqttSource_action_1.png)
+	 ![](doc/images/JeeHealtToJmqttSource_action_1.png)
 	 
 	 > Voila on en a terminé pour ce qui est du Jeedom Source, passons maintenant au la partie "Cible" (widget).
 
