@@ -5,10 +5,9 @@
 ## 1) Téléchargement du Widget
 - Fichier source à récupérer sous :
   - /widgets_perso/Battery_jeedom/cmd.info.string.battery_jeedom.html
+(Si vous ne savez pas comment télécharger un fichier sur Github, lisez cette [section](https://github.com/Phpvarious/Widgets_perso/blob/B%C3%AAta/HowToDownload.md))
 - Puis déposer ce fichier dans le dossier :
   - /html/data/customTemplates/dashboard/
-  
-Si vous ne savez pas comment télécharger un fichier sur Github, lisez cette [section](https://github.com/Phpvarious/Widgets_perso/blob/B%C3%AAta/HowToDownload.md).
 
  ![](doc/images/capture2.png)
 
