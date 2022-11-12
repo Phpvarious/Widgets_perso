@@ -7,7 +7,7 @@
   - /widgets_perso/Battery_jeedom/cmd.info.string.battery_jeedom.html
 - Puis déposer ce fichier dans le dossier :
   - /html/data/customTemplates/dashboard/
- 
+ [-> Comment télécharger un fichier](https://github.com/Phpvarious/Widgets_perso/blob/B%C3%AAta/HowToDownload.md){.btn .btn-info}
  ![](doc/images/capture2.png)
 
 ## 2) Création d'un virtuel
