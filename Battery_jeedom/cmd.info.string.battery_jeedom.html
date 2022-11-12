@@ -1,0 +1,197 @@
+<div class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="string" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#" style="width: 100%;">
+  <!-- ################ Widget Batterie ################ 
+  Widget name : cmd.info.string.battery_jeedom
+  Author : Phpvarious
+    Création : 12/11/2022
+  Last Uptade :
+-->
+  <template>
+    <div>------------------- WIDGET ----------------------------</div>
+    <div>eqId : Id de l'équipement a afficher</div>
+    <div>versionWidget : version a afficher [mobile, dashboard] défaut : mobile</div>
+    <div>widthWidget : Largueur de la tuile [défaut : 210px] mettre 100% si vous voulez qu'il s'adapte a la tuile. </div>
+    
+    <div>------------------- CSS ----------------------------</div>
+  </template>
+  <style>
+    :root {
+      --border-radius#id# : 1rem;
+      --background-tuile#id# : 49,49,49;
+      --background-tuileLight#id# :  240, 240, 240;
+      --width#id# : 210px;
+      --height#id# : 130px;
+    }
+    
+    #battery#id# .eqLogic-widget#id# {
+      position: relative;
+      font-family: "Roboto";
+      color: var(--txt-color) !important;
+      width: var(--width#id#);
+      height: var(--height#id#);
+      font-size: 14px;
+      line-height: 1.42;
+      border-radius: var(--border-radius#id#) !important;
+      min-width : 180px;
+    }
+    
+    /* Thème Dark */
+    [data-theme="core2019_Dark"] #battery#id# .eqLogic-widget#id# {
+      background-color: rgba(var(--background-tuile#id#), var(--opacity)) !important;
+    }
+    
+    /* Thème Light */
+    [data-theme="core2019_Light"] #battery#id# .eqLogic-widget#id# {
+      background-color: rgba(var(--background-tuileLight#id#), var(--opacity)) !important;
+    }
+    
+    /* Thème Legacy */
+    [data-theme="core2019_Legacy"] #battery#id# .eqLogic-widget#id#.critical {
+      background-color: var(--al-danger-color) !important;
+    }
+    [data-theme="core2019_Legacy"] #battery#id# .eqLogic-widget#id#.good {
+      background-color: var(--al-success-color) !important;
+    }
+    [data-theme="core2019_Legacy"] #battery#id# .eqLogic-widget#id#.warning {
+      background-color: var(--al-warning-color) !important;
+    }
+    
+    [data-theme="core2019_Legacy"] #battery#id# .eqLogic-widget#id# {
+      color: var(--linkHoverLight-color) !important;
+    }
+    
+    [data-theme="core2019_Legacy"] #battery#id# .eqLogic-widget#id# i {
+      color: var(--linkHoverLight-color) !important;
+    }
+    
+    [data-theme="core2019_Legacy"] #battery#id# .eqLogic-widget#id# i:hover {
+      opacity: 1 !important;
+      color: var(--linkHoverLight-color) !important;
+    }
+    
+    [data-theme="core2019_Legacy"] #battery#id# .eqLogic-widget#id# .jeedom-batterie span {
+    color: var(--linkHoverLight-color) !important;
+    }
+    
+    /* Global */
+    #battery#id# .eqLogic-widget#id# .widget-name {
+    color: var(--title-color);
+    line-height: 1.42;
+    }
+    #battery#id# .eqLogic-widget#id#.critical .widget-name {
+      background-color: var(--al-danger-color) !important;
+    }
+    #battery#id# .eqLogic-widget#id#.good .widget-name {
+      background-color: var(--al-success-color) !important; 
+    }
+    #battery#id# .eqLogic-widget#id#.warning .widget-name {
+      background-color: var(--al-warning-color) !important; 
+    }
+    #battery#id# .eqLogic-widget#id# .widget-name > a,
+    #battery#id# .eqLogic-widget#id# .widget-name .name{
+      color: var(--eqTitle-color) !important;
+      font-size: 16px !important;
+      display: block;
+      max-height: 24px !important;
+      overflow: hidden !important;
+    }
+    #battery#id# .eqLogic-widget#id# .widget-name span {
+      border-radius: var(--border-radius#id#) !important;
+    }
+    #battery#id# .eqLogic-widget#id# .widget-name span:not(.name) {
+      color: var(--txt-color);
+      background-color: rgb(var(--bg-color)) !important;
+      position: relative;
+      opacity: .8;
+      padding: 0 4px;
+      top: -2px !important;
+      display: none;
+    }
+    #battery#id# .eqLogic-widget#id# .widget-name .object {
+      opacity: .5;
+      font-size: 14px;
+    }
+    #battery#id# .eqLogic-widget#id#.critical .jeedom-batterie i {
+      color: var(--al-danger-color);
+    }
+    #battery#id# .eqLogic-widget#id#.good .jeedom-batterie i {
+      color: var(--al-success-color);
+    }
+    #battery#id# .eqLogic-widget#id# .jeedom-batterie i {
+      vertical-align: middle;
+      font-size: 75px !important;
+    }
+    #battery#id# .eqLogic-widget#id# .jeedom-batterie {
+      color: var(--link-color);
+      margin-top: -12px;
+      margin-bottom: -20px;
+    }
+    #battery#id# .eqLogic-widget#id# .jeedom-batterie span {
+      position: relative;
+      display: inline-block;
+      font-family: "Roboto";
+      color: var(--link-color);
+      font-size: 18px;
+      font-weight: bold;
+      top: 3px;
+    }
+    #battery#id# .eqLogic-widget#id# .pluginName {
+      padding-left: 5px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    #battery#id# .eqLogic-widget#id# .batteryTime {
+      clear: left;
+      padding-left: 5px;
+      font-size: 12px;
+    }
+    #battery#id# .eqLogic-widget#id# .batteryTime i {
+      font-size: 16px !important;
+    }
+    #battery#id# .mobile.eqLogic-widget#id# .widget-name > .name {
+      display: block;
+      max-height: 21px;
+      overflow: hidden;
+    }
+  </style>
+  <div style="width: 100%;border-radius: 5px !important;display: none;" id="div_alert#id#" class="jqAlert alert-danger">
+    <span href="#" class="btn_closeAlert pull-right cursor" style="position : relative; left : 30px;color : grey">×</span>
+    <span class="displayError#id#">Veuillez sélectionner un équipement !</span>
+  </div>
+  <div class="battery#id#" id="battery#id#"></div>
+  <script>
+    var eqId#id# = 0
+    var version#id# = 'mobile'
+    if ('#eqId#' != '#'+'eqId#') eqId#id# = '#eqId#'
+    if ('#versionWidget#' != '#'+'versionWidget#') version#id# = '#versionWidget#'
+    if ('#widthWidget#' != '#'+'widthWidget#') document.documentElement.style.setProperty('--width#id#', '#widthWidget#');
+    jeedom.cmd.update['#id#'] = function(_options){
+      if ('#backgroundTitle#' != '#'+'backgroundTitle#') {
+        document.documentElement.style.setProperty('--backgroundtitle#id#', '#backgroundTitle#')
+      }
+      jeedom.eqLogic.htmlBattery({
+        version : version#id#,
+        async: false,
+        noCache: true,
+        error: function(error) {
+          if (debug == 1) console.log('|| ERREUR !!!')
+        },
+        success: function (htmlBattery) {
+          for (j in htmlBattery) {
+            if (htmlBattery[j].id == eqId#id#) {
+              $(".battery#id#").append(htmlBattery[j].html.replace('eqLogic eqLogic-widget', version#id#+' eqLogic-widget#id#'))
+            }
+          }
+        }
+      })
+      
+      if (version#id# != 'mobile') {
+        $('.cmd[data-cmd_id=#id#] .batteryTime').off('click').on('click', function() {
+          $('#md_modal').dialog({
+            title: "{{Configuration de l'équipement}}"
+          }).load('index.php?v=d&modal=eqLogic.configure&eqLogic_id=' + $(this).closest('.eqLogic').attr('data-eqlogic_id')).dialog('open')
+        })
+      }
+    }
+    jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
+  </script>
+</div>
