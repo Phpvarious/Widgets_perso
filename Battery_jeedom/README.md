@@ -8,7 +8,8 @@
 - Puis déposer ce fichier dans le dossier :
   - /html/data/customTemplates/dashboard/
   
-[-> Comment télécharger un fichier sur github ?](https://github.com/Phpvarious/Widgets_perso/blob/B%C3%AAta/HowToDownload.md)
+Si vous ne savez pas comment télécharger un fichier sur Github, lisez cette [section](https://github.com/Phpvarious/Widgets_perso/blob/B%C3%AAta/HowToDownload.md).
+
  ![](doc/images/capture2.png)
 
 ## 2) Création d'un virtuel
