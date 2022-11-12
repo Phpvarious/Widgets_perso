@@ -1,4 +1,4 @@
-# Widget swiper Battery Jeedom
+# Widget Battery Jeedom
 
 ![](doc/images/capture1.png)
 
@@ -21,7 +21,7 @@
 ## 3) Paramètres.
 
      eqId : [Numérique] - 	OBLIGATOIRE : Id de l'équipement à afficher, attention celui-ci doit être disponible dans Analyse/Equipements.
-	 versionWidget [mobile ou dashboard] - 	version a afficher. [Défaut : mobile]
+	 versionWidget : [mobile ou dashboard] - 	version à afficher. [Défaut : mobile]
      widthWidget : [Autre] - Largueur de la tuile, mettre 100% si vous voulez qu'il s'adapte a la tuile.. [Défaut : 210px]
 	  
 - Exemple de paramètres optionnels :
