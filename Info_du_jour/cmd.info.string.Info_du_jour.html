@@ -7,12 +7,12 @@
       <div>colorTextDay : Couleur du texte lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
       <div>colorLogoNight : Couleur du logo saison lorsque le widget est en Mode nuit - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
       <div>colorLogoDay : Couleur du logo saison lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]</div>
-      <div>opacityLogo : opacité du logo saison - Exemple : 10, 20 ... [Défaut : 50 (50%)]</div> 
+      <div>opacityLogo : Opacité du logo saison - Exemple : 10, 20 ... [Défaut : 50 (50%)]</div> 
       <div>borderRadius : Taille arrondi du widget - Exemple : 10, 20 ... [Défaut : 30]</div>
       <div>displaySaisonText : Affiche/cache le texte saison - 1=Afficher, 0=cacher [défaut : 0]</div>
       <div>displaySaisonLogo : Affiche/cache le logo saison - 1=Afficher, 0=cacher [défaut : 1]</div>
       <div>displayLeverCoucher : Affiche/cache le div Lever/Coucher du soleil - 1=Afficher, 0=cacher [défaut : 1]</div>
-      <div>themeJeedom : Le widget se base sur le theme Jeedom pour basculer en mode Day/Night - 1=Jeedom, 0=scénario(widget) [défaut : 0]</div>
+      <div>themeJeedom : Le widget se base sur le thème Jeedom pour basculer en mode Day/Night - 1=Jeedom, 0=scénario(widget) [défaut : 0]</div>
     </template>
     <div class="alert#id#" id="alert#id#" style="display:none;"><h1>Données inexistantes !!</h1></div>
     <div class="saison_div#id#" id="saison_div#id#"></div>
@@ -205,7 +205,7 @@
             else cmd.find('#weekend').html('Week-end : <i class="icon_red fas fa-times"></i>');
             
             if (ferie == 1) cmd.find('#ferie').html('Férié : <i class="icon_green fas fa-check"></i>').attr('title', "Aujourd'hui : "+ferieLibelle+"<br>Pochain : "+ferieLibelleProchain+" le "+ferieDateProchain+" ("+nbProchainFerie+" Jours)");
-            else cmd.find('#ferie').html('Férié : <i class="icon_red fas fa-times"></i>').attr('title', "Pochain : "+ferieLibelleProchain+" le "+ferieDateProchain+" ("+nbProchainFerie+" Jours)");
+            else cmd.find('#ferie').html('Férié : <i class="icon_red fas fa-times"></i>').attr('title', "Prochain : "+ferieLibelleProchain+" le "+ferieDateProchain+" ("+nbProchainFerie+" Jours)");
             
             ///////// VACANCES
             if (vacancesEnCours == 1) cmd.find('#vacanceCours').html('Vacances : <i class="icon_green fas fa-check"></i>').attr('title', vacancesEnCoursLibelle+" jusqu'au "+finVacancesEnCours+"<br>Prochaine : "+vacancesPochainesLibelle+" du "+debutVacancesProchaines+" au "+finVacancesProchaines+" (+"+nbProchainesVacances+" J)");
