@@ -38,19 +38,19 @@
 ## Paramètres Optionnels :
 
 
-     colorBackgroundNight : Couleur du fond lorsque le widget est en Mode nuit - Exemple : #fffff, white ... (accepte linear-gradient...)
-	 colorBackgroundDay :   Couleur du fond lorsque le widget est en Mode jour - Exemple : #fffff, white ... (accepte linear-gradient...)
-	 colorTextNight :       Couleur du texte lorsque le widget est en Mode nuit - Exemple : #fffff, white ... [Défaut : #c3c3c3]
-	 colorTextDay :         Couleur du texte lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]
-	 colorLogoNight :       Couleur du logo saison lorsque le widget est en Mode nuit - Exemple : #fffff, white ... [Défaut : #c3c3c3]
-	 colorLogoDay :         Couleur du logo saison lorsque le widget est en Mode jour - Exemple : #fffff, white ... [Défaut : #c3c3c3]
-	 opacityLogo :          Opacité du logo saison - Exemple : 10, 20 ... [Défaut : 50 (50%)]
-	 borderRadius :         Taille arrondi du widget - Exemple : 10, 20 ...  [Défaut : 30]
-	 displaySaisonText :    Affiche/cache le texte saison - 1=Afficher, 0=cacher [défaut : 0]
-	 displaySaisonLogo :    Affiche/cache le logo saison - 1=Afficher, 0=cacher [défaut : 1]
-	 displayLeverCoucher :  Affiche/cache le div Lever/Coucher du soleil - 1=Afficher, 0=cacher [défaut : 1]
-	 displayDureeJour :     Affiche/cache la durée du jour dans le widget - 1=Afficher, 0=cacher [défaut : 1]
-	 themeJeedom :          Le widget se base sur le thème Jeedom pour basculer en mode Day/Night - 1=Jeedom, 0=scénario(widget) [défaut : 0]
+     colorBackgroundNight : Couleur du fond lorsque le widget est en Mode nuit [ Exemple : #fffff, white ... (accepte linear-gradient...) ]
+     colorBackgroundDay : Couleur du fond lorsque le widget est en Mode jour [ Exemple : #fffff, white ... (accepte linear-gradient...) ]
+     colorTextNight : Couleur du texte lorsque le widget est en Mode nuit [ Exemple : #fffff, white ... (Défaut : couleur du core) ]
+     colorTextDay : Couleur du texte lorsque le widget est en Mode jour [ Exemple : #fffff, white ... (Défaut : couleur du core) ]
+     colorLogoNight : Couleur du logo saison lorsque le widget est en Mode nuit [ Exemple : #fffff, white ... (Défaut : couleur du core) ]
+     colorLogoDay : Couleur du logo saison lorsque le widget est en Mode jour [ Exemple : #fffff, white ... (Défaut : couleur du core) ]
+     opacityLogo : opacité du logo saison [ Exemple : 10, 20 ... (Défaut : 50) ]
+     borderRadius : Taille arrondi du widget [ Exemple : 10, 20 ... (Défaut : 30) ]
+     displaySaisonText : Affiche/cache le texte saison [ 1=Afficher, 0=cacher (défaut : 1) ]
+     displaySaisonLogo : Affiche/cache le logo saison [ 1=Afficher, 0=cacher (défaut : 1) ]
+     displayLeverCoucher : Affiche/cache le div Lever/Coucher du soleil [ 1=Afficher, 0=cacher (défaut : 1) ]
+     displayDureeJour : Affiche/cache la durée du jour dans le widget [ 1=Afficher, 0=cacher (défaut : 1) ]
+     themeJeedom : Le widget se base sur le theme Jeedom pour basculer en mode Day/Night [ 1=Jeedom, 0=scénario(widget) (défaut : 0) ]
 
 ## 3) Création du scénario
 
@@ -115,9 +115,15 @@ Il est possible d'extraire plus d'informations du scénario, il faudra créer de
 |---|---|---|
 |tag(dateDuJour)|Autre| Ex : 2022-09-18 |
 |tag(daynumber)|Numérique| |
-|tag(leverSoleilScenario)|Numérique|Exemple : 831 (8h31)
+|tag(leverSoleilScenario)|Numérique|Exemple : 831 (8h31) |
 |tag(zenithSoleilScenario)|Numérique|Exemple : 1249 (12h49) |
 |tag(coucherSoleilScenario)|Numérique|Exemple : 1707 (17h07) |
+|tag(aubeCivil)|Numérique|Exemple : 831 (8h31)|
+|tag(crepusculeCivil)|Numérique|Exemple : 1707 (17h07)|
+|tag(aubeNautique)|Numérique|Exemple : 831 (8h31)|
+|tag(crepusculeNautique)|Numérique|Exemple : 1707 (17h07) |
+|tag(aubeAstronomique)|Numérique|Exemple : 831 (8h31)|
+|tag(crepusculeAstronomique)|Numérique|Exemple : 1707 (17h07) |
 |tag(elevation)|Numérique| |
 |tag(elevationZenith)|Numérique| |
 |tag(dureeJour)|Autre|Exemple : 15:10:51 (hh:mm:ss) |
@@ -131,6 +137,7 @@ Il est possible d'extraire plus d'informations du scénario, il faudra créer de
 |tag(nbProchainFerie)|Numérique| Ex : 44 (44jours restant avant prochain jour férié|
 |tag(saison)|Autre| Printemps/Eté...|
 
+### Exemple dans le Scénario
 
 ![](doc/images/scenario5_1.png)
 
