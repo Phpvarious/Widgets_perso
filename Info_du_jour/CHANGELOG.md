@@ -23,3 +23,9 @@ Rajout des dates de vacances jusqu'au 2023/09/01
   - mise a dispo du tag « dureeJourEcart » en secondes. [scénario]
   - Restructuration du code, il est possible de désactiver chaque catégorie (vacances, saint, soleil, widget ...) individuellement. [scénario]
   - Affichage de la durée du jour (par paramètre optionnel) entre lever et coucher du soleil. [widget]
+ - 09/03/2023 :
+  - Restructuration du code, compatibité Core V4.2 V4.3 V4.4
+  - Ajout des dates de vacances jusqu'au 2026/09/01. [scénario]
+  - Ajout de l'écart de durée du jour avec la veille. [widget]
+  - Ajout de tag (aubeCivil, crepusculeCivil, aubeNautique, crepusculeNautique, aubeAstronomique, crepusculeAstronomique) Thanks @prfalken.  [scénario]
+  - En mode themeJeedom, le widget change de thème lors de l'évènement du core, plus besoin d'attendre le lancement du scénario. [widget]
