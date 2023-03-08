@@ -1,6 +1,6 @@
 # Widget Info du jour
 
-![](doc/images/capture4.png)
+![](doc/images/capture1_2.png)
 
 - Informations disponibles sur le widget :
   - Date du jour.
