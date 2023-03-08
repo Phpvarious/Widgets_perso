@@ -17,7 +17,7 @@
         "height": "92px"
     },
     "order": "9999",
-    "description": "Auteur : @Phpvarious\nGithub --> https:\/\/phpvarious.github.io\/documentation\/widget\/fr_FR\/action\/slider\/WIDGET_cmd.info.sting.Info_du_jour\nInfos vacances Max --> 2026\/09\/01, après faudra mettre à jour le scenario.",
+    "description": "Auteur : @Phpvarious\nGithub --> https:\/\/phpvarious.github.io\/documentation\/widget\/fr_FR\/widget_scenario\/info_du_jour\/\nInfos vacances Max --> 2026\/09\/01, après faudra mettre à jour le scenario.",
     "configuration": {
         "timeDependency": 0,
         "has_return": 0,
