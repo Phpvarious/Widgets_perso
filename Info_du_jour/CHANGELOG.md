@@ -24,7 +24,7 @@
   - mise a dispo du tag « dureeJourEcart » en secondes. [scénario]
   - Restructuration du code, il est possible de désactiver chaque catégorie (vacances, saint, soleil, widget ...) individuellement. [scénario]
   - Affichage de la durée du jour (par paramètre optionnel) entre lever et coucher du soleil. [widget]
-## 09/03/2023
+## 08/03/2023
   - Restructuration du code, compatibité Core V4.2 V4.3 V4.4
   - Ajout des dates de vacances jusqu'au 2026/09/01. [scénario]
   - Ajout de l'écart de durée du jour avec la veille. [widget]
