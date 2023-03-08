@@ -127,6 +127,7 @@ Il est possible d'extraire plus d'informations du scénario, il faudra créer de
 |tag(elevation)|Numérique| |
 |tag(elevationZenith)|Numérique| |
 |tag(dureeJour)|Autre|Exemple : 15:10:51 (hh:mm:ss) |
+|tag(dureeJourSeconde)|Numérique|Exemple : 41203 |
 |tag(dureeJourEcart)|Autre|Exemple : -207 (-207 secondes) |
 |tag(modeJourBinaire)|Binaire|1=Jour|
 |tag(weekend)|Binaire| 1=WE|

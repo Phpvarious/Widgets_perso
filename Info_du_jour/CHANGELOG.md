@@ -29,4 +29,5 @@
   - Ajout des dates de vacances jusqu'au 2026/09/01. [scénario]
   - Ajout de l'écart de durée du jour avec la veille. [widget]
   - Ajout de tag (aubeCivil, crepusculeCivil, aubeNautique, crepusculeNautique, aubeAstronomique, crepusculeAstronomique) Thanks @PrFalKeN.  [scénario]
+  - Ajout de tag (dureeJourSeconde) [scénario]
   - En mode themeJeedom, le widget change de thème lors de l'évènement du core, plus besoin d'attendre le lancement du scénario. [widget]
