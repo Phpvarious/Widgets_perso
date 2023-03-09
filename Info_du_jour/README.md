@@ -130,6 +130,7 @@ Il est possible d'extraire plus d'informations du scénario, il faudra créer de
 |tag(dureeJourSeconde)|Numérique|Exemple : 41203 |
 |tag(dureeJourEcart)|Autre|Exemple : -207 (-207 secondes) |
 |tag(modeJourBinaire)|Binaire|1=Jour|
+|tag(modeJour)|Autre|Jour / Nuit|
 |tag(weekend)|Binaire| 1=WE|
 |tag(ferie)|Binaire| 1=Férié|
 |tag(libelleFerie)|Autre| Ex : Toussaint|
