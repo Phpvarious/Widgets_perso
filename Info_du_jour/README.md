@@ -93,51 +93,53 @@ Ensuite configurez la zone géographique dans la configuration Jeedom :
 Il est possible d'extraire plus d'informations du scénario, il faudra créer de nouvelles actions (event) dans celui-ci et ajouter des infos dans votre virtuel :
 
 ### VACANCES SCOLAIRE
-|Tag scénario|Type Info virtuel|Détail|
-|---|---|---|
-|tag(vacancesEnCours)|Binaire| 1=Vacances|
-|tag(vacancesEnCoursLibelle)|Autre| Ex : Vacances de la Toussaint|
-|tag(debutVacancesEnCours)|Autre| Ex : 2022-10-22|
-|tag(finVacancesEnCours)|Autre| Ex : 2022-11-07|
-|tag(vacancesPochainesLibelle)|Autre| Ex : Vacances de la Toussaint|
-|tag(debutVacancesProchaines)|Autre| Ex : 2022-10-22|
-|tag(finVacancesProchaines)|Autre| Ex : 2022-11-07|
-|tag(nbProchainesVacances)|Numérique| Ex : 34 (34 jours)|
+
+| Tag scénario | Type Info virtuel | Détail |
+| ------ | ------ | ------ |
+| tag(vacancesEnCours) | Binaire | 1=Vacances |
+| tag(vacancesEnCoursLibelle) | Autre | Ex : Vacances de la Toussaint |
+| tag(debutVacancesEnCours) |Autre | Ex : 2022-10-22 |
+| tag(finVacancesEnCours) | Autre | Ex : 2022-11-07 |
+| tag(vacancesPochainesLibelle) | Autre | Ex : Vacances de la Toussaint |
+| tag(debutVacancesProchaines) | Autre | Ex : 2022-10-22 |
+| tag(finVacancesProchaines) | Autre | Ex : 2022-11-07 |
+| tag(nbProchainesVacances) | Numérique | Ex : 34 (34 jours) |
 
 ### SAINT DU JOUR
-|Tag scénario|Type Info virtuel|Détail|
-|---|---|---|
-|tag(saintJour)|Autre| Saint du jour|
-|tag(saintDemain)|Autre| Saint du lendemain|
+
+| Tag scénario | Type Info virtuel | Détail |
+| ------ | ------ | ------ |
+| tag(saintJour) | Autre | Saint du jour |
+| tag(saintDemain) | Autre| Saint du lendemain |
 
 ### SOLEIL / JOUR
-|Tag scénario|Type Info virtuel|Détail|
-|---|---|---|
-|tag(dateDuJour)|Autre| Ex : 2022-09-18 |
-|tag(daynumber)|Numérique| |
-|tag(leverSoleilScenario)|Numérique|Exemple : 831 (8h31) |
-|tag(zenithSoleilScenario)|Numérique|Exemple : 1249 (12h49) |
-|tag(coucherSoleilScenario)|Numérique|Exemple : 1707 (17h07) |
-|tag(aubeCivil)|Numérique|Exemple : 831 (8h31)|
-|tag(crepusculeCivil)|Numérique|Exemple : 1707 (17h07)|
-|tag(aubeNautique)|Numérique|Exemple : 831 (8h31)|
-|tag(crepusculeNautique)|Numérique|Exemple : 1707 (17h07) |
-|tag(aubeAstronomique)|Numérique|Exemple : 831 (8h31)|
-|tag(crepusculeAstronomique)|Numérique|Exemple : 1707 (17h07) |
-|tag(elevation)|Numérique| |
-|tag(elevationZenith)|Numérique| |
-|tag(dureeJour)|Autre|Exemple : 15:10:51 (hh:mm:ss) |
-|tag(dureeJourSeconde)|Numérique|Exemple : 41203 |
-|tag(dureeJourEcart)|Autre|Exemple : -207 (-207 secondes) |
-|tag(modeJourBinaire)|Binaire|1=Jour|
-|tag(modeJour)|Autre|Jour / Nuit|
-|tag(weekend)|Binaire| 1=WE|
-|tag(ferie)|Binaire| 1=Férié|
-|tag(libelleFerie)|Autre| Ex : Toussaint|
-|tag(dateProchainFerie)|Autre| Ex : 2022-11-01|
-|tag(libelleProchainFerie)|Autre| Ex : Toussaint|
-|tag(nbProchainFerie)|Numérique| Ex : 44 (44jours restant avant prochain jour férié|
-|tag(saison)|Autre| Printemps/Eté...|
+
+| Tag scénario | Type Info virtuel | Détail |
+| ------ | ------ | ------ |
+| tag(dateDuJour) | Autre | Ex : 2022-09-18 |
+| tag(daynumber) | Numérique | |
+| tag(leverSoleilScenario) | Numérique | Exemple : 831 (8h31) |
+| tag(zenithSoleilScenario) | Numérique | Exemple : 1249 (12h49) |
+| tag(coucherSoleilScenario) | Numérique | Exemple : 1707 (17h07) |
+| tag(aubeCivil)| Numérique | Exemple : 831 (8h31) |
+| tag(crepusculeCivil) | Numérique | Exemple : 1707 (17h07) |
+| tag(aubeNautique) | Numérique | Exemple : 831 (8h31) |
+| tag(crepusculeNautique) | Numérique | Exemple : 1707 (17h07) |
+| tag(aubeAstronomique) | Numérique | Exemple : 831 (8h31) |
+| tag(crepusculeAstronomique) | Numérique | Exemple : 1707 (17h07) |
+| tag(elevation) | Numérique | |
+| tag(elevationZenith) | Numérique | |
+| tag(dureeJour)| Autre | Exemple : 15:10:51 (hh:mm:ss) |
+| tag(dureeJourSeconde) |  Numérique | Exemple : 41203
+| tag(dureeJourEcart) | Autre | Exemple : -207 (-207 secondes) |
+| tag(modeJourBinaire) | Binaire | 1=Jour |
+| tag(weekend) | Binaire | 1=WE |
+| tag(ferie) | Binaire | 1=Férié |
+| tag(libelleFerie) | Autre | Ex : Toussaint |
+| tag(dateProchainFerie) | Autre | Ex : 2022-11-01 |
+| tag(libelleProchainFerie) | Autre| Ex : Toussaint |
+| tag(nbProchainFerie) | Numérique | Ex : 44 (44jours restant avant prochain jour férié |
+| tag(saison) |Autre | Printemps/Eté... |
 
 ### Exemple dans le Scénario
 

@@ -1,4 +1,4 @@
-# Change Log
+# Journal des modifications
 
      
      /!\ Attention, n'oubliez pas de reconfigurer le paramètre "$zone" dans le bloc code, si vous mettez a jour le scénario, car celui-ci sera reconfiguré en zone B par défaut.
@@ -31,3 +31,5 @@
   - Ajout de tag (aubeCivil, crepusculeCivil, aubeNautique, crepusculeNautique, aubeAstronomique, crepusculeAstronomique) Thanks @PrFalKeN.  [scénario]
   - Ajout tag(dureeJourSeconde) et tag(modeJour) [scénario]
   - En mode themeJeedom, le widget change de thème lors de l'évènement du core, plus besoin d'attendre le lancement du scénario. [widget]
+## 26/03/2023
+  - Ajout d'un bloc code, celui-ci permet de récupérer des informations sur la lune. Thanks @PrFalKeN.  [scénario]
