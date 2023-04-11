@@ -1,6 +1,6 @@
 # Widget Info du jour
 
-![](doc/images/capture1_2.png)
+![](doc/images/capture1_3.png)
 
 - Informations disponibles sur le widget :
   - Date du jour.
@@ -37,21 +37,8 @@
 
 ## Paramètres Optionnels :
 
+![](doc/images/parametres_2.png)
 
-     colorBackgroundNight : Couleur du fond lorsque le widget est en Mode nuit [ Exemple : #fffff, white ... (accepte linear-gradient...) ]
-     colorBackgroundDay : Couleur du fond lorsque le widget est en Mode jour [ Exemple : #fffff, white ... (accepte linear-gradient...) ]
-     colorTextNight : Couleur du texte lorsque le widget est en Mode nuit [ Exemple : #fffff, white ... (Défaut : couleur du core) ]
-     colorTextDay : Couleur du texte lorsque le widget est en Mode jour [ Exemple : #fffff, white ... (Défaut : couleur du core) ]
-     colorLogoNight : Couleur du logo saison lorsque le widget est en Mode nuit [ Exemple : #fffff, white ... (Défaut : couleur du core) ]
-     colorLogoDay : Couleur du logo saison lorsque le widget est en Mode jour [ Exemple : #fffff, white ... (Défaut : couleur du core) ]
-     opacityLogo : opacité du logo saison [ Exemple : 10, 20 ... (Défaut : 50) ]
-     borderRadius : Taille arrondi du widget [ Exemple : 10, 20 ... (Défaut : 30) ]
-     displaySaisonText : Affiche/cache le texte saison [ 1=Afficher, 0=cacher (défaut : 1) ]
-     displaySaisonLogo : Affiche/cache le logo saison [ 1=Afficher, 0=cacher (défaut : 1) ]
-     displayLeverCoucher : Affiche/cache l'animation Lever/Coucher du soleil [ 1=Afficher, 0=cacher (défaut : 1) ]
-     displayDureeJour : Affiche/cache la durée du jour dans le widget [ 1=Afficher, 0=cacher (défaut : 1) ]
-	 displayLune : Affiche/cache l'animation de la lune [ 1=Afficher, 0=cacher (défaut : 1) ]
-     themeJeedom : Le widget se base sur le theme Jeedom pour basculer en mode Day/Night [ 1=Jeedom, 0=scénario(widget) (défaut : 0) ]
 
 ## 3) Création du scénario
 
