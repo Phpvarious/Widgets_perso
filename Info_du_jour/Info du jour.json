@@ -105,7 +105,7 @@
                         {
                             "type": "element",
                             "subtype": "",
-                            "expression": "867",
+                            "expression": "2021",
                             "options": [],
                             "order": "0",
                             "element": {
@@ -139,7 +139,7 @@
                         {
                             "type": "element",
                             "subtype": "",
-                            "expression": "868",
+                            "expression": "2022",
                             "options": [],
                             "order": "1",
                             "element": {
@@ -172,18 +172,18 @@
                         },
                         {
                             "type": "element",
-                            "subtype": null,
-                            "expression": "872",
+                            "subtype": "",
+                            "expression": "2023",
                             "options": [],
                             "order": "2",
                             "element": {
-                                "name": null,
+                                "name": "",
                                 "type": "code",
                                 "options": [],
                                 "order": "0",
                                 "subElements": [
                                     {
-                                        "name": null,
+                                        "name": "",
                                         "type": "code",
                                         "subtype": "action",
                                         "options": {
@@ -194,7 +194,7 @@
                                         "expressions": [
                                             {
                                                 "type": "code",
-                                                "subtype": null,
+                                                "subtype": "",
                                                 "expression": "\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ JOUR \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$scenario->setLog('┌─────────────────── JOUR');\n$tags = $scenario->getTags(); \/\/récupère la liste des tags\n$date = date(\"Y-m-d\");\n\/\/$date = date(\"Y-05-08\"); \/\/ for test\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Date du jour \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$dateDuJour = date(\"d\/m\/Y\",strtotime($date));\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Numero de jour de l'année \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$daynumber = date('z',strtotime($date)) + 1;\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Week-end \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\nif(date(\"l\",strtotime($date)) == 'Saturday' || date(\"l\",strtotime($date)) == 'Sunday') $weekend = 1; \/\/ Week-end\nelse $weekend = 0;\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Jours fériés \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$ferie = 0;\n$libelle_ferie =\"\";\n$dateProchainFerie=\"\";\n$libelleProchainFerie=\"\";\n$diffFerie = \"\";\n$dimanche_paques = date(\"Y-m-d\", easter_date(date(\"Y\")));\/\/\n$holidays[\"Jour de l'an\"] = date(\"Y\").\"-01-01\";\n$holidays[\"Lundi de Paques\"] = date(\"Y-m-d\", strtotime(\"$dimanche_paques +1 day\"));\n$holidays[\"Ascension\"] = date(\"Y-m-d\", strtotime(\"$dimanche_paques +39 day\"));\n$holidays[\"Lundi Pentecote\"] = date(\"Y-m-d\", strtotime(\"$dimanche_paques +50 day\"));\n$holidays[\"Fête du travail\"] = date(\"Y\").\"-05-01\";\n$holidays[\"Victoire des alliés 1945\"] = date(\"Y\").\"-05-08\";\n$holidays[\"Assomption\"] = date(\"Y\").\"-08-15\";\n$holidays[\"Fête nationale\"] = date(\"Y\").\"-07-14\";\n$holidays[\"Armistice 1918\"] = date(\"Y\").\"-11-11\";\n$holidays[\"Toussaint\"] = date(\"Y\").\"-11-01\";\n$holidays[\"Noël\"] = date(\"Y\").\"-12-25\";\n$count = count($holidays);\nasort($holidays);\n$i=1;\nforeach($holidays as $key => $holiday_timestamp) {\n  if ($holiday_timestamp == $date) {\n    $ferie = 1; $libelle_ferie = $key;\n  }\n  if ($i == $count) { \/\/ si dernier ferié\n    if ($date < $holiday_timestamp)\n    {\n      $dateProchainFerie = $holiday_timestamp;\n      $libelleProchainFerie = $key;\n      break;\n    }\n    else\n    {\n      $d= date(\"Y\")+1;\n      $dateProchainFerie = $d.'-01-01';\n      $libelleProchainFerie = \"Jour de l'an\";\n      break;\n    }   \n  }\n  else\n  {\n    if ($date < $holiday_timestamp)\n    {\n      $dateProchainFerie = $holiday_timestamp;\n      $libelleProchainFerie = $key;\n      break; \n    }   \n  }\n  $i++;\n}\n$date1 = new DateTime($dateProchainFerie);\n$date2 = new DateTime($date);\n$diffFerie = $date1->diff($date2)->format(\"%a\");\n$dateProchainFerieScenario = date(\"Y-m-d\",strtotime(str_replace('\/','-',$dateProchainFerie)));\n$dateProchainFerie = date(\"d\/m\/Y\",strtotime(str_replace('\/','-',$dateProchainFerie)));\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ Saisons \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$date_year = date(\"Y\", strtotime($date));  \nif (strtotime($date)<strtotime($date_year.'-03-21') || strtotime($date)>=strtotime($date_year.'-12-21')) $saison = \"Hiver\";\nelseif (strtotime($date)>=strtotime($date_year.'-09-23')) $saison = \"Automne\";\nelseif (strtotime($date)>=strtotime($date_year.'-06-21')) $saison = \"Eté\";\nelseif (strtotime($date)>=strtotime($date_year.'-03-21')) $saison = \"Printemps\";\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ LOG \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$scenario->setLog('| tag(dateDuJour) - [Autre] : '.$date);\n$scenario->setLog('| tag(dayNumber) - [Numérique] : '.$daynumber);\n$scenario->setLog('| tag(weekend) - [Binaire] : '.$weekend);\n$scenario->setLog('| tag(ferie) - [Binaire] : '.$ferie);\n$scenario->setLog('| tag(libelleFerie) - [Autre] : '.$libelle_ferie);\n$scenario->setLog('| tag(dateProchainFerie) - [Autre] : '.$dateProchainFerieScenario);\n$scenario->setLog('| tag(libelleProchainFerie) - [Autre] : '.$libelleProchainFerie);\n$scenario->setLog('| tag(nbProchainFerie) - [Numérique] : '.$diffFerie);\n$scenario->setLog('| tag(saison) - [Autre] : '.$saison);\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ TAG \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$tags['#dateDuJour#'] = '\"'.$date.'\"';\n$tags['#dayNumber#'] = $daynumber;\n$tags['#weekend#'] = $weekend;\n$tags['#ferie#'] = $ferie;\n$tags['#libelleFerie#'] = $libelle_ferie;\n$tags['#dateProchainFerie#'] = '\"'.$dateProchainFerieScenario.'\"';\n$tags['#libelleProchainFerie#'] = $libelleProchainFerie;\n$tags['#nbProchainFerie#'] = $diffFerie;\n$tags['#saison#'] = $saison;\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ WIDGET \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$tags['#json#']['Jour'] = array (\n  \"dateJour\" => $dateDuJour,\n  \"weekend\" => $weekend,\n  \"ferie\" => $ferie,\n  \"libelleFerie\" => $libelle_ferie,\n  \"dateProchainFerie\" => $dateProchainFerie,\n  \"libelleProchainFerie\" => $libelleProchainFerie,\n  \"nbProchainFerie\" => $diffFerie,\n  \"saison\" => $saison\n);\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n$scenario->setTags($tags);\n$scenario->setLog('└────────────────────────────');",
                                                 "options": [],
                                                 "order": "0"
@@ -207,7 +207,7 @@
                         {
                             "type": "element",
                             "subtype": "",
-                            "expression": "869",
+                            "expression": "2024",
                             "options": [],
                             "order": "3",
                             "element": {
@@ -241,7 +241,7 @@
                         {
                             "type": "element",
                             "subtype": "",
-                            "expression": "870",
+                            "expression": "2025",
                             "options": [],
                             "order": "4",
                             "element": {
@@ -275,7 +275,7 @@
                         {
                             "type": "element",
                             "subtype": "",
-                            "expression": "871",
+                            "expression": "2026",
                             "options": [],
                             "order": "5",
                             "element": {
@@ -313,7 +313,7 @@
                             "options": {
                                 "enable": "1",
                                 "background": "0",
-                                "cmd": "#[Extérieur][Info du jour][json]#",
+                                "cmd": "#[InfoJour][Type_de_jour][json]#",
                                 "value": "\"tag(json)\""
                             },
                             "order": "6"
