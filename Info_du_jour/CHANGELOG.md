@@ -33,3 +33,8 @@
   - En mode themeJeedom, le widget change de thème lors de l'évènement du core, plus besoin d'attendre le lancement du scénario. [widget]
 ## 26/03/2023
   - Ajout d'un bloc code, celui-ci permet de récupérer des informations sur la lune. Thanks @PrFalKeN.  [scénario]
+## 11/04/2023
+  - Correction d'une erreur sur le tag Next_New_Moon. [scénario]
+  - Renommage des Phases : montante et descendante deviennent Croissante, Décroissante.  [scénario]
+  - Modification du code, celui-ci est plus précis dans les phases lunaire.  [scénario]
+  - Ajout de l'animation de la phase lunaire dans le widget. [widget]
