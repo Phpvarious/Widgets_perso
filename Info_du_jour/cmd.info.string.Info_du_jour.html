@@ -5,6 +5,7 @@
     Lien          : https://phpvarious.github.io/documentation/widget/fr_FR/widget_scenario/info_du_jour/
   -->
   <template>
+    <div>--------------------- Version Desktop -----------------------------------</div>
     <div>colorBackgroundNight : Couleur du fond lorsque le widget est en Mode nuit [ Exemple : #fffff, white ... (accepte linear-gradient...) ]</div>
     <div>colorBackgroundDay : Couleur du fond lorsque le widget est en Mode jour [ Exemple : #fffff, white ... (accepte linear-gradient...) ]</div>
     <div>colorTextNight : Couleur du texte lorsque le widget est en Mode nuit [ Exemple : #fffff, white ... (Défaut : couleur du core) ]</div>
@@ -19,6 +20,10 @@
     <div>displayLune : Affiche/cache l'animation de la lune [ 1=Afficher, 0=cacher (défaut : 1) ]</div>
     <div>displayDureeJour : Affiche/cache la durée du jour dans le widget [ 1=Afficher, 0=cacher (défaut : 1) ]</div>
     <div>themeJeedom : Le widget se base sur le thème Jeedom pour basculer en mode Day/Night [ 1=Jeedom, 0=scénario(widget) (défaut : 0) ]</div>
+    <div>--------------------- Version Mobile -----------------------------------</div>
+    <div>displayLuneMobile : Affiche/cache l'animation de la lune [ 1=Afficher, 0=cacher (défaut : 1) ]</div>
+    <div>displayLeverCoucherMobile : Affiche/cache l'animation Lever/Coucher du soleil [ 1=Afficher, 0=cacher (défaut : 1) ]</div>
+    <div>displayDureeJourMobile : Affiche/cache la durée du jour dans le widget [ 1=Afficher, 0=cacher (défaut : 1) ]</div>
   </template>
   
   <div class="widget#id#">
@@ -243,7 +248,7 @@
             cmd.querySelector('.mode#id#').style.display = ''
             if (modeJour == "Jour") {
               cmd.querySelector('.mode#id#').innerHTML = '{{Mode}} : <i class="fas fa-sun icon_yellow"></i>'
-              cmd.querySelector('.soleil_actuel#id#').style.color = '#fdd30e'
+              cmd.querySelector('.soleil_actuel#id#').style.color = '#c5a71e'  //#fdd30e
             } else {
               cmd.querySelector('.mode#id#').innerHTML = '{{Mode}} : <i class="fas fa-moon icon_blue"></i>'
               cmd.querySelector('.soleil_actuel#id#').style.color = '#4a4a4a'
